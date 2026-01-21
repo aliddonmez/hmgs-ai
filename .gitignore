@@ -1,5 +1,17 @@
+# Virtual environment
+.venv/
 venv/
+
+# Environment variables
 .env
+
+# Python cache
 __pycache__/
 *.pyc
+
+# OS
 .DS_Store
+Thumbs.db
+
+# HuggingFace cache (isteğe bağlı ama iyi)
+.cache/
