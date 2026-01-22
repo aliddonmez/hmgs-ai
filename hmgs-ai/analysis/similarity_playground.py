@@ -1,8 +1,3 @@
-
-import sys
-import os
-
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from data.day2_texts import TEXTS
 
 from sentence_transformers import SentenceTransformer  ## metni vektöre cevirir 
