@@ -17,7 +17,7 @@ model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 # 🔹 PostgreSQL bağlantısı
 conn = psycopg.connect(
     host="localhost",
-    port=5432,
+    port=5433,
     dbname="postgres",
     user="postgres",
     password="1234"

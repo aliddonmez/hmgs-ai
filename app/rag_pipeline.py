@@ -25,7 +25,8 @@ def fill_prompt(prompt_template: str, context: str) -> str:
 
 def main():
     # 1️⃣ Soru
-    question = "Hırsızlık suçu nedir?"
+    # 1️⃣ Soru
+    question = input("Lütfen sorunuzu girin: ")
 
     # 2️⃣ Retrieval + Context
     results = retrieve(question, top_k=5)

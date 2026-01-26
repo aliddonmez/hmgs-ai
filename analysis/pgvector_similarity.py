@@ -16,7 +16,7 @@ model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 def retrieve(question, top_k=5):
     conn = psycopg.connect(
         host="localhost",
-        port=5432,
+        port=5433,
         dbname="postgres",
         user="postgres",
         password="1234"
@@ -54,7 +54,7 @@ def retrieve(question, top_k=5):
 def main():
     conn = psycopg.connect(
         host="localhost",
-        port=5432,
+        port=5433,
         dbname="postgres",
         user="postgres",
         password="1234"
