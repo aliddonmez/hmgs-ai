@@ -11,23 +11,15 @@ sys.path.insert(0, PROJECT_ROOT)
 import streamlit as st
 
 # -------------------------------------------------
-# Streamlit config (İLK Streamlit çağrısı OLMALI)
+# Streamlit config (İLK Streamlit çağrısı OLMALI) sayfa başlığı ve icon 
 # -------------------------------------------------
 st.set_page_config(page_title="HMGS", page_icon="⚖️")
 
-# -------------------------------------------------
-# Debug göstergesi
-# -------------------------------------------------
-st.write("🚀 Streamlit çalışıyor")
 
-# -------------------------------------------------
-# Backend import (lazy model load zaten çözüldü)
-# -------------------------------------------------
-from app.rag_pipeline import run
+from app.rag_pipeline import run 
+##Kullanıcı soru sorunca, arka planda çalışan RAG sistemi run(question) fonksiyonu ile cevap üretecek.
 
-# -------------------------------------------------
-# UI
-# -------------------------------------------------
+
 st.title("HMGS – Hukuki Metin Asistanı")
 
 st.markdown(
@@ -35,7 +27,7 @@ st.markdown(
     "Gerekli durumlarda bilinçli olarak cevap vermeyebilir."
 )
 
-st.divider()
+st.divider() ##ekrana yatay çizgi 
 
 # -------------------------------------------------
 # CHAT

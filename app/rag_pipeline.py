@@ -9,16 +9,12 @@ from google import genai
 from analysis.pgvector_similarity import retrieve
 
 
-# =========================
 # SABİT METİNLER
-# =========================
-
 IDK_TEXT = "Bu soruya, elimdeki kaynaklara dayanarak güvenilir bir cevap veremiyorum."
 
 
-# =========================
+
 # YAPISAL ÇIKTI HELPERS
-# =========================
 
 def make_no_answer(reason: str):
     return {
@@ -80,6 +76,7 @@ def fill_prompt(prompt_template: str, question: str, context: str) -> str:
 # CORE PIPELINE (UI + API İÇİN)
 # =========================
 
+##Kullanıcı boşluklu soru atarsa temizle , soru yoksa hiç işlem yapma .
 def run(question: str, debug: bool = False) -> dict:
     question = question.strip()
     if not question:
@@ -120,13 +117,13 @@ def run(question: str, debug: bool = False) -> dict:
             contents=final_prompt
         )
         return make_answer(response.text)
-
+    
     except Exception:
         return make_no_answer("llm_error")
 
 
 # =========================
-# CLI ENTRY (TEST AMAÇLI)
+# CLI ENTRY (TEST AMAÇLI) terminalden hızlı test 
 # =========================
 
 def main():
