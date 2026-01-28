@@ -9,8 +9,35 @@ from google import genai
 from analysis.pgvector_similarity import retrieve
 
 
+# =========================
+# SABİT METİNLER
+# =========================
+
 IDK_TEXT = "Bu soruya, elimdeki kaynaklara dayanarak güvenilir bir cevap veremiyorum."
 
+
+# =========================
+# YAPISAL ÇIKTI HELPERS
+# =========================
+
+def make_no_answer(reason: str):
+    return {
+        "type": "no_answer",
+        "text": IDK_TEXT,
+        "reason": reason,
+    }
+
+
+def make_answer(text: str):
+    return {
+        "type": "answer",
+        "text": text,
+    }
+
+
+# =========================
+# SCOPE KONTROLÜ
+# =========================
 
 def is_out_of_scope(question: str) -> bool:
     """
@@ -27,6 +54,10 @@ def is_out_of_scope(question: str) -> bool:
     return any(k in q for k in out_kw)
 
 
+# =========================
+# PROMPT & CONTEXT
+# =========================
+
 def build_context(results):
     parts = []
     for title, content, score in results:
@@ -36,7 +67,6 @@ def build_context(results):
 
 def load_prompt():
     prompt_path = Path(__file__).resolve().parents[1] / "docs" / "prompt_v1.md"
-    print("PROMPT PATH:", prompt_path)
     return prompt_path.read_text(encoding="utf-8")
 
 
@@ -46,25 +76,20 @@ def fill_prompt(prompt_template: str, question: str, context: str) -> str:
     return prompt
 
 
-def main():
-    debug = os.environ.get("DEBUG") == "1"
+# =========================
+# CORE PIPELINE (UI + API İÇİN)
+# =========================
 
-    question = input("Lütfen sorunuzu girin: ").strip()
+def run(question: str, debug: bool = False) -> dict:
+    question = question.strip()
     if not question:
-        print("⚠️ Boş soru girdin.")
-        return
+        return make_no_answer("empty_question")
 
-    # (A) Out-of-scope => direkt IDK
+    # (A) Out-of-scope
     if is_out_of_scope(question):
-        if debug:
-            print("\n=== FINAL ANSWER ===\n")
-            print(IDK_TEXT)
-            print("\n[DEBUG] reason=out_of_scope_keyword")
-        else:
-            print(IDK_TEXT)
-        return
+        return make_no_answer("out_of_scope_keyword")
 
-    # (B) Retrieval (confidence + topic filter içeride)
+    # (B) Retrieval
     results = retrieve(
         question,
         top_k=5,
@@ -74,29 +99,19 @@ def main():
         debug=debug,
     )
 
-    # (C) Confidence check: sonuç yoksa LLM yok
+    # (C) Context yoksa
     if not results:
-        if debug:
-            print("\n=== FINAL ANSWER ===\n")
-            print(IDK_TEXT)
-            print("\n[DEBUG] reason=no_result_after_min_score")
-        else:
-            print(IDK_TEXT)
-        return
+        return make_no_answer("no_result_after_min_score")
 
-    # (D) Prompt + LLM
+    # (D) Prompt
     context = build_context(results)
     prompt_template = load_prompt()
     final_prompt = fill_prompt(prompt_template, question, context)
 
-    if debug:
-        print("\n=== FINAL PROMPT ===\n")
-        print(final_prompt)
-
+    # (E) LLM
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
-        print("❌ GEMINI_API_KEY bulunamadı.")
-        return
+        return make_no_answer("missing_api_key")
 
     try:
         client = genai.Client(api_key=api_key)
@@ -104,12 +119,20 @@ def main():
             model="gemini-2.5-flash",
             contents=final_prompt
         )
-        print("\n=== LLM ANSWER (GEMINI) ===\n")
-        print(response.text)
+        return make_answer(response.text)
 
-    except Exception as e:
-        print("\n❌ LLM çağrısı başarısız oldu.")
-        print("Hata:", str(e))
+    except Exception:
+        return make_no_answer("llm_error")
+
+
+# =========================
+# CLI ENTRY (TEST AMAÇLI)
+# =========================
+
+def main():
+    question = input("Lütfen sorunuzu girin: ")
+    result = run(question)
+    print(result)
 
 
 if __name__ == "__main__":

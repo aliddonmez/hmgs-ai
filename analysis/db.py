@@ -16,7 +16,7 @@ def get_conn():
     """
     return psycopg.connect(
         host=os.environ.get("PG_HOST", "localhost"),
-        port=int(os.environ.get("PG_PORT", "5433")),
+        port=int(os.environ.get("PG_PORT", "5432")),
         dbname=os.environ.get("PG_DB", "postgres"),
         user=os.environ.get("PG_USER", "postgres"),
         password=os.environ.get("PG_PASSWORD", "1234"),
