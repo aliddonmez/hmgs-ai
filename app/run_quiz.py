@@ -1,0 +1,37 @@
+
+import sys
+import os
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, PROJECT_ROOT)
+
+from app.quiz_engine import (
+    start_quiz,
+    get_current_question,
+    submit_answer,
+    is_quiz_finished
+)
+
+from data.questions_v1 import questions
+
+# 👇 İŞTE ARADIĞIN SATIR BURADA
+quiz_state = start_quiz(questions)
+
+while not is_quiz_finished(quiz_state):
+    q = get_current_question(quiz_state)
+
+    print("\n❓", q["soru"])
+    for i, secenek in enumerate(q["secenekler"]):
+        print(f"{i}. {secenek}")
+
+    answer = int(input("Cevabın: "))
+    result = submit_answer(quiz_state, answer)
+
+    if result["dogru_mu"]:
+        print("✅ Doğru")
+    else:
+        print("❌ Yanlış")
+        print("ℹ️", result["aciklama"])
+
+print("\n🎉 Quiz bitti")
+print("Skor:", quiz_state["score"])

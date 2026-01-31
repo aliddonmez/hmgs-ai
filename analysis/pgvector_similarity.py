@@ -1,10 +1,9 @@
 # analysis/pgvector_similarity.py
-
 import os
 import sys
 from typing import List, Tuple, Optional
 
-# ✅ Proje root'unu Python path'ine ekle
+# Proje root'unu Python path'ine ekle
 # Böylece üst klasördeki modülleri (analysis.db gibi) import edebiliyoruz
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, PROJECT_ROOT)
@@ -128,7 +127,7 @@ def retrieve(
     cur.close()
     conn.close()
 
-    # 🔍 Ham sonuçları görmek için debug modu
+    #  Ham sonuçları görmek için debug modu
     if debug:
         print("\n=== RETRIEVAL DEBUG (RAW candidates) ===")
         print("Q:", question)
