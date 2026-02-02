@@ -1,65 +1,102 @@
-#app/quiz_engine.py
+# app/quiz_engine.py
+# -- QUIZ MOTORU (UI-dostu) --
 
-##--QUİZ MOTORU--
-
-
-## soru yüklenir , mevcut indeks ve skor 0 dan başlanır cevaplar ileride analiz yapabilmemiz icin saklanacak . 
-def start_quiz (questions):
-    return{
-        "questions":questions,
-        "current_index":0,
-        "score":0,
-        "answers":[]
+def start_quiz(questions):
+    """
+    Quiz başlatılırken çağrılır.
+    Başlangıç state'ini oluşturur.
+    """
+    return {
+        "questions": questions,      # Tüm soru listesi
+        "current_index": 0,          # Şu an hangi sorudayız
+        "score": 0,                  # Doğru sayısı
+        "answers": []                # Kullanıcının verdiği cevaplar (log)
     }
 
-#Bulunduğumuz soruyu gösterme 
-def get_current_question(quiz_state):
 
-    idx=quiz_state["current_index"]
-    questions=quiz_state["questions"]
+def get_current_question(state):
+    """
+    Mevcut soruyu döndürür.
+    Sorular bittiyse None döner.
+    """
+    idx = state["current_index"]
+    questions = state["questions"]
 
-    if idx>= len(questions):
-        return None
-    return questions[idx]
+    if idx >= len(questions):
+        return None                  # Quiz bitti
+    return questions[idx]            # Şu anki soru
 
-## şık seçildiğinde çalışır 
-def submit_answer(quiz_state,user_answer_index):
 
-    question=get_current_question(quiz_state)
-
+def submit_answer(state, user_answer_index):
+    """
+    Kullanıcının verdiği cevabı işler.
+    Doğru/yanlış kontrolü yapar ve state'i günceller.
+    """
+    question = get_current_question(state)
     if question is None:
-        return None 
-    
-    ## doğru mu kontrolü 
-    correct_index=question["dogru_cevap"]
-    is_correct=user_answer_index==correct_index
+        return {"error": "Quiz bitmiş veya soru bulunamadı."}
 
-    ##skor güncellemesi 
+    options = question.get("secenekler", [])
+
+    # Cevap integer değilse hata ver
+    if not isinstance(user_answer_index, int):
+        return {"error": "Cevap formatı hatalı. Sayı (int) olmalı."}
+
+    # Cevap aralık dışıysa hata ver
+    if user_answer_index < 0 or user_answer_index >= len(options):
+        return {"error": f"Geçersiz seçim. 0-{len(options)-1} arası bir değer girin."}
+
+    correct_index = question["dogru_cevap"]
+    is_correct = (user_answer_index == correct_index)
+
+    # Doğruysa skoru artır
     if is_correct:
-        quiz_state["score"]+=1
-    
+        state["score"] += 1
 
-    ##cevap geçmişi kaydetme 
-    quiz_state["answers"].append({
+    # Cevabı logla (ileride analiz için)
+    state["answers"].append({
         "question_id": question["id"],
         "selected": user_answer_index,
         "correct": is_correct,
-        "zorluk": question["zorluk"]
+        "zorluk": question.get("zorluk")
     })
 
-    ## var olan index arttırma 
-    quiz_state["current_index"]+=1
-    
-    ##cıktı verme 
-    return  {
-        "dogru_mu":is_correct,
-        "aciklama":question["aciklama"],
-        "kaynak":question["kaynak"]
+    # Bir sonraki soruya geç
+    state["current_index"] += 1
+
+    # UI'ye döndürülecek sonuç
+    return {
+        "dogru_mu": is_correct,
+        "selected_index": user_answer_index,
+        "correct_index": correct_index,
+        "aciklama": question.get("aciklama"),
+        "kaynak": question.get("kaynak")
     }
 
 
-def is_quiz_finished(quiz_state):
-    return quiz_state["current_index"] >= len(quiz_state["questions"])
+def is_quiz_finished(state):
+    """
+    Quiz bitmiş mi kontrolü.
+    """
+    return state["current_index"] >= len(state["questions"])
 
 
+# --- UI için kolay isimlendirme ---
 
+def is_finished(state):
+    """
+    UI tarafında daha okunabilir isim.
+    """
+    return is_quiz_finished(state)
+
+
+def get_score(state):
+    """
+    Skor ve toplam soru sayısını döndürür.
+    UI için hazır format.
+    """
+    total = len(state["questions"])
+    return {
+        "score": state["score"],
+        "total": total
+    }
