@@ -55,11 +55,15 @@ def submit_answer(state, user_answer_index):
 
     # Cevabı logla (ileride analiz için)
     state["answers"].append({
-        "question_id": question["id"],
-        "selected": user_answer_index,
-        "correct": is_correct,
-        "zorluk": question.get("zorluk")
-    })
+    "question_id": question["id"],
+    "ders": question.get("ders"),
+    "konu": question.get("konu"),
+    "selected_option": user_answer_index,
+    "correct_option": correct_index,
+    "is_correct": is_correct,
+    "confidence": question.get("confidence"),
+    "retrieval_score": question.get("retrieval_score"),
+})
 
     # Bir sonraki soruya geç
     state["current_index"] += 1
@@ -100,3 +104,34 @@ def get_score(state):
         "score": state["score"],
         "total": total
     }
+
+import uuid
+from datetime import datetime
+
+
+def export_attempt_rows(state, user_id: str):
+    """
+    Quiz tamamlandıktan sonra SQL'e yazılacak satırları üretir.
+    Her soru = 1 satır
+    """
+    attempt_id = str(uuid.uuid4())
+    timestamp = datetime.utcnow().isoformat()
+
+    rows = []
+
+    for ans in state["answers"]:
+        rows.append({
+            "attempt_id": attempt_id,
+            "user_id": user_id,
+            "timestamp": timestamp,
+            "question_id": ans["question_id"],
+            "ders": ans.get("ders"),
+            "konu": ans.get("konu"),
+            "selected_option": ans["selected_option"],
+            "correct_option": ans["correct_option"],
+            "is_correct": 1 if ans["is_correct"] else 0,
+            "confidence": ans.get("confidence"),
+            "retrieval_score": ans.get("retrieval_score"),
+        })
+
+    return rows

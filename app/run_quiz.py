@@ -12,9 +12,10 @@ from app.quiz_engine import (
     is_quiz_finished
 )
 
+
 from data.questions_v1 import questions
 
-# 👇 İŞTE ARADIĞIN SATIR BURADA
+
 quiz_state = start_quiz(questions)
 
 while not is_quiz_finished(quiz_state):
@@ -33,5 +34,19 @@ while not is_quiz_finished(quiz_state):
         print("❌ Yanlış")
         print("ℹ️", result["aciklama"])
 
+
+from app.quiz_engine import export_attempt_rows
+from app.sqlstorage import save_attempt_rows
+
 print("\n🎉 Quiz bitti")
 print("Skor:", quiz_state["score"])
+
+rows = export_attempt_rows(
+    quiz_state,
+    user_id="terminal_test"
+)
+
+save_attempt_rows(rows)
+
+print("💾 Quiz sonuçları veritabanına kaydedildi")
+
