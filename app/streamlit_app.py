@@ -24,9 +24,14 @@ from app.quiz_engine import (
     get_current_question,
     submit_answer,
     is_finished,
-    get_score
+    get_score,
+    export_attempt_rows,
 )
+from app.sqlstorage import save_attempt_rows
 
+# -------------------------------------------------
+# UI HEADER
+# -------------------------------------------------
 st.title("HMGS – Hukuki Metin Asistanı")
 
 st.markdown(
@@ -37,13 +42,13 @@ st.markdown(
 st.divider()
 
 # -------------------------------------------------
-# SAYFA SEÇİMİ (Chat / Quiz)
+# SAYFA SEÇİMİ
 # -------------------------------------------------
 page = st.sidebar.radio("Mod seç", ["Chat", "Quiz"])
 
-# -------------------------------------------------
+# =================================================
 # CHAT
-# -------------------------------------------------
+# =================================================
 if page == "Chat":
     question = st.chat_input("Sorunuzu yazın")
 
@@ -54,94 +59,98 @@ if page == "Chat":
         result = run(question)
 
         with st.chat_message("assistant"):
-
-            # 🟡 BİLİNÇLİ SUSMA
             if result.get("type") == "no_answer":
                 st.info(
                     "### Bu soruda durduk\n\n"
                     "İlgili ve güvenilir hukuki kaynaklar bulunamadığı için "
-                    "bu soruya cevap üretmedik.\n\n"
-                    "Bu, sistemin bilinçli bir tercihidir."
+                    "bu soruya cevap üretmedik."
                 )
-
                 st.caption(
                     "Yanlış veya eksik yönlendirme yapmamak için cevap vermemek tercih edilmiştir."
                 )
-
-            # 🟢 NORMAL CEVAP
             else:
                 st.markdown(result.get("text", ""))
+                st.caption("Bu cevap, mevcut hukuki kaynaklara dayanarak üretilmiştir.")
 
-                st.caption(
-                    "Bu cevap, mevcut hukuki kaynaklara dayanarak üretilmiştir."
-                )
-
-# -------------------------------------------------
-# QUIZ (Adım 7: mini UX metni + kullanıcı gösterimi)
-# -------------------------------------------------
+# =================================================
+# QUIZ
+# =================================================
 elif page == "Quiz":
     st.subheader("Quiz")
 
-    # Mini UX açıklaması (doğru cevapta açıklama yok kuralını anlatır)
-    st.caption("Yanlış cevaplarda kısa açıklama gösterilir. Doğru cevaplarda açıklama gösterilmez.")
-
-    # 11.7 - user_id girişi
+    # Kullanıcı ID
     user_id = st.text_input("Kullanıcı ID", placeholder="ör: ali_donmez")
 
-    # user_id boşsa quiz'e devam etme
     if not user_id:
-        st.warning("Sonuçlarını kaydedebilmemiz için lütfen bir kullanıcı ID gir.")
+        st.warning("Sonuçları kaydedebilmemiz için lütfen bir kullanıcı ID gir.")
         st.stop()
 
-    # Kullanıcıyı görünür yap
     st.caption(f"Kullanıcı: {user_id}")
 
-    # Quiz state'i session içinde tut
+    # Session init
     if "quiz_state" not in st.session_state:
         st.session_state.quiz_state = None
 
-    # Başlat butonu
+    if "quiz_saved" not in st.session_state:
+        st.session_state.quiz_saved = False
+
+    # Quiz başlat
     if st.button("Quiz'i Başlat"):
         st.session_state.quiz_state = start_quiz(questions)
+        st.session_state.quiz_saved = False
 
-    # Quiz başladıysa akış
+    # -------------------------------------------------
+    # QUIZ AKIŞI
+    # -------------------------------------------------
     if st.session_state.quiz_state is not None:
         q = get_current_question(st.session_state.quiz_state)
 
-        # Quiz bittiyse skor + yeniden başlat
+        # ------------------------------
+        # QUIZ BİTTİ
+        # ------------------------------
         if q is None or is_finished(st.session_state.quiz_state):
+
+            if not st.session_state.quiz_saved:
+                rows = export_attempt_rows(
+                    st.session_state.quiz_state,
+                    user_id=user_id,
+                )
+                save_attempt_rows(rows)
+                st.session_state.quiz_saved = True
+
             score = get_score(st.session_state.quiz_state)
             st.success(f"🎉 Quiz bitti! Skor: {score['score']} / {score['total']}")
 
-            # Yeniden başlat (sıfırdan state)
             if st.button("🔄 Yeni Quiz Başlat"):
                 st.session_state.quiz_state = start_quiz(questions)
+                st.session_state.quiz_saved = False
                 st.rerun()
 
-        # Quiz devam ediyorsa soru göster
+        # ------------------------------
+        # QUIZ DEVAM EDİYOR
+        # ------------------------------
         else:
             st.markdown(f"### Soru {st.session_state.quiz_state['current_index'] + 1}")
             st.write(q["soru"])
 
-            # Şık seçimi (radio)
             selected_text = st.radio("Şık seç", q["secenekler"], index=None)
 
-            # Seçileni index'e çevirme
             selected_index = None
             if selected_text is not None:
                 selected_index = q["secenekler"].index(selected_text)
 
-            # Cevabı gönder butonu
             if st.button("Cevabı Gönder"):
                 if selected_index is None:
                     st.warning("Lütfen bir şık seç.")
                 else:
-                    result = submit_answer(st.session_state.quiz_state, selected_index)
+                    result = submit_answer(
+                        st.session_state.quiz_state,
+                        selected_index,
+                    )
 
                     if "error" in result:
                         st.warning(result["error"])
                     else:
-                        # UX kuralı: doğruysa açıklama gösterme
                         if result["dogru_mu"]:
                             st.success("✅ Doğru")
                         else:
