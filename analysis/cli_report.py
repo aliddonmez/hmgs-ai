@@ -1,6 +1,5 @@
 # analysis/cli_report.py
 
-# app/streamlit_app.py
 import sys
 import os
 
@@ -10,43 +9,62 @@ import os
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, PROJECT_ROOT)
 
-from app.sqlstorage import load_attempts
-from analysis.quizanalysis import compute_topic_stats
-from analysis.rank_topics import rank_weak_topics
-from analysis.suggestions import generate_study_suggestions
+from analysis.user_report import get_user_report
 
 
-def run_12_3():
+def run_report():
     user_id = input("Kullanıcı ID: ").strip()
 
     if not user_id:
         print("❌ Kullanıcı ID boş olamaz.")
         return
 
-    rows = load_attempts(user_id)
+    report = get_user_report(user_id, min_n=3)
+    summary = report["summary"]
 
-    if not rows:
-        print(f"ℹ️ '{user_id}' için kayıt bulunamadı.")
-        return
+    # -------------------------
+    # GENEL ÖZET
+    # -------------------------
+    print("\n📊 GENEL ÖZET\n")
+    print(f"Toplam soru : {summary['total_questions']}")
+    print(f"Doğru       : {summary['correct']}")
+    print(f"Yanlış      : {summary['wrong']}")
+    print(f"Doğruluk    : %{summary['accuracy']}")
 
-    topic_stats = compute_topic_stats(rows)
-    ranked_topics = rank_weak_topics(topic_stats)
-    suggestions = generate_study_suggestions(ranked_topics)
+    # -------------------------
+    # VERİ YETERSİZ KONULAR
+    # -------------------------
+    if report["insufficient_data_topics"]:
+        print("\n⚠️ VERİ YETERSİZ KONULAR\n")
+        for t in report["insufficient_data_topics"]:
+            print(f"- {t['message']}")
 
-    print("\n📉 12.4 — Zayıflıktan Güçlüye Konu Sıralaması\n")
+    # -------------------------
+    # ZAYIF KONULAR
+    # -------------------------
+    if report["weak_topics"]:
+        print("\n📉 ZAYIF KONULAR\n")
+        for i, t in enumerate(report["weak_topics"], start=1):
+            print(
+                f"{i}. {t['konu']} | " f"%{t['accuracy']} | " f"{t['n_questions']} soru"
+            )
 
-    for i, t in enumerate(ranked_topics, start=1):
-        print(
-            f"{i}. {t['konu']} | "
-            f"%{t['accuracy']} | "
-            f"{t['n_questions']} soru | "
-            f"{t['data_status']}"
-        )
-    print("\n🧠 12.5 — Çalışma Önerileri\n")
+    # -------------------------
+    # GÜÇLÜ KONULAR
+    # -------------------------
+    if report["strong_topics"]:
+        print("\n💪 GÜÇLÜ KONULAR\n")
+        for t in report["strong_topics"]:
+            print(f"- {t['konu']} | " f"%{t['accuracy']} | " f"{t['n_questions']} soru")
 
-    for s in suggestions:
-        print(f"- {s}")
+    # -------------------------
+    # ÖNERİLER
+    # -------------------------
+    if report["suggestions"]:
+        print("\n🧠 ÇALIŞMA ÖNERİLERİ\n")
+        for s in report["suggestions"]:
+            print(f"- {s}")
 
 
 if __name__ == "__main__":
-    run_12_3()
+    run_report()

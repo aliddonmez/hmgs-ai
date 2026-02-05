@@ -1,3 +1,4 @@
+##analysis/rank_topics.py
 def rank_weak_topics(topic_stats: list[dict]) -> list[dict]:
     """
     ##konu listesi alır konu listesi sıralanmış şekilde gelir .
