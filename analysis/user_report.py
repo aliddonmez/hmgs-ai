@@ -63,4 +63,5 @@ def get_user_report(user_id: str, min_n: int = 3) -> dict:
         "strong_topics": strong,
         "insufficient_data_topics": insufficient,
         "suggestions": suggestions,
+        "topic_stats": ranked,
     }

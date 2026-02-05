@@ -29,6 +29,13 @@ from app.quiz_engine import (
 )
 from app.sqlstorage import save_attempt_rows
 
+# Dashboard / Analysis import
+from analysis.user_report import get_user_report
+
+# Grafik için (13.7)
+import matplotlib.pyplot as plt
+
+
 # -------------------------------------------------
 # UI HEADER
 # -------------------------------------------------
@@ -44,7 +51,8 @@ st.divider()
 # -------------------------------------------------
 # SAYFA SEÇİMİ
 # -------------------------------------------------
-page = st.sidebar.radio("Mod seç", ["Chat", "Quiz"])
+page = st.sidebar.radio("Mod seç", ["Chat", "Quiz", "Dashboard"])
+
 
 # =================================================
 # CHAT
@@ -71,6 +79,7 @@ if page == "Chat":
             else:
                 st.markdown(result.get("text", ""))
                 st.caption("Bu cevap, mevcut hukuki kaynaklara dayanarak üretilmiştir.")
+
 
 # =================================================
 # QUIZ
@@ -158,3 +167,118 @@ elif page == "Quiz":
                             st.info(f"ℹ️ {result.get('aciklama', '')}")
 
                         st.caption(f"Kaynak: {result.get('kaynak', '')}")
+
+
+# =================================================
+# DASHBOARD (Gün 13 - B)
+# =================================================
+elif page == "Dashboard":
+    st.subheader("Dashboard")
+
+    # 13.6 - User ID input (+ opsiyonel buton)
+    dash_user_id = st.text_input("User ID", placeholder="ör: ali_donmez", key="dash_user_id")
+
+    # Basit cache: aynı user_id için tekrar hesaplamayı azaltır (13.3)
+    if "report_cache" not in st.session_state:
+        st.session_state.report_cache = {}
+
+    # Raporu getir butonu (opsiyonel)
+    fetch_clicked = st.button("Raporu getir")
+
+    if not dash_user_id:
+        st.info("Dashboard görmek için bir User ID gir.")
+        st.stop()
+
+    # Eğer butona basılmadıysa da gösterebiliriz,
+    # ama senin isteğine göre: butonla çalışsın istersen bu satırı aç/kapat.
+    if not fetch_clicked and dash_user_id not in st.session_state.report_cache:
+        st.info("Raporu görmek için “Raporu getir” butonuna bas.")
+        st.stop()
+
+    # Raporu cache’ten al veya yeniden üret
+    try:
+        if fetch_clicked or dash_user_id not in st.session_state.report_cache:
+            st.session_state.report_cache[dash_user_id] = get_user_report(dash_user_id)
+
+        report = st.session_state.report_cache.get(dash_user_id)
+
+    except Exception as e:
+        st.error("Rapor oluşturulurken hata oluştu.")
+        st.caption(f"Hata: {e}")
+        st.stop()
+
+    if not report:
+        st.warning("Bu kullanıcı için rapor bulunamadı.")
+        st.stop()
+
+    # 13.8 - veri yok / eksik durumlarını düzgün anlat
+    summary = report.get("summary", {})
+    total_q = summary.get("total_questions", 0)
+
+    if total_q == 0:
+        st.warning("Bu kullanıcı için henüz kayıt yok. Önce quiz çözmelisin.")
+        st.stop()
+
+    # 13.6 - Üst metrik kutuları
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Total Questions", summary.get("total_questions", 0))
+    col2.metric("Accuracy", f"%{summary.get('accuracy', 0)}")
+    col3.metric("Correct / Wrong", f"{summary.get('correct', 0)} / {summary.get('wrong', 0)}")
+
+    st.divider()
+
+    # 13.6 - En zayıf konular (Top 5)
+    weak_topics = report.get("weak_topics", [])[:5]
+    st.markdown("### 📉 En zayıf konular (Top 5)")
+    if not weak_topics:
+        st.info("Zayıf konu listesi üretilemedi.")
+    else:
+        for t in weak_topics:
+            st.write(f"- {t.get('konu', '-')}: %{t.get('accuracy', 0)} ({t.get('n_questions', 0)} soru)")
+
+    # 13.6 - En güçlü konular (Top 3)
+    strong_topics = report.get("strong_topics", [])[:3]
+    st.markdown("### 💪 En güçlü konular (Top 3)")
+    if not strong_topics:
+        st.info("Güçlü konu listesi üretilemedi.")
+    else:
+        for t in strong_topics:
+            st.write(f"- {t.get('konu', '-')}: %{t.get('accuracy', 0)} ({t.get('n_questions', 0)} soru)")
+
+    # 13.4 - Yetersiz veri uyarısı
+    insufficient = report.get("insufficient_data_topics", [])
+    if insufficient:
+        st.markdown("### ⚠️ Yetersiz veri olan konular")
+        for t in insufficient:
+            st.write(f"- {t.get('konu', '-')}: sadece {t.get('n', 0)} soru (analiz için az)")
+
+    st.divider()
+
+    # 13.7 - Basit grafik: konu bazlı doğruluk (Top 10)
+    st.markdown("### 📊 Konu bazlı doğruluk (Top 10)")
+    topic_stats = report.get("topic_stats", [])
+    if topic_stats:
+        # En çok soru çözülen ilk 10 konuyu göster
+        sorted_by_n = sorted(topic_stats, key=lambda x: x.get("n_questions", 0), reverse=True)[:10]
+        labels = [x.get("konu", "-") for x in sorted_by_n]
+        values = [x.get("accuracy", 0) for x in sorted_by_n]
+
+        fig, ax = plt.subplots()
+        ax.bar(labels, values)
+        ax.set_ylabel("Accuracy (%)")
+        ax.set_ylim(0, 100)
+        plt.xticks(rotation=35, ha="right")
+        st.pyplot(fig)
+    else:
+        st.info("Grafik için yeterli konu istatistiği yok.")
+
+    st.divider()
+
+    # 13.6 - Öneriler
+    st.markdown("### 🧠 Öneriler")
+    suggestions = report.get("suggestions", [])
+    if not suggestions:
+        st.info("Öneri üretilemedi.")
+    else:
+        for s in suggestions:
+            st.write(f"- {s}")
