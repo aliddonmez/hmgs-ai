@@ -9,12 +9,12 @@ from google import genai
 from analysis.pgvector_similarity import retrieve
 
 
+# =========================
 # SABİT METİNLER
+# =========================
+
 IDK_TEXT = "Bu soruya, elimdeki kaynaklara dayanarak güvenilir bir cevap veremiyorum."
 
-
-
-# YAPISAL ÇIKTI HELPERS
 
 def make_no_answer(reason: str):
     return {
@@ -37,15 +37,13 @@ def make_answer(text: str):
 
 def is_out_of_scope(question: str) -> bool:
     """
-    Dataset dışına taşan bariz konuları direkt sustur.
-    (Bunu LLM'e bırakmıyoruz.)
+    Dataset dışına taşan bariz konular için erken susma.
     """
     q = question.lower()
-
     out_kw = [
         "ofsayt", "futbol",
-        "kahve", "filtre kahve", "demleme",
-        "kasten öldürme", "yağma",
+        "kahve", "demleme",
+        "python", "list",
     ]
     return any(k in q for k in out_kw)
 
@@ -62,29 +60,30 @@ def build_context(results):
 
 
 def load_prompt():
-    prompt_path = Path(__file__).resolve().parents[1] / "docs" / "prompt_v1.md"
-    return prompt_path.read_text(encoding="utf-8")
+    path = Path(__file__).resolve().parents[1] / "docs" / "prompt_v1.md"
+    return path.read_text(encoding="utf-8")
 
 
-def fill_prompt(prompt_template: str, question: str, context: str) -> str:
-    prompt = prompt_template.replace("{{question}}", question)
-    prompt = prompt.replace("{{context}}", context)
-    return prompt
+def fill_prompt(prompt: str, question: str, context: str) -> str:
+    return (
+        prompt
+        .replace("{{question}}", question)
+        .replace("{{context}}", context)
+    )
 
 
 # =========================
-# CORE PIPELINE (UI + API İÇİN)
+# CORE PIPELINE
 # =========================
 
-##Kullanıcı boşluklu soru atarsa temizle , soru yoksa hiç işlem yapma .
-def run(question: str, debug: bool = False) -> dict:
+def run(question: str, debug: bool = True) -> dict:
     question = question.strip()
     if not question:
         return make_no_answer("empty_question")
 
-    # (A) Out-of-scope
+    # (A) Scope kontrolü
     if is_out_of_scope(question):
-        return make_no_answer("out_of_scope_keyword")
+        return make_no_answer("out_of_scope")
 
     # (B) Retrieval
     results = retrieve(
@@ -96,16 +95,53 @@ def run(question: str, debug: bool = False) -> dict:
         debug=debug,
     )
 
-    # (C) Context yoksa
-    if not results:
-        return make_no_answer("no_result_after_min_score")
+    # ---------- DEBUG ----------
+    if debug:
+        print("\n--- RETRIEVAL DEBUG ---")
+        for i, r in enumerate(results):
+            title, content, score = r
+            print(f"\n[{i+1}] SCORE: {round(score,4)}")
+            print(f"TITLE: {title}")
+            print("CONTENT:")
+            print(content[:400])
+    # ----------------------------
 
-    # (D) Prompt
-    context = build_context(results)
+    # (C0) Hiç sonuç yoksa
+    if not results:
+        return make_no_answer("no_result")
+
+    # (C1) Skor dağılımı kontrolü (15.2 / 15.3)
+    top_scores = [r[2] for r in results]
+    if len(top_scores) >= 2:
+        gap = abs(top_scores[0] - top_scores[1])
+        if gap < 0.005:
+            return make_no_answer("ambiguous_retrieval")
+
+    # (D) Tanım var mı kontrolü (15.4)
+    # Not: Burada sadece keyword listesini genişlettik.
+    definition_keywords = [
+        "tanımı",
+        "şudur",
+        "olarak tanımlanır",
+        "ifade eder",
+        "alınmasıdır",
+        "oluşur",
+        "unsurları",
+    ]
+
+    has_definition = any(
+        any(k in content.lower() for k in definition_keywords)
+        for _, content, _ in results
+    )
+
+    if not has_definition:
+        return make_no_answer("no_clear_definition")
+
+    # (E) Prompt + LLM
     prompt_template = load_prompt()
+    context = build_context(results)
     final_prompt = fill_prompt(prompt_template, question, context)
 
-    # (E) LLM
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         return make_no_answer("missing_api_key")
@@ -114,22 +150,21 @@ def run(question: str, debug: bool = False) -> dict:
         client = genai.Client(api_key=api_key)
         response = client.models.generate_content(
             model="gemini-2.5-flash",
-            contents=final_prompt
+            contents=final_prompt,
         )
         return make_answer(response.text)
-    
+
     except Exception:
         return make_no_answer("llm_error")
 
 
 # =========================
-# CLI ENTRY (TEST AMAÇLI) terminalden hızlı test 
+# CLI TEST
 # =========================
 
 def main():
-    question = input("Lütfen sorunuzu girin: ")
-    result = run(question)
-    print(result)
+    q = input("Soru: ")
+    print(run(q))
 
 
 if __name__ == "__main__":

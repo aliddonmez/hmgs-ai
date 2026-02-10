@@ -76,6 +76,7 @@ if page == "Chat":
                 st.caption(
                     "Yanlış veya eksik yönlendirme yapmamak için cevap vermemek tercih edilmiştir."
                 )
+                st.caption(f"reason: {result.get('reason')}")
             else:
                 st.markdown(result.get("text", ""))
                 st.caption("Bu cevap, mevcut hukuki kaynaklara dayanarak üretilmiştir.")
