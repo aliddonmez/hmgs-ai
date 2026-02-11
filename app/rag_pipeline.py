@@ -3,6 +3,7 @@ from pathlib import Path
 import os
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from google import genai
@@ -13,7 +14,11 @@ from analysis.pgvector_similarity import retrieve
 # SABİT METİNLER
 # =========================
 
-IDK_TEXT = "Bu soruya, elimdeki kaynaklara dayanarak güvenilir bir cevap veremiyorum."
+IDK_TEXT = (
+    "⚠️ Bu soruya, mevcut hukuki kaynaklar içinde doğrudan ve güvenli "
+    "bir yanıt bulamadım. Varsayıma dayalı bir cevap üretmemek için burada duruyorum.\n\n"
+    "🔎 Soruyu biraz daraltarak ya da ilgili kanun maddesini belirterek yeniden sorabilirsin."
+)
 
 
 def make_no_answer(reason: str):
@@ -24,10 +29,13 @@ def make_no_answer(reason: str):
     }
 
 
-def make_answer(text: str):
+def make_answer(text: str, source_count: int = 0):
     return {
         "type": "answer",
         "text": text,
+        "meta": {
+            "source_count": source_count,
+        },
     }
 
 
@@ -35,15 +43,19 @@ def make_answer(text: str):
 # SCOPE KONTROLÜ
 # =========================
 
+
 def is_out_of_scope(question: str) -> bool:
     """
     Dataset dışına taşan bariz konular için erken susma.
     """
     q = question.lower()
     out_kw = [
-        "ofsayt", "futbol",
-        "kahve", "demleme",
-        "python", "list",
+        "ofsayt",
+        "futbol",
+        "kahve",
+        "demleme",
+        "python",
+        "list",
     ]
     return any(k in q for k in out_kw)
 
@@ -51,6 +63,7 @@ def is_out_of_scope(question: str) -> bool:
 # =========================
 # PROMPT & CONTEXT
 # =========================
+
 
 def build_context(results):
     parts = []
@@ -65,16 +78,13 @@ def load_prompt():
 
 
 def fill_prompt(prompt: str, question: str, context: str) -> str:
-    return (
-        prompt
-        .replace("{{question}}", question)
-        .replace("{{context}}", context)
-    )
+    return prompt.replace("{{question}}", question).replace("{{context}}", context)
 
 
 # =========================
 # CORE PIPELINE
 # =========================
+
 
 def run(question: str, debug: bool = True) -> dict:
     question = question.strip()
@@ -152,7 +162,7 @@ def run(question: str, debug: bool = True) -> dict:
             model="gemini-2.5-flash",
             contents=final_prompt,
         )
-        return make_answer(response.text)
+        return make_answer(response.text, source_count=len(results))
 
     except Exception:
         return make_no_answer("llm_error")
@@ -161,6 +171,7 @@ def run(question: str, debug: bool = True) -> dict:
 # =========================
 # CLI TEST
 # =========================
+
 
 def main():
     q = input("Soru: ")

@@ -10,12 +10,14 @@ sys.path.insert(0, PROJECT_ROOT)
 
 import streamlit as st
 
+
 # -------------------------------------------------
 # Streamlit config (İLK Streamlit çağrısı OLMALI)
 # -------------------------------------------------
 st.set_page_config(page_title="HMGS", page_icon="⚖️")
 
 from app.rag_pipeline import run
+from app.question_select import select_questions
 
 # Quiz imports
 from data.questions_v1 import questions
@@ -81,7 +83,6 @@ if page == "Chat":
                 st.markdown(result.get("text", ""))
                 st.caption("Bu cevap, mevcut hukuki kaynaklara dayanarak üretilmiştir.")
 
-
 # =================================================
 # QUIZ
 # =================================================
@@ -97,6 +98,18 @@ elif page == "Quiz":
 
     st.caption(f"Kullanıcı: {user_id}")
 
+    # Quiz türü seçimi
+    quiz_mode_label = st.radio(
+        "Quiz Türünü Seç",
+        [
+            "🧠 Otomatik (Zayıf Konulara Göre)",
+            "⚖ Dengeli",
+            "🎲 Rastgele",
+        ],
+    )
+
+    st.caption("Otomatik mod, zayıf konularınıza daha fazla soru getirir.")
+
     # Session init
     if "quiz_state" not in st.session_state:
         st.session_state.quiz_state = None
@@ -104,9 +117,33 @@ elif page == "Quiz":
     if "quiz_saved" not in st.session_state:
         st.session_state.quiz_saved = False
 
-    # Quiz başlat
+    # ---------------------------------------------
+    # QUIZ BAŞLAT
+    # ---------------------------------------------
     if st.button("Quiz'i Başlat"):
-        st.session_state.quiz_state = start_quiz(questions)
+
+        if quiz_mode_label == "🧠 Otomatik (Zayıf Konulara Göre)":
+            report = get_user_report(user_id)
+            weak_topic_names = [t["konu"] for t in report.get("weak_topics", [])]
+            mode = "weak_focus"
+
+        elif quiz_mode_label == "⚖ Dengeli":
+            weak_topic_names = []
+            mode = "balanced"
+
+        else:
+            weak_topic_names = []
+            mode = "random"
+
+        selected_questions = select_questions(
+            question_pool=questions,
+            n_questions=10,
+            mode=mode,
+            weak_topics=weak_topic_names,
+            seed=42,
+        )
+
+        st.session_state.quiz_state = start_quiz(selected_questions)
         st.session_state.quiz_saved = False
 
     # -------------------------------------------------
@@ -131,8 +168,35 @@ elif page == "Quiz":
             score = get_score(st.session_state.quiz_state)
             st.success(f"🎉 Quiz bitti! Skor: {score['score']} / {score['total']}")
 
+            # ---------------------------------------------
+            # YENİ QUIZ (SEÇİLEN MODLA)
+            # ---------------------------------------------
             if st.button("🔄 Yeni Quiz Başlat"):
-                st.session_state.quiz_state = start_quiz(questions)
+
+                if quiz_mode_label == "🧠 Otomatik (Zayıf Konulara Göre)":
+                    report = get_user_report(user_id)
+                    weak_topic_names = [
+                        t["konu"] for t in report.get("weak_topics", [])
+                    ]
+                    mode = "weak_focus"
+
+                elif quiz_mode_label == "⚖ Dengeli":
+                    weak_topic_names = []
+                    mode = "balanced"
+
+                else:
+                    weak_topic_names = []
+                    mode = "random"
+
+                selected_questions = select_questions(
+                    question_pool=questions,
+                    n_questions=10,
+                    mode=mode,
+                    weak_topics=weak_topic_names,
+                    seed=42,
+                )
+
+                st.session_state.quiz_state = start_quiz(selected_questions)
                 st.session_state.quiz_saved = False
                 st.rerun()
 
@@ -177,7 +241,9 @@ elif page == "Dashboard":
     st.subheader("Dashboard")
 
     # 13.6 - User ID input (+ opsiyonel buton)
-    dash_user_id = st.text_input("User ID", placeholder="ör: ali_donmez", key="dash_user_id")
+    dash_user_id = st.text_input(
+        "User ID", placeholder="ör: ali_donmez", key="dash_user_id"
+    )
 
     # Basit cache: aynı user_id için tekrar hesaplamayı azaltır (13.3)
     if "report_cache" not in st.session_state:
@@ -224,7 +290,9 @@ elif page == "Dashboard":
     col1, col2, col3 = st.columns(3)
     col1.metric("Total Questions", summary.get("total_questions", 0))
     col2.metric("Accuracy", f"%{summary.get('accuracy', 0)}")
-    col3.metric("Correct / Wrong", f"{summary.get('correct', 0)} / {summary.get('wrong', 0)}")
+    col3.metric(
+        "Correct / Wrong", f"{summary.get('correct', 0)} / {summary.get('wrong', 0)}"
+    )
 
     st.divider()
 
@@ -235,7 +303,9 @@ elif page == "Dashboard":
         st.info("Zayıf konu listesi üretilemedi.")
     else:
         for t in weak_topics:
-            st.write(f"- {t.get('konu', '-')}: %{t.get('accuracy', 0)} ({t.get('n_questions', 0)} soru)")
+            st.write(
+                f"- {t.get('konu', '-')}: %{t.get('accuracy', 0)} ({t.get('n_questions', 0)} soru)"
+            )
 
     # 13.6 - En güçlü konular (Top 3)
     strong_topics = report.get("strong_topics", [])[:3]
@@ -244,14 +314,18 @@ elif page == "Dashboard":
         st.info("Güçlü konu listesi üretilemedi.")
     else:
         for t in strong_topics:
-            st.write(f"- {t.get('konu', '-')}: %{t.get('accuracy', 0)} ({t.get('n_questions', 0)} soru)")
+            st.write(
+                f"- {t.get('konu', '-')}: %{t.get('accuracy', 0)} ({t.get('n_questions', 0)} soru)"
+            )
 
     # 13.4 - Yetersiz veri uyarısı
     insufficient = report.get("insufficient_data_topics", [])
     if insufficient:
         st.markdown("### ⚠️ Yetersiz veri olan konular")
         for t in insufficient:
-            st.write(f"- {t.get('konu', '-')}: sadece {t.get('n', 0)} soru (analiz için az)")
+            st.write(
+                f"- {t.get('konu', '-')}: sadece {t.get('n', 0)} soru (analiz için az)"
+            )
 
     st.divider()
 
@@ -260,7 +334,9 @@ elif page == "Dashboard":
     topic_stats = report.get("topic_stats", [])
     if topic_stats:
         # En çok soru çözülen ilk 10 konuyu göster
-        sorted_by_n = sorted(topic_stats, key=lambda x: x.get("n_questions", 0), reverse=True)[:10]
+        sorted_by_n = sorted(
+            topic_stats, key=lambda x: x.get("n_questions", 0), reverse=True
+        )[:10]
         labels = [x.get("konu", "-") for x in sorted_by_n]
         values = [x.get("accuracy", 0) for x in sorted_by_n]
 
