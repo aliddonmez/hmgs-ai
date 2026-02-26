@@ -13,7 +13,8 @@ from app.quiz_engine import (
 )
 
 
-from data.questions_v1 import questions
+from app.repositories.questions_repo import get_questions
+questions = get_questions()
 
 
 quiz_state = start_quiz(questions)
@@ -21,8 +22,8 @@ quiz_state = start_quiz(questions)
 while not is_quiz_finished(quiz_state):
     q = get_current_question(quiz_state)
 
-    print("\n❓", q["soru"])
-    for i, secenek in enumerate(q["secenekler"]):
+    print("\n❓", q["question"])
+    for i, secenek in enumerate(q["options"]):
         print(f"{i}. {secenek}")
 
     answer = int(input("Cevabın: "))

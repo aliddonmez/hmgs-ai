@@ -16,3 +16,4 @@ Thumbs.db
 # HuggingFace cache (isteğe bağlı ama iyi)
 .cache/
 data/*.db
+data/*.db

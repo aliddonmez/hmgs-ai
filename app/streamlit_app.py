@@ -9,6 +9,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, PROJECT_ROOT)
 
 import streamlit as st
+from collections import Counter  # ✅ DEBUG için eklendi
 
 
 # -------------------------------------------------
@@ -20,7 +21,8 @@ from app.rag_pipeline import run
 from app.question_select import select_questions
 
 # Quiz imports
-from data.questions_v1 import questions
+from app.repositories.questions_repo import get_questions
+questions = get_questions()
 from app.quiz_engine import (
     start_quiz,
     get_current_question,
@@ -98,6 +100,9 @@ elif page == "Quiz":
 
     st.caption(f"Kullanıcı: {user_id}")
 
+    # ✅ Debug panel toggle
+    show_debug = st.checkbox("🛠 Debug göster", value=True)
+
     # Quiz türü seçimi
     quiz_mode_label = st.radio(
         "Quiz Türünü Seç",
@@ -137,11 +142,28 @@ elif page == "Quiz":
 
         selected_questions = select_questions(
             question_pool=questions,
-            n_questions=10,
+            n_questions=20,
             mode=mode,
             weak_topics=weak_topic_names,
             seed=42,
         )
+
+        # ✅ DEBUG: seçilen soruların dağılımını göster
+        if show_debug:
+            ders_sayim = Counter(q.get("dersadi") for q in selected_questions)
+            konu_sayim = Counter(q.get("konu") for q in selected_questions)
+
+            st.write("✅ Seçilen Quiz Modu:", mode)
+            st.write("📚 Ders dağılımı:", dict(ders_sayim))
+            st.write("📌 Konu dağılımı:", dict(konu_sayim))
+
+            if weak_topic_names:
+                weak3 = weak_topic_names[:3]
+                weak_count = sum(
+                    1 for q in selected_questions if q.get("konu") in weak3
+                )
+                st.write("🧠 Weak topics (ilk 3):", weak3)
+                st.write("🧠 Weak soru sayısı:", f"{weak_count} / {len(selected_questions)}")
 
         st.session_state.quiz_state = start_quiz(selected_questions)
         st.session_state.quiz_saved = False
@@ -190,11 +212,31 @@ elif page == "Quiz":
 
                 selected_questions = select_questions(
                     question_pool=questions,
-                    n_questions=10,
+                    n_questions=20,
                     mode=mode,
                     weak_topics=weak_topic_names,
                     seed=42,
                 )
+
+                # ✅ DEBUG: yeni quiz için de dağılım
+                if show_debug:
+                    ders_sayim = Counter(q.get("dersadi") for q in selected_questions)
+                    konu_sayim = Counter(q.get("konu") for q in selected_questions)
+
+                    st.write("✅ Seçilen Quiz Modu:", mode)
+                    st.write("📚 Ders dağılımı:", dict(ders_sayim))
+                    st.write("📌 Konu dağılımı:", dict(konu_sayim))
+
+                    if weak_topic_names:
+                        weak3 = weak_topic_names[:3]
+                        weak_count = sum(
+                            1 for q in selected_questions if q.get("konu") in weak3
+                        )
+                        st.write("🧠 Weak topics (ilk 3):", weak3)
+                        st.write(
+                            "🧠 Weak soru sayısı:",
+                            f"{weak_count} / {len(selected_questions)}",
+                        )
 
                 st.session_state.quiz_state = start_quiz(selected_questions)
                 st.session_state.quiz_saved = False

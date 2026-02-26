@@ -37,7 +37,7 @@ def submit_answer(state, user_answer_index):
     if question is None:
         return {"error": "Quiz bitmiş veya soru bulunamadı."}
 
-    options = question.get("secenekler", [])
+    options = question.get("options", [])
 
     # Cevap integer değilse hata ver
     if not isinstance(user_answer_index, int):
@@ -47,7 +47,7 @@ def submit_answer(state, user_answer_index):
     if user_answer_index < 0 or user_answer_index >= len(options):
         return {"error": f"Geçersiz seçim. 0-{len(options)-1} arası bir değer girin."}
 
-    correct_index = question["dogru_cevap"]
+    correct_index = question["correct_answer"]
     is_correct = user_answer_index == correct_index
 
     # Doğruysa skoru artır
@@ -57,8 +57,8 @@ def submit_answer(state, user_answer_index):
     # Cevabı logla (ileride analiz için)
     state["answers"].append(
         {
-            "question_id": question["id"],
-            "ders": question.get("dersadi"),
+            "question_id": question["question_id"],
+            "ders": question.get("ders"),
             "konu": question.get("konu"),
             "selected_option": user_answer_index,
             "correct_option": correct_index,
@@ -76,8 +76,8 @@ def submit_answer(state, user_answer_index):
         "dogru_mu": is_correct,
         "selected_index": user_answer_index,
         "correct_index": correct_index,
-        "aciklama": question.get("aciklama"),
-        "kaynak": question.get("kaynak"),
+        "aciklama": question.get("explanation"),
+        "kaynak": question.get("source"),
     }
 
 

@@ -9,8 +9,7 @@ sys.path.insert(0, PROJECT_ROOT)
 
 from sentence_transformers import SentenceTransformer
 from analysis.db import get_conn
-from data.day2_texts import TEXTS
-
+from data.day2_texts import TEXTS as DAY2_TEXTS
 
 # 🔹 Embedding modeli
 model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")

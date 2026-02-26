@@ -7,7 +7,8 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, PROJECT_ROOT)
 
 # Soru listesi ve quiz motoru fonksiyonlarını içeri al
-from data.questions_v1 import questions
+from app.repositories.questions_repo import get_questions
+questions = get_questions()
 from app.quiz_engine import (
     start_quiz,
     get_current_question,
