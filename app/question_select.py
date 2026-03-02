@@ -25,34 +25,48 @@ def qrandom(pool, n, rnd):
 
 
 ## balanced secimi
-def qbalanced(pool, n, rnd):
+import random
+from collections import defaultdict
+
+def _lesson_name(q: dict) -> str:
+    return q.get("ders") or q.get("dersadi") or "Bilinmiyor"
+
+def qbalanced(question_pool, n, rnd: random.Random):
+    # Havuz boşsa direkt boş dön
+    if not question_pool:
+        return []
 
     by_lesson = defaultdict(list)
-    for q in pool:
-        by_lesson[q.get("dersadi", "Bilinmiyor")].append(q)
+    for q in question_pool:
+        by_lesson[_lesson_name(q)].append(q)
 
     lessons = list(by_lesson.keys())
-    rnd.shuffle(lessons)
-    ## shuffle sürekli ilk sorunun aynı konudan olmasını vs engeller .
+
+    # ✅ KRİTİK FIX: ders yoksa patlama -> random fallback
+    if not lessons:
+        k = min(n, len(question_pool))
+        return rnd.sample(question_pool, k)
 
     base = n // len(lessons)
-    remainder = n % len(lessons)
+    extra = n % len(lessons)
 
     selected = []
+    rnd.shuffle(lessons)
 
     for i, lesson in enumerate(lessons):
-        quota = base + (1 if i < remainder else 0)
-        picks = rnd.sample(by_lesson[lesson], min(quota, len(by_lesson[lesson])))
-        selected.extend(picks)
+        k = base + (1 if i < extra else 0)
+        candidates = by_lesson[lesson]
+        if not candidates:
+            continue
+        take = min(k, len(candidates))
+        selected.extend(rnd.sample(candidates, take))
 
-    ## örneğin 22 soru varsa kalan sayı kadar soru eklemesi yapar örneğin ilk iki konuya birer tane daha soru ekler .
-
+    # Eğer derslerden yeterince toplayamadıysak random ile tamamla
     if len(selected) < n:
-        remaining = [q for q in pool if q not in selected]
-        fill = rnd.sample(remaining, min(n - len(selected), len(remaining)))
-        selected.extend(fill)
-
-    ## örneğin her konudan 5 soru gelecek ama o konuda 5 soru yok soru sayısı istenenden daha azsa seçilmemiş sorulardan eksik kalan kısmı tamamlar başka konulardan .
+        remaining = [q for q in question_pool if q not in selected]
+        need = min(n - len(selected), len(remaining))
+        if need > 0:
+            selected.extend(rnd.sample(remaining, need))
 
     return selected[:n]
 

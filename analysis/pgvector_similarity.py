@@ -84,9 +84,9 @@ def _title_matches_topic(title: str, topic: str) -> bool:
 def retrieve(
     question: str,
     top_k: int = 5,          # Sonuç olarak dönecek maksimum chunk sayısı
-    fetch_k: int = 20,       # DB’den ilk etapta çekilecek aday sayısı
+    fetch_k: int = 200,       # DB’den ilk etapta çekilecek aday sayısı
     min_score: float = 0.60, # Minimum benzerlik skoru eşiği
-    use_topic_filter: bool = True,  # Topic filtresi açık mı
+    use_topic_filter: bool = False,  # Topic filtresi açık mı
     debug: bool = False,     # Debug çıktıları yazdırılsın mı
 ) -> List[Row]:
     """
@@ -111,16 +111,19 @@ def retrieve(
     cur.execute(
         """
         SELECT
-            title,
-            content,
-            1 - (embedding <=> %s::vector) AS similarity
-        FROM hukuki_kaynaklar
-        ORDER BY embedding <=> %s::vector
+            d.title,
+            dc.content,
+            1 - (dc.embedding <=> %s::vector) AS similarity,
+            d.id,
+            d.ders,
+            d.konu
+        FROM document_chunks dc
+        JOIN documents d ON d.id = dc.document_id
+        ORDER BY dc.embedding <=> %s::vector
         LIMIT %s
         """,
         (q_emb, q_emb, fetch_k),
     )
-
     # İlk aday sonuçlar
     rows: List[Row] = cur.fetchall()
 
@@ -131,8 +134,8 @@ def retrieve(
     if debug:
         print("\n=== RETRIEVAL DEBUG (RAW candidates) ===")
         print("Q:", question)
-        for i, (title, _content, score) in enumerate(rows[:10], start=1):
-            print(f"{i:02d}. score={score:.4f} | {title}")
+        for i, (title, _content, score, doc_id, ders, konu) in enumerate(rows[:10], start=1):
+            print(f"{i:02d}. score={score:.4f} | {doc_id} | {ders}/{konu} | {title}")
         print("==========================================\n")
 
     # Topic tahmini
@@ -145,8 +148,27 @@ def retrieve(
     if use_topic_filter and topic != "unknown":
         rows = [r for r in rows if _title_matches_topic(r[0], topic)]
 
+    # 🔥 Konu bonusu
+    boosted_rows = []
+    for title, content, score, doc_id, ders, konu in rows:
+        new_score = score
+        if "hırsızlık" in question.lower() and konu and "hırsızlık" in konu.lower():
+            new_score += 0.05
+        boosted_rows.append((title, content, new_score, doc_id, ders, konu))
+    rows = boosted_rows
     # 2️⃣ Minimum skor filtresi
     rows = [r for r in rows if r[2] >= min_score]
+
+    # 🧩 Doc çeşitliliği: aynı doc'tan en fazla 3 chunk
+    per_doc_limit = 2
+    per_doc_counts = {}
+    diversified = []
+    for r in rows:
+        doc_id = r[3]
+        per_doc_counts[doc_id] = per_doc_counts.get(doc_id, 0) + 1
+        if per_doc_counts[doc_id] <= per_doc_limit:
+            diversified.append(r)
+    rows = diversified
 
     # 3️⃣ En iyi top_k sonucu al
     rows = rows[:top_k]
@@ -155,8 +177,20 @@ def retrieve(
     if debug:
         print("\n=== RETRIEVAL DEBUG (AFTER topic+min_score) ===")
         print("Q:", question)
-        for i, (title, _content, score) in enumerate(rows, start=1):
-            print(f"{i:02d}. score={score:.4f} | {title}")
+        for i, (title, _content, score, doc_id, ders, konu) in enumerate(rows, start=1):
+            print(f"{i:02d}. score={score:.4f} | {doc_id} | {ders}/{konu} | {title}")
         print("==============================================")
 
-    return rows  # RAG pipeline’a gönderilecek son chunk listesi
+    return [
+        {
+            "title": title,
+            "content": content,
+            "chunk_text": content,
+            "similarity": score,
+            "score": score,
+            "doc_id": doc_id,
+            "ders": ders,
+            "konu": konu,
+        }
+        for (title, content, score, doc_id, ders, konu) in rows
+    ]  # RAG pipeline’a gönderilecek son chunk listesi

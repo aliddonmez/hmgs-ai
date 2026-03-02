@@ -11,7 +11,6 @@ sys.path.insert(0, PROJECT_ROOT)
 import streamlit as st
 from collections import Counter  # ✅ DEBUG için eklendi
 
-
 # -------------------------------------------------
 # Streamlit config (İLK Streamlit çağrısı OLMALI)
 # -------------------------------------------------
@@ -22,7 +21,9 @@ from app.question_select import select_questions
 
 # Quiz imports
 from app.repositories.questions_repo import get_questions
+
 questions = get_questions()
+
 from app.quiz_engine import (
     start_quiz,
     get_current_question,
@@ -31,6 +32,7 @@ from app.quiz_engine import (
     get_score,
     export_attempt_rows,
 )
+
 from app.sqlstorage import save_attempt_rows
 
 # Dashboard / Analysis import
@@ -38,6 +40,11 @@ from analysis.user_report import get_user_report
 
 # Grafik için (13.7)
 import matplotlib.pyplot as plt
+
+
+def _get_lesson_name(q: dict) -> str:
+    """Hem eski (dersadi) hem yeni (ders) veriye uyumluluk."""
+    return q.get("ders") or q.get("dersadi") or "Bilinmiyor"
 
 
 # -------------------------------------------------
@@ -85,6 +92,7 @@ if page == "Chat":
                 st.markdown(result.get("text", ""))
                 st.caption("Bu cevap, mevcut hukuki kaynaklara dayanarak üretilmiştir.")
 
+
 # =================================================
 # QUIZ
 # =================================================
@@ -126,10 +134,9 @@ elif page == "Quiz":
     # QUIZ BAŞLAT
     # ---------------------------------------------
     if st.button("Quiz'i Başlat"):
-
         if quiz_mode_label == "🧠 Otomatik (Zayıf Konulara Göre)":
             report = get_user_report(user_id)
-            weak_topic_names = [t["konu"] for t in report.get("weak_topics", [])]
+            weak_topic_names = [t.get("konu") for t in report.get("weak_topics", []) if t.get("konu")]
             mode = "weak_focus"
 
         elif quiz_mode_label == "⚖ Dengeli":
@@ -150,8 +157,8 @@ elif page == "Quiz":
 
         # ✅ DEBUG: seçilen soruların dağılımını göster
         if show_debug:
-            ders_sayim = Counter(q.get("dersadi") for q in selected_questions)
-            konu_sayim = Counter(q.get("konu") for q in selected_questions)
+            ders_sayim = Counter(_get_lesson_name(q) for q in selected_questions)
+            konu_sayim = Counter(q.get("konu") or "Bilinmiyor" for q in selected_questions)
 
             st.write("✅ Seçilen Quiz Modu:", mode)
             st.write("📚 Ders dağılımı:", dict(ders_sayim))
@@ -159,14 +166,13 @@ elif page == "Quiz":
 
             if weak_topic_names:
                 weak3 = weak_topic_names[:3]
-                weak_count = sum(
-                    1 for q in selected_questions if q.get("konu") in weak3
-                )
+                weak_count = sum(1 for q in selected_questions if q.get("konu") in weak3)
                 st.write("🧠 Weak topics (ilk 3):", weak3)
                 st.write("🧠 Weak soru sayısı:", f"{weak_count} / {len(selected_questions)}")
 
         st.session_state.quiz_state = start_quiz(selected_questions)
         st.session_state.quiz_saved = False
+        st.rerun()
 
     # -------------------------------------------------
     # QUIZ AKIŞI
@@ -178,7 +184,6 @@ elif page == "Quiz":
         # QUIZ BİTTİ
         # ------------------------------
         if q is None or is_finished(st.session_state.quiz_state):
-
             if not st.session_state.quiz_saved:
                 rows = export_attempt_rows(
                     st.session_state.quiz_state,
@@ -194,11 +199,10 @@ elif page == "Quiz":
             # YENİ QUIZ (SEÇİLEN MODLA)
             # ---------------------------------------------
             if st.button("🔄 Yeni Quiz Başlat"):
-
                 if quiz_mode_label == "🧠 Otomatik (Zayıf Konulara Göre)":
                     report = get_user_report(user_id)
                     weak_topic_names = [
-                        t["konu"] for t in report.get("weak_topics", [])
+                        t.get("konu") for t in report.get("weak_topics", []) if t.get("konu")
                     ]
                     mode = "weak_focus"
 
@@ -220,8 +224,8 @@ elif page == "Quiz":
 
                 # ✅ DEBUG: yeni quiz için de dağılım
                 if show_debug:
-                    ders_sayim = Counter(q.get("dersadi") for q in selected_questions)
-                    konu_sayim = Counter(q.get("konu") for q in selected_questions)
+                    ders_sayim = Counter(_get_lesson_name(q) for q in selected_questions)
+                    konu_sayim = Counter(q.get("konu") or "Bilinmiyor" for q in selected_questions)
 
                     st.write("✅ Seçilen Quiz Modu:", mode)
                     st.write("📚 Ders dağılımı:", dict(ders_sayim))
@@ -229,14 +233,9 @@ elif page == "Quiz":
 
                     if weak_topic_names:
                         weak3 = weak_topic_names[:3]
-                        weak_count = sum(
-                            1 for q in selected_questions if q.get("konu") in weak3
-                        )
+                        weak_count = sum(1 for q in selected_questions if q.get("konu") in weak3)
                         st.write("🧠 Weak topics (ilk 3):", weak3)
-                        st.write(
-                            "🧠 Weak soru sayısı:",
-                            f"{weak_count} / {len(selected_questions)}",
-                        )
+                        st.write("🧠 Weak soru sayısı:", f"{weak_count} / {len(selected_questions)}")
 
                 st.session_state.quiz_state = start_quiz(selected_questions)
                 st.session_state.quiz_saved = False
@@ -247,13 +246,17 @@ elif page == "Quiz":
         # ------------------------------
         else:
             st.markdown(f"### Soru {st.session_state.quiz_state['current_index'] + 1}")
-            st.write(q["soru"])
 
-            selected_text = st.radio("Şık seç", q["secenekler"], index=None)
+            # Soru metni
+            st.write(q.get("question", ""))
+
+            # Şıklar
+            options = q.get("options", [])
+            selected_text = st.radio("Şık seç", options, index=None)
 
             selected_index = None
             if selected_text is not None:
-                selected_index = q["secenekler"].index(selected_text)
+                selected_index = options.index(selected_text)
 
             if st.button("Cevabı Gönder"):
                 if selected_index is None:
@@ -267,13 +270,15 @@ elif page == "Quiz":
                     if "error" in result:
                         st.warning(result["error"])
                     else:
-                        if result["dogru_mu"]:
+                        if result.get("dogru_mu"):
                             st.success("✅ Doğru")
                         else:
                             st.error("❌ Yanlış")
                             st.info(f"ℹ️ {result.get('aciklama', '')}")
 
                         st.caption(f"Kaynak: {result.get('kaynak', '')}")
+
+                    st.rerun()
 
 
 # =================================================
@@ -283,9 +288,7 @@ elif page == "Dashboard":
     st.subheader("Dashboard")
 
     # 13.6 - User ID input (+ opsiyonel buton)
-    dash_user_id = st.text_input(
-        "User ID", placeholder="ör: ali_donmez", key="dash_user_id"
-    )
+    dash_user_id = st.text_input("User ID", placeholder="ör: ali_donmez", key="dash_user_id")
 
     # Basit cache: aynı user_id için tekrar hesaplamayı azaltır (13.3)
     if "report_cache" not in st.session_state:
@@ -332,9 +335,7 @@ elif page == "Dashboard":
     col1, col2, col3 = st.columns(3)
     col1.metric("Total Questions", summary.get("total_questions", 0))
     col2.metric("Accuracy", f"%{summary.get('accuracy', 0)}")
-    col3.metric(
-        "Correct / Wrong", f"{summary.get('correct', 0)} / {summary.get('wrong', 0)}"
-    )
+    col3.metric("Correct / Wrong", f"{summary.get('correct', 0)} / {summary.get('wrong', 0)}")
 
     st.divider()
 
@@ -345,9 +346,7 @@ elif page == "Dashboard":
         st.info("Zayıf konu listesi üretilemedi.")
     else:
         for t in weak_topics:
-            st.write(
-                f"- {t.get('konu', '-')}: %{t.get('accuracy', 0)} ({t.get('n_questions', 0)} soru)"
-            )
+            st.write(f"- {t.get('konu', '-')}: %{t.get('accuracy', 0)} ({t.get('n_questions', 0)} soru)")
 
     # 13.6 - En güçlü konular (Top 3)
     strong_topics = report.get("strong_topics", [])[:3]
@@ -356,18 +355,14 @@ elif page == "Dashboard":
         st.info("Güçlü konu listesi üretilemedi.")
     else:
         for t in strong_topics:
-            st.write(
-                f"- {t.get('konu', '-')}: %{t.get('accuracy', 0)} ({t.get('n_questions', 0)} soru)"
-            )
+            st.write(f"- {t.get('konu', '-')}: %{t.get('accuracy', 0)} ({t.get('n_questions', 0)} soru)")
 
     # 13.4 - Yetersiz veri uyarısı
     insufficient = report.get("insufficient_data_topics", [])
     if insufficient:
         st.markdown("### ⚠️ Yetersiz veri olan konular")
         for t in insufficient:
-            st.write(
-                f"- {t.get('konu', '-')}: sadece {t.get('n', 0)} soru (analiz için az)"
-            )
+            st.write(f"- {t.get('konu', '-')}: sadece {t.get('n', 0)} soru (analiz için az)")
 
     st.divider()
 
@@ -376,9 +371,7 @@ elif page == "Dashboard":
     topic_stats = report.get("topic_stats", [])
     if topic_stats:
         # En çok soru çözülen ilk 10 konuyu göster
-        sorted_by_n = sorted(
-            topic_stats, key=lambda x: x.get("n_questions", 0), reverse=True
-        )[:10]
+        sorted_by_n = sorted(topic_stats, key=lambda x: x.get("n_questions", 0), reverse=True)[:10]
         labels = [x.get("konu", "-") for x in sorted_by_n]
         values = [x.get("accuracy", 0) for x in sorted_by_n]
 
