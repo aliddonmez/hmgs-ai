@@ -2,16 +2,20 @@
 # -- QUIZ MOTORU (UI-dostu) --
 
 
-def start_quiz(questions):
-    """
-    Quiz başlatılırken çağrılır.
-    Başlangıç state'ini oluşturur.
-    """
+def start_quiz(
+    question_pool, n_questions=20, mode="balanced", weak_topics=None, seed=None
+):
+    from app.question_select import select_questions
+
+    selected = select_questions(
+        question_pool, n_questions, mode=mode, weak_topics=weak_topics, seed=seed
+    )
+
     return {
-        "questions": questions,  # Tüm soru listesi
-        "current_index": 0,  # Şu an hangi sorudayız
-        "score": 0,  # Doğru sayısı
-        "answers": [],  # Kullanıcının verdiği cevaplar (log)
+        "questions": selected,
+        "current_index": 0,
+        "score": 0,
+        "answers": [],
     }
 
 
@@ -38,14 +42,6 @@ def submit_answer(state, user_answer_index):
         return {"error": "Quiz bitmiş veya soru bulunamadı."}
 
     options = question.get("options", [])
-
-    # Cevap integer değilse hata ver
-    if not isinstance(user_answer_index, int):
-        return {"error": "Cevap formatı hatalı. Sayı (int) olmalı."}
-
-    # Cevap aralık dışıysa hata ver
-    if user_answer_index < 0 or user_answer_index >= len(options):
-        return {"error": f"Geçersiz seçim. 0-{len(options)-1} arası bir değer girin."}
 
     correct_index = question["correct_answer"]
     is_correct = user_answer_index == correct_index

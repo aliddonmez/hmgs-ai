@@ -1,196 +1,25 @@
 # analysis/pgvector_similarity.py
-import os
-import sys
-from typing import List, Tuple, Optional
 
-# Proje root'unu Python path'ine ekle
-# Böylece üst klasördeki modülleri (analysis.db gibi) import edebiliyoruz
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.insert(0, PROJECT_ROOT)
+"""
+⚠️ DEPRECATED MODULE
 
-from sentence_transformers import SentenceTransformer
-from analysis.db import get_conn  # PostgreSQL bağlantısı sağlayan fonksiyon
+Bu dosya eski retrieval pipeline'ına aitti.
 
-# 🔹 Global embedding modeli (tek sefer yüklenir)
-# Bu model metinleri vektöre çevirir (semantic anlam çıkarır)
-model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+Yeni retrieval sistemi şu klasöre taşındı:
 
-# DB’den gelecek satır formatı:
-# (başlık, içerik, benzerlik skoru)
-Row = Tuple[str, str, float]
+retrieval/
+    embedding_model.py
+    topic_classifier.py
+    query_expansion.py
+    vector_search.py
+    reranker.py
+    pipeline.py
 
+pgvector araması artık:
 
-def _guess_topic(question: str) -> str:
-    """
-    Basit topic tahmini (keyword bazlı).
-    Amaç: retrieval karışmasını azaltmak.
-    Örneğin: Dolandırıcılık sorusunda hırsızlık chunk'ları gelmesin.
-    """
-    q = question.lower()  # Küçük harfe çevirerek karşılaştırma kolaylaştırılır
+retrieval/vector_search.py
 
-    # Her suç tipi için anahtar kelimeler
-    fraud_kw = ["dolandır", "hile", "aldat", "aldan", "yarar", "menfaat"]
-    theft_kw = ["hırsız", "zilyet", "alma hareketi", "rızanın olmaması", "taşınır"]
-    intent_kw = ["kast", "olası kast", "doğrudan kast"]
-    negligence_kw = ["taksir", "bilinçli taksir", "özen", "dikkat"]
-    tort_kw = ["haksız fiil", "illiyet", "tazminat", "kusur"]
-    contract_kw = ["sözleşme", "teklif", "kabul", "irade beyanı"]
+tarafından yapılmaktadır.
 
-    # Soru içinde kelime geçiyorsa ilgili topic döndürülür
-    if any(k in q for k in fraud_kw):
-        return "fraud"
-    if any(k in q for k in theft_kw):
-        return "theft"
-    if any(k in q for k in intent_kw):
-        return "intent"
-    if any(k in q for k in negligence_kw):
-        return "negligence"
-    if any(k in q for k in tort_kw):
-        return "tort"
-    if any(k in q for k in contract_kw):
-        return "contract"
-
-    # Hiçbiri değilse bilinmeyen konu
-    return "unknown"
-
-
-def _title_matches_topic(title: str, topic: str) -> bool:
-    """
-    Topic'e göre başlık filtresi.
-    Şimdilik sadece başlıkta anahtar kelime arıyoruz.
-
-    ⚠️ İleride DB’ye 'topic' kolonu ekleyip SQL WHERE topic=... yapmak daha doğru olur.
-    """
-    t = title.lower()
-
-    # Her topic için başlıkta aranacak kelimeler
-    if topic == "fraud":
-        return ("dolandır" in t) or ("hile" in t)
-    if topic == "theft":
-        return ("hırsız" in t) or ("zilyet" in t) or ("alma" in t)
-    if topic == "intent":
-        return "kast" in t
-    if topic == "negligence":
-        return "taksir" in t
-    if topic == "tort":
-        return "haksız fiil" in t
-    if topic == "contract":
-        return "sözleşme" in t or "teklif" in t or "kabul" in t
-
-    # Topic bilinmiyorsa filtreleme yapılmaz
-    return True
-
-
-def retrieve(
-    question: str,
-    top_k: int = 5,          # Sonuç olarak dönecek maksimum chunk sayısı
-    fetch_k: int = 200,       # DB’den ilk etapta çekilecek aday sayısı
-    min_score: float = 0.60, # Minimum benzerlik skoru eşiği
-    use_topic_filter: bool = False,  # Topic filtresi açık mı
-    debug: bool = False,     # Debug çıktıları yazdırılsın mı
-) -> List[Row]:
-    """
-    RAG retrieval pipeline:
-
-    1️-Soru embedding'e çevrilir  
-    2- pgvector ile en benzer fetch_k aday çekilir  
-    3- (Opsiyonel) topic filtresi uygulanır  
-    4- min_score altındaki sonuçlar elenir  
-     top_k sonuç döndürülür
-    """
-
-    conn = get_conn()        # PostgreSQL bağlantısı aç
-    cur = conn.cursor()      # Cursor oluştur
-
-    # Soruyu vektöre çevir
-    q_emb = model.encode(question).tolist()
-
-    # pgvector ile cosine distance benzeri arama
-    # <=> operatörü: vector distance
-    # 1 - distance = similarity
-    cur.execute(
-        """
-        SELECT
-            d.title,
-            dc.content,
-            1 - (dc.embedding <=> %s::vector) AS similarity,
-            d.id,
-            d.ders,
-            d.konu
-        FROM document_chunks dc
-        JOIN documents d ON d.id = dc.document_id
-        ORDER BY dc.embedding <=> %s::vector
-        LIMIT %s
-        """,
-        (q_emb, q_emb, fetch_k),
-    )
-    # İlk aday sonuçlar
-    rows: List[Row] = cur.fetchall()
-
-    cur.close()
-    conn.close()
-
-    #  Ham sonuçları görmek için debug modu
-    if debug:
-        print("\n=== RETRIEVAL DEBUG (RAW candidates) ===")
-        print("Q:", question)
-        for i, (title, _content, score, doc_id, ders, konu) in enumerate(rows[:10], start=1):
-            print(f"{i:02d}. score={score:.4f} | {doc_id} | {ders}/{konu} | {title}")
-        print("==========================================\n")
-
-    # Topic tahmini
-    topic = _guess_topic(question) if use_topic_filter else "no_topic"
-
-    if debug:
-        print(f"[DEBUG] topic={topic} | min_score={min_score} | fetch_k={fetch_k} | top_k={top_k}")
-
-    # 1️⃣ Topic filtresi
-    if use_topic_filter and topic != "unknown":
-        rows = [r for r in rows if _title_matches_topic(r[0], topic)]
-
-    # 🔥 Konu bonusu
-    boosted_rows = []
-    for title, content, score, doc_id, ders, konu in rows:
-        new_score = score
-        if "hırsızlık" in question.lower() and konu and "hırsızlık" in konu.lower():
-            new_score += 0.05
-        boosted_rows.append((title, content, new_score, doc_id, ders, konu))
-    rows = boosted_rows
-    # 2️⃣ Minimum skor filtresi
-    rows = [r for r in rows if r[2] >= min_score]
-
-    # 🧩 Doc çeşitliliği: aynı doc'tan en fazla 3 chunk
-    per_doc_limit = 2
-    per_doc_counts = {}
-    diversified = []
-    for r in rows:
-        doc_id = r[3]
-        per_doc_counts[doc_id] = per_doc_counts.get(doc_id, 0) + 1
-        if per_doc_counts[doc_id] <= per_doc_limit:
-            diversified.append(r)
-    rows = diversified
-
-    # 3️⃣ En iyi top_k sonucu al
-    rows = rows[:top_k]
-
-    # 🔍 Filtre sonrası debug çıktısı
-    if debug:
-        print("\n=== RETRIEVAL DEBUG (AFTER topic+min_score) ===")
-        print("Q:", question)
-        for i, (title, _content, score, doc_id, ders, konu) in enumerate(rows, start=1):
-            print(f"{i:02d}. score={score:.4f} | {doc_id} | {ders}/{konu} | {title}")
-        print("==============================================")
-
-    return [
-        {
-            "title": title,
-            "content": content,
-            "chunk_text": content,
-            "similarity": score,
-            "score": score,
-            "doc_id": doc_id,
-            "ders": ders,
-            "konu": konu,
-        }
-        for (title, content, score, doc_id, ders, konu) in rows
-    ]  # RAG pipeline’a gönderilecek son chunk listesi
+Bu dosya sadece geriye dönük referans için tutulmuştur.
+"""

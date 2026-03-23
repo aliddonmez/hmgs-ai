@@ -1,19 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
 # Virtual environment
 .venv/
 venv/
+env/
 
 # Environment variables
 .env
 
-# Python cache
-__pycache__/
-*.pyc
-
-# OS
+# OS files
 .DS_Store
 Thumbs.db
 
-# HuggingFace cache (isteğe bağlı ama iyi)
-.cache/
-data/*.db
-data/*.db
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build
+build/
+dist/

@@ -2,6 +2,7 @@ import random
 from collections import defaultdict
 
 
+##app/question_select.py
 def select_questions(
     question_pool, n_questions, mode="balanced", weak_topics=None, seed=None
 ):
@@ -28,8 +29,10 @@ def qrandom(pool, n, rnd):
 import random
 from collections import defaultdict
 
+
 def _lesson_name(q: dict) -> str:
     return q.get("ders") or q.get("dersadi") or "Bilinmiyor"
+
 
 def qbalanced(question_pool, n, rnd: random.Random):
     # Havuz boşsa direkt boş dön

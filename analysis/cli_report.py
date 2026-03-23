@@ -7,7 +7,8 @@ import os
 # Proje root'unu path'e ekle
 # -------------------------------------------------
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.insert(0, PROJECT_ROOT)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
 from analysis.user_report import get_user_report
 
@@ -20,49 +21,64 @@ def run_report():
         return
 
     report = get_user_report(user_id, min_n=3)
-    summary = report["summary"]
+
+    if not report:
+        print("⚠️ Veri bulunamadı.")
+        return
+
+    summary = report.get("summary", {})
 
     # -------------------------
     # GENEL ÖZET
     # -------------------------
     print("\n📊 GENEL ÖZET\n")
-    print(f"Toplam soru : {summary['total_questions']}")
-    print(f"Doğru       : {summary['correct']}")
-    print(f"Yanlış      : {summary['wrong']}")
-    print(f"Doğruluk    : %{summary['accuracy']}")
+    print(f"Toplam soru : {summary.get('total_questions', 0)}")
+    print(f"Doğru       : {summary.get('correct', 0)}")
+    print(f"Yanlış      : {summary.get('wrong', 0)}")
+    print(f"Doğruluk    : %{summary.get('accuracy', 0)}")
 
     # -------------------------
     # VERİ YETERSİZ KONULAR
     # -------------------------
-    if report["insufficient_data_topics"]:
+    insufficient = report.get("insufficient_data_topics", [])
+    if insufficient:
         print("\n⚠️ VERİ YETERSİZ KONULAR\n")
-        for t in report["insufficient_data_topics"]:
-            print(f"- {t['message']}")
+        for t in insufficient:
+            print(f"- {t.get('message','')}")
 
     # -------------------------
     # ZAYIF KONULAR
     # -------------------------
-    if report["weak_topics"]:
+    weak_topics = report.get("weak_topics", [])
+    if weak_topics:
         print("\n📉 ZAYIF KONULAR\n")
-        for i, t in enumerate(report["weak_topics"], start=1):
+        for i, t in enumerate(weak_topics, start=1):
             print(
-                f"{i}. {t['konu']} | " f"%{t['accuracy']} | " f"{t['n_questions']} soru"
+                f"{i}. {t.get('konu')} | "
+                f"%{t.get('accuracy')} | "
+                f"{t.get('n_questions')} soru"
             )
 
     # -------------------------
     # GÜÇLÜ KONULAR
     # -------------------------
-    if report["strong_topics"]:
+    strong_topics = report.get("strong_topics", [])
+    if strong_topics:
         print("\n💪 GÜÇLÜ KONULAR\n")
-        for t in report["strong_topics"]:
-            print(f"- {t['konu']} | " f"%{t['accuracy']} | " f"{t['n_questions']} soru")
+        for t in strong_topics:
+            print(
+                f"- {t.get('konu')} | "
+                f"%{t.get('accuracy')} | "
+                f"{t.get('n_questions')} soru"
+            )
 
     # -------------------------
     # ÖNERİLER
     # -------------------------
-    if report["suggestions"]:
+    suggestions = report.get("suggestions", [])
+    if suggestions:
         print("\n🧠 ÇALIŞMA ÖNERİLERİ\n")
-        for s in report["suggestions"]:
+        for s in suggestions:
             print(f"- {s}")
 
 

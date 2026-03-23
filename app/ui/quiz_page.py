@@ -14,10 +14,11 @@ from app.quiz_engine import (
 from app.sqlstorage import save_attempt_rows
 from analysis.user_report import get_user_report
 
-questions = get_questions()
 
 
 def render_quiz():
+
+    questions = get_questions()
 
     user_id = st.text_input("Kullanıcı ID")
 
@@ -31,6 +32,22 @@ def render_quiz():
     if "quiz_saved" not in st.session_state:
         st.session_state.quiz_saved = False
 
+    # ----------------------------
+    # QUIZ AYARLARI
+    # ----------------------------
+
+    mode = st.selectbox("Quiz Modu", ["random", "balanced", "weak_focus"])
+
+    n_questions = st.slider("Soru Sayısı", 5, 50, 20)
+
+    weak_topic_input = None
+    if mode == "weak_focus":
+        weak_topic_input = st.text_input("Zayıf konu (isteğe bağlı)")
+
+    # ----------------------------
+    # QUIZ BAŞLAT
+    # ----------------------------
+
     if st.button("Quiz'i Başlat"):
 
         report = get_user_report(user_id)
@@ -40,15 +57,22 @@ def render_quiz():
 
         selected_questions = select_questions(
             question_pool=questions,
-            n_questions=20,
-            mode="weak_focus",
+            n_questions=n_questions,
+            mode=mode,
             weak_topics=weak_topic_names,
-            seed=42,
         )
+
+        if not selected_questions:
+            st.error("Bu ayarlara göre soru bulunamadı.")
+            return
 
         st.session_state.quiz_state = start_quiz(selected_questions)
         st.session_state.quiz_saved = False
         st.rerun()
+
+    # ----------------------------
+    # QUIZ AKIŞI
+    # ----------------------------
 
     if st.session_state.quiz_state is None:
         return
@@ -91,3 +115,4 @@ def render_quiz():
             st.success("Doğru")
         else:
             st.error("Yanlış")
+        st.rerun()

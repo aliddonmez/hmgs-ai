@@ -1,6 +1,2 @@
 doc_id,ders,konu,title,file_path
-DOC_001,Ceza Hukuku,Hırsızlık Suçu,Hırsızlık Notları,storage/documents/ceza/hirsizlik_notlari.txt
-
-DOC_002,Ceza Hukuku,Genel Hükümler,TCK Tam Metin,storage/documents/ceza/tck.pdf
-
-DOC_003,Ceza Hukuku,Hırsızlık Suçu,Hırsızlık Notu DOCX,storage/documents/ceza/hirsizlik_docx.docx
+tck,Ceza,Genel,Türk Ceza Kanunu,storage/documents/ceza/tck.pdf
