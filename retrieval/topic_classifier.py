@@ -1,42 +1,52 @@
 # retrieval/topic_classifier.py
-from retrieval.embedding_model import embed_text
-from sklearn.metrics.pairwise import cosine_similarity
 
-TOPICS = {
-    "hırsızlık": "hırsızlık başkasına ait taşınır malın rızası olmadan alınması",
-    "dolandırıcılık": "dolandırıcılık suçu hile ile aldatma ve menfaat sağlama",
-    "kast": "kast suçun bilerek ve isteyerek işlenmesi",
-    "taksir": "taksir dikkat ve özen yükümlülüğüne aykırılık",
+TOPIC_KEYWORDS = {
+    "hırsızlık": ["hırsızlık", "zilyet", "taşınır mal"],
+    "dolandırıcılık": ["dolandırıcılık", "hile", "aldatma"],
+    "taksir": ["taksir", "dikkat", "özen"],
+    "kast": ["kast", "olası kast", "bilinçli taksir"],
 }
 
-_topic_embeddings = None
 
+def classify_topic(query: str) -> dict:
+    scores = {}
 
-## konuları embedding yapıyoruz en başta sürekli embedding yapmak maliyetli olur cünkü
-def _build_topic_embeddings():
-    global _topic_embeddings
+    # basit skor: kaç keyword geçti
+    for topic, keywords in TOPIC_KEYWORDS.items():
+        score = 0
+        for kw in keywords:
+            if kw in query:
+                score += 1
+        scores[topic] = score
 
-    if _topic_embeddings is None:
-        _topic_embeddings = {topic: embed_text(desc) for topic, desc in TOPICS.items()}
+    # en iyi ve ikinci en iyi
+    sorted_topics = sorted(scores.items(), key=lambda x: x[1], reverse=True)
 
-    return _topic_embeddings
+    best_topic, best_score = sorted_topics[0]
+    second_score = sorted_topics[1][1] if len(sorted_topics) > 1 else 0
 
+    # normalize (basit)
+    total = sum(scores.values()) + 1e-6
+    confidence = best_score / total
 
-def classify_topic(question: str):
+    # config değerlerini al
+    from retrieval.config import (
+        TOPIC_CONFIDENCE_THRESHOLD,
+        TOPIC_MARGIN_THRESHOLD,
+    )
 
-    _topic_embeddings = _build_topic_embeddings()
+    margin = best_score - second_score
 
-    q_emb = embed_text(question)
+    # güven kontrolü
+    if confidence < TOPIC_CONFIDENCE_THRESHOLD or margin < TOPIC_MARGIN_THRESHOLD:
+     f   return {
+            "topic": "unknown",
+            "confidence": confidence,
+            "is_reliable": False,
+        }
 
-    best_topic = None
-    best_score = -1
-
-    ## soru ve topic vektörü benzerliği ölçülür .
-    for topic, emb in _topic_embeddings.items():
-        score = cosine_similarity([q_emb], [emb])[0][0]
-
-        if score > best_score:
-            best_score = score
-            best_topic = topic
-
-    return best_topic
+    return {
+        "topic": best_topic,
+        "confidence": confidence,
+        "is_reliable": True,
+    }
