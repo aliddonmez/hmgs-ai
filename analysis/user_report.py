@@ -1,12 +1,13 @@
 # analysis/user_report.py
-from app.sqlstorage import load_attempts
+
+from app.sqlstorage import load_attempt_answers
 from analysis.quizanalysis import compute_topic_stats
 from analysis.rank_topics import rank_weak_topics
 from analysis.suggestions import generate_study_suggestions
 
 
 def get_user_report(user_id: str, min_n: int = 3) -> dict:
-    rows = load_attempts(user_id)
+    rows = load_attempt_answers(user_id)
 
     if not rows:
         return {
@@ -32,8 +33,11 @@ def get_user_report(user_id: str, min_n: int = 3) -> dict:
 
     weak, strong, insufficient = [], [], []
 
+    # 🚨 DÜZELTME BURADA: Kaybolan döngü ve continue mantığı eklendi
     for t in ranked:
-        if t["data_status"] == "yetersiz":
+
+        # 1. Aşama: Veri Yetersiz mi?
+        if t.get("data_status") == "yetersiz":
             insufficient.append(
                 {
                     "konu": t["konu"],
@@ -45,11 +49,16 @@ def get_user_report(user_id: str, min_n: int = 3) -> dict:
                     ),
                 }
             )
-        elif t["accuracy"] < 60:
+            # Yetersizse aşağı inme, bu konunun işlemi bitti
+            continue
+
+        # 2. Aşama: Veri yeterliyse Zayıf / Güçlü ayrımı yap
+        if t["accuracy"] < 60:
             weak.append(t)
         else:
             strong.append(t)
 
+    # Döngü bittikten sonra tavsiyeleri oluştur
     suggestions = generate_study_suggestions(weak)
 
     return {

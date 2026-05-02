@@ -25,73 +25,69 @@ def _pg_get_connection():
 
 
 # -----------------------------
-# STORAGE INIT
+# CREATE QUIZ ATTEMPT
 # -----------------------------
-def init_storage():
+def create_quiz_attempt(
+    attempt_id: str, user_id: str, mode: str, total_questions: int, started_at
+):
+    sql = """
+    INSERT INTO quiz_attempts(
+        id,
+        user_id,
+        mode,
+        total_questions,
+        started_at
+    )
+    VALUES(
+        %(id)s,
+        %(user_id)s,
+        %(mode)s,
+        %(total_questions)s,
+        %(started_at)s
+    );
+    """
+
+    payload = {
+        "id": attempt_id,
+        "user_id": user_id,
+        "mode": mode,
+        "total_questions": total_questions,
+        "started_at": started_at,
+    }
+
     with _pg_get_connection() as conn:
         with conn.cursor() as cur:
-            cur.execute(
-                """
-                CREATE TABLE IF NOT EXISTS quiz_attempt_answers (
-                    id BIGSERIAL PRIMARY KEY,
-                    attempt_id TEXT NOT NULL,
-                    user_id TEXT NOT NULL,
-                    timestamp TEXT NOT NULL,
-                    question_id TEXT NOT NULL,
-                    ders TEXT,
-                    konu TEXT,
-                    selected_option INTEGER NOT NULL,
-                    correct_option INTEGER NOT NULL,
-                    is_correct INTEGER NOT NULL,
-                    confidence DOUBLE PRECISION,
-                    retrieval_score DOUBLE PRECISION
-                );
-            """
-            )
-            cur.execute(
-                "CREATE INDEX IF NOT EXISTS idx_attempt_id ON quiz_attempt_answers (attempt_id);"
-            )
-            cur.execute(
-                "CREATE INDEX IF NOT EXISTS idx_user_id ON quiz_attempt_answers (user_id);"
-            )
+            cur.execute(sql, payload)
         conn.commit()
 
 
 # -----------------------------
-# SAVE
+# SAVE ANSWERS
 # -----------------------------
 def save_attempt_rows(rows: List[Dict]):
     if not rows:
         return
 
-    init_storage()
-
     sql = """
     INSERT INTO quiz_attempt_answers (
         attempt_id,
-        user_id,
-        timestamp,
         question_id,
-        ders,
-        konu,
+        user_id,
         selected_option,
         correct_option,
         is_correct,
-        confidence,
-        retrieval_score
+        response_time_seconds,
+        answered_at
     )
     VALUES (
         %(attempt_id)s,
-        %(user_id)s,
-        %(timestamp)s,
         %(question_id)s,
-        %(ders)s,
-        %(konu)s,
+        %(user_id)s,
         %(selected_option)s,
         %(correct_option)s,
         %(is_correct)s,
-        %(confidence)s,
-        %(retrieval_score)s
+        %(response_time_seconds)s,
+        %(answered_at)s
     );
     """
 
@@ -102,19 +98,71 @@ def save_attempt_rows(rows: List[Dict]):
 
 
 # -----------------------------
-# LOAD
+# FINALIZE ATTEMPT
 # -----------------------------
-def load_attempts(user_id: Optional[str] = None):
-    init_storage()
+def finalize_quiz_attempt(
+    attempt_id: str,
+    correct_count: int,
+    wrong_count: int,
+    finished_at,
+    total_duration_seconds: int,
+):
+    sql = """
+    UPDATE quiz_attempts
+    SET
+        correct_count = %(correct_count)s,
+        wrong_count = %(wrong_count)s,
+        finished_at = %(finished_at)s,
+        total_duration_seconds = %(total_duration_seconds)s
+    WHERE id = %(attempt_id)s;
+    """
+
+    payload = {
+        "attempt_id": attempt_id,
+        "correct_count": correct_count,
+        "wrong_count": wrong_count,
+        "finished_at": finished_at,
+        "total_duration_seconds": total_duration_seconds,
+    }
 
     with _pg_get_connection() as conn:
-        conn.row_factory = dict_row
         with conn.cursor() as cur:
+            cur.execute(sql, payload)
+        conn.commit()
+
+
+# -----------------------------
+# LOAD (🔥 EN KRİTİK KISIM)
+# -----------------------------
+def load_attempt_answers(user_id: Optional[str] = None):
+    with _pg_get_connection() as conn:
+        conn.row_factory = dict_row
+
+        with conn.cursor() as cur:
+
             if user_id:
                 cur.execute(
-                    "SELECT * FROM quiz_attempt_answers WHERE user_id = %s ORDER BY id;",
+                    """
+                    SELECT 
+                        a.*,
+                        q.topic
+                    FROM quiz_attempt_answers a
+                    JOIN questions q ON a.question_id = q.id
+                    WHERE a.user_id = %s
+                    ORDER BY a.id;
+                    """,
                     (user_id,),
                 )
             else:
-                cur.execute("SELECT * FROM quiz_attempt_answers ORDER BY id;")
+                cur.execute(
+                    """
+                    SELECT 
+                        a.*,
+                        q.topic
+                    FROM quiz_attempt_answers a
+                    JOIN questions q ON a.question_id = q.id
+                    ORDER BY a.id;
+                    """
+                )
+
             return cur.fetchall()

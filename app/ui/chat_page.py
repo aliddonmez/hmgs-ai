@@ -5,7 +5,7 @@ from app.rag_pipeline import run
 def render_chat():
     import streamlit as st
 
-    st.subheader("HMGS Hukuki Asistan")
+    st.subheader("--")
     st.write("Aşağıya hukuki bir soru yazın.")
 
     # session state başlat

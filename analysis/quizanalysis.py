@@ -14,7 +14,7 @@ def compute_topic_stats(attempt_rows: List[Dict], min_n: int = 3) -> List[Dict]:
 
     # 1) Konuya göre gruplama yapılıyor analiz icinde konu ve doğru mu yanlış mı oldugunun bilinmesi gerekiyor.
     for row in attempt_rows:
-        konu = row.get("konu")
+        konu = row.get("topic")
         is_correct = row.get("is_correct")
 
         if konu is None or is_correct is None:

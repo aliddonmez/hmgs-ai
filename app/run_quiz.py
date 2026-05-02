@@ -12,10 +12,14 @@ from app.quiz_engine import (
     is_quiz_finished,
     export_attempt_rows,
 )
+from app.sqlstorage import (
+    save_attempt_rows,
+    create_quiz_attempt,
+    finalize_quiz_attempt,
+)
 
 from app.repositories.questions_repo import get_questions
 from app.question_select import select_questions
-from app.sqlstorage import save_attempt_rows
 
 
 # ----------------------------
@@ -60,7 +64,13 @@ if not selected:
 # QUIZ BAŞLAT
 # ----------------------------
 quiz_state = start_quiz(selected)
-
+create_quiz_attempt(
+    attempt_id=quiz_state["attempt_id"],
+    user_id="terminal_test",
+    mode="balanced",
+    total_questions=len(quiz_state["questions"]),
+    started_at=quiz_state["started_at"],
+)
 
 # ----------------------------
 # QUIZ LOOP
@@ -101,4 +111,14 @@ rows = export_attempt_rows(quiz_state, user_id="terminal_test")
 
 save_attempt_rows(rows)
 
-print("💾 Quiz sonuçları veritabanına kaydedildi")
+from datetime import datetime, timezone
+
+duration = (datetime.now(timezone.utc) - quiz_state["started_at"]).total_seconds()
+
+finalize_quiz_attempt(
+    attempt_id=quiz_state["attempt_id"],
+    correct_count=quiz_state["score"],
+    wrong_count=len(quiz_state["questions"]) - quiz_state["score"],
+    finished_at=datetime.now(timezone.utc),
+    total_duration_seconds=int(duration),
+)

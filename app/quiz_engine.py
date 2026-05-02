@@ -1,6 +1,8 @@
 # app/quiz_engine.py
 # -- QUIZ MOTORU (UI-dostu) --
 
+from datetime import datetime, timezone
+
 
 def start_quiz(
     question_pool, n_questions=20, mode="balanced", weak_topics=None, seed=None
@@ -16,6 +18,9 @@ def start_quiz(
         "current_index": 0,
         "score": 0,
         "answers": [],
+        "attempt_id": str(uuid.uuid4()),
+        "started_at": datetime.now(timezone.utc),
+        "question_start_time": datetime.now(timezone.utc),
     }
 
 
@@ -41,9 +46,10 @@ def submit_answer(state, user_answer_index):
     if question is None:
         return {"error": "Quiz bitmiş veya soru bulunamadı."}
 
-    options = question.get("options", [])
+    now = datetime.now(timezone.utc)
+    response_time = (now - state["question_start_time"]).total_seconds()
 
-    correct_index = question["correct_answer"]
+    correct_index = question["correct_index"]
     is_correct = user_answer_index == correct_index
 
     # Doğruysa skoru artır
@@ -54,26 +60,24 @@ def submit_answer(state, user_answer_index):
     state["answers"].append(
         {
             "question_id": question["question_id"],
-            "ders": question.get("ders"),
-            "konu": question.get("konu"),
             "selected_option": user_answer_index,
             "correct_option": correct_index,
             "is_correct": is_correct,
             "confidence": question.get("confidence"),
             "retrieval_score": question.get("retrieval_score"),
+            "response_time": response_time,
         }
     )
 
     # Bir sonraki soruya geç
     state["current_index"] += 1
-
+    state["question_start_time"] = datetime.now(timezone.utc)
     # UI'ye döndürülecek sonuç
     return {
         "dogru_mu": is_correct,
         "selected_index": user_answer_index,
         "correct_index": correct_index,
         "aciklama": question.get("explanation"),
-        "kaynak": question.get("source"),
     }
 
 
@@ -106,14 +110,17 @@ def get_score(state):
 import uuid
 from datetime import datetime
 
+from datetime import datetime, timezone
+
 
 def export_attempt_rows(state, user_id: str):
     """
     Quiz tamamlandıktan sonra SQL'e yazılacak satırları üretir.
     Her soru = 1 satır
     """
-    attempt_id = str(uuid.uuid4())
-    timestamp = datetime.utcnow().isoformat()
+
+    attempt_id = state["attempt_id"]
+    timestamp = datetime.now(timezone.utc)
 
     rows = []
 
@@ -122,15 +129,12 @@ def export_attempt_rows(state, user_id: str):
             {
                 "attempt_id": attempt_id,
                 "user_id": user_id,
-                "timestamp": timestamp,
                 "question_id": ans["question_id"],
-                "ders": ans.get("ders"),
-                "konu": ans.get("konu"),
                 "selected_option": ans["selected_option"],
                 "correct_option": ans["correct_option"],
-                "is_correct": 1 if ans["is_correct"] else 0,
-                "confidence": ans.get("confidence"),
-                "retrieval_score": ans.get("retrieval_score"),
+                "is_correct": ans["is_correct"],
+                "response_time_seconds": ans.get("response_time"),
+                "answered_at": timestamp,
             }
         )
 
