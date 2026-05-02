@@ -1,0 +1,1488 @@
+
+=== RETRIEVAL EVALUATION START ===
+
+
+=== QUERY EXPANSION DEBUG ===
+original: hırsızlık suçu nedir
+normalized: hırsızlık suçu nedir
+phrase_hits: []
+matched_terms: ['hırsızlık']
+added_terms: ['taşınır mal', 'zilyet', 'rıza', 'almak']
+expanded_query: hırsızlık suçu nedir taşınır mal zilyet rıza almak
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: hırsızlık
+confidence: 0.9999996666667778
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7736 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kullanma hırsızlığı', 'source': 'tck', 'madde_no': '146', 'chunk_type': 'article', 'chunk_index': 144, 'full_heading': 'TCK Madde 146 - Kullanma hırsızlığı'} | PREVIEW: TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+DOC: tck | SCORE: 0.7517 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+DOC: tck | SCORE: 0.7127 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli hırsızlık', 'source': 'tck', 'madde_no': '142', 'chunk_type': 'article', 'chunk_index': 140, 'full_heading': 'TCK Madde 142 - Nitelikli hırsızlık'} | PREVIEW: TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+DOC: tck | SCORE: 0.7046 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Resmen teslim olunan mala elkonulması ve bozulması', 'source': 'tck', 'madde_no': '290', 'chunk_type': 'article', 'chunk_index': 288, 'full_heading': 'TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması'} | PREVIEW: TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması - Madde 290- 
+DOC: tck | SCORE: 0.6948 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Hırsızlık', 'source': 'tck', 'madde_no': '141', 'chunk_type': 'article', 'chunk_index': 139, 'full_heading': 'TCK Madde 141 - Hırsızlık'} | PREVIEW: TCK Madde 141 - Hırsızlık - Madde 141- (1) Zilyedinin rızası olmadan başkasına a
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6948 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.1667 | EXACT_TITLE=1.0000 | FINAL=1.0114 | PREVIEW=TCK Madde 141 - Hırsızlık - Madde 141- (1) Zilyedinin rızası olmadan başkasına a
+VECTOR=0.7127 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.1667 | EXACT_TITLE=0.2500 | FINAL=0.8419 | PREVIEW=TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+VECTOR=0.7736 | TOPIC=0.0000 | LEXICAL=0.1667 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7902 | PREVIEW=TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+VECTOR=0.7517 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7517 | PREVIEW=TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+VECTOR=0.7046 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7379 | PREVIEW=TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması - Madde 290- 
+1. SORU: hırsızlık suçu nedir
+   Grup          : single_article
+   Beklenen madde: 141
+   Gelen madde   : 141
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: dolandırıcılık suçu nedir
+normalized: dolandırıcılık suçu nedir
+phrase_hits: []
+matched_terms: ['dolandırıcılık']
+added_terms: ['hile', 'aldatma', 'menfaat']
+expanded_query: dolandırıcılık suçu nedir hile aldatma menfaat
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: dolandırıcılık
+confidence: 0.9999996666667778
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6294 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli dolandırıcılık', 'source': 'tck', 'madde_no': '158', 'chunk_type': 'article', 'chunk_index': 156, 'full_heading': 'TCK Madde 158 - Nitelikli dolandırıcılık'} | PREVIEW: TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+DOC: tck | SCORE: 0.6009 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Özel belgede sahtecilik', 'source': 'tck', 'madde_no': '207', 'chunk_type': 'article', 'chunk_index': 205, 'full_heading': 'TCK Madde 207 - Özel belgede sahtecilik'} | PREVIEW: TCK Madde 207 - Özel belgede sahtecilik - Madde 207- (1) Bir özel belgeyi sahte 
+DOC: tck | SCORE: 0.6004 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '201', 'chunk_type': 'article', 'chunk_index': 199, 'full_heading': 'TCK Madde 201 - Etkin pişmanlık'} | PREVIEW: TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+DOC: tck | SCORE: 0.573 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '254', 'chunk_type': 'article', 'chunk_index': 252, 'full_heading': 'TCK Madde 254 - Etkin pişmanlık'} | PREVIEW: TCK Madde 254 - Etkin pişmanlık - Madde 254- (1) (Değişik: 2/7/2012-6352/88 md.)
+DOC: tck | SCORE: 0.5664 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Parada sahtecilik', 'source': 'tck', 'madde_no': '197', 'chunk_type': 'article', 'chunk_index': 195, 'full_heading': 'TCK Madde 197 - Parada sahtecilik'} | PREVIEW: TCK Madde 197 - Parada sahtecilik - Madde 197- (1) Memlekette veya yabancı ülkel
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.5294 | TOPIC=0.0000 | LEXICAL=0.2500 | TITLE=0.2500 | EXACT_TITLE=1.0000 | FINAL=0.8544 | PREVIEW=TCK Madde 157 - Dolandırıcılık - Madde 157- (1) Hileli davranışlarla bir kimseyi
+VECTOR=0.6294 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.2500 | EXACT_TITLE=0.2500 | FINAL=0.7919 | PREVIEW=TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+VECTOR=0.6009 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6009 | PREVIEW=TCK Madde 207 - Özel belgede sahtecilik - Madde 207- (1) Bir özel belgeyi sahte 
+VECTOR=0.6004 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6004 | PREVIEW=TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+VECTOR=0.5730 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.5730 | PREVIEW=TCK Madde 254 - Etkin pişmanlık - Madde 254- (1) (Değişik: 2/7/2012-6352/88 md.)
+2. SORU: dolandırıcılık suçu nedir
+   Grup          : single_article
+   Beklenen madde: 157
+   Gelen madde   : 157
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: kasten yaralama nedir
+normalized: kasten yaralama nedir
+phrase_hits: []
+matched_terms: ['kast']
+added_terms: ['doğrudan kast', 'olası kast', 'bilerek', 'isteyerek']
+expanded_query: kasten yaralama nedir doğrudan kast olası kast bilerek isteyerek
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: kast
+confidence: 0.99999950000025
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.5967 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Neticesi sebebiyle ağırlaşmış yaralama', 'source': 'tck', 'madde_no': '87', 'chunk_type': 'article', 'chunk_index': 85, 'full_heading': 'TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama'} | PREVIEW: TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama - Madde 87- (1) Kasten yar
+DOC: tck | SCORE: 0.553 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kasten yaralamanın ihmali davranışla işlenmesi', 'source': 'tck', 'madde_no': '88', 'chunk_type': 'article', 'chunk_index': 86, 'full_heading': 'TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi'} | PREVIEW: TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+DOC: tck | SCORE: 0.5139 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Neticesi sebebiyle ağırlaşmış işkence', 'source': 'tck', 'madde_no': '95', 'chunk_type': 'article', 'chunk_index': 93, 'full_heading': 'TCK Madde 95 - Neticesi sebebiyle ağırlaşmış işkence'} | PREVIEW: TCK Madde 95 - Neticesi sebebiyle ağırlaşmış işkence - Madde 95- (1) İşkence fi 
+DOC: tck | SCORE: 0.5083 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli haller', 'source': 'tck', 'madde_no': '82', 'chunk_type': 'article', 'chunk_index': 80, 'full_heading': 'TCK Madde 82 - Nitelikli haller'} | PREVIEW: TCK Madde 82 - Nitelikli haller - Madde 82- (1) Kasten öldürme suçunun; a) Tasar
+DOC: tck | SCORE: 0.5082 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Netice sebebiyle ağırlaşmış suç', 'source': 'tck', 'madde_no': '23', 'chunk_type': 'article', 'chunk_index': 22, 'full_heading': 'TCK Madde 23 - Netice sebebiyle ağırlaşmış suç'} | PREVIEW: TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.4270 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.2857 | EXACT_TITLE=1.0000 | FINAL=0.7627 | PREVIEW=TCK Madde 86 - Kasten yaralama - Madde 86- (1) Kasten başkasının vücuduna acı ve
+VECTOR=0.5967 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.1429 | EXACT_TITLE=0.0000 | FINAL=0.6538 | PREVIEW=TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama - Madde 87- (1) Kasten yar
+VECTOR=0.5530 | TOPIC=0.0000 | LEXICAL=0.1429 | TITLE=0.1429 | EXACT_TITLE=0.0000 | FINAL=0.5959 | PREVIEW=TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+VECTOR=0.4778 | TOPIC=0.0000 | LEXICAL=0.1429 | TITLE=0.1429 | EXACT_TITLE=0.2500 | FINAL=0.5832 | PREVIEW=TCK Madde 89 - Taksirle yaralama - Madde 89- (1) Taksirle başkasının vücuduna ac
+VECTOR=0.5007 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.5293 | PREVIEW=TCK Madde 108 - Cebir - Madde 108- (1) Bir şeyi yapması veya yapmaması ya da ken
+3. SORU: kasten yaralama nedir
+   Grup          : single_article
+   Beklenen madde: 86
+   Gelen madde   : 86
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: taksir nedir
+normalized: taksir nedir
+phrase_hits: []
+matched_terms: ['taksir']
+added_terms: ['dikkat', 'özen', 'kusur', 'bilinçli taksir']
+expanded_query: taksir nedir dikkat özen kusur bilinçli taksir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: taksir
+confidence: 0.7499998125000469
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.4211 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Taksir', 'source': 'tck', 'madde_no': '22', 'chunk_type': 'article', 'chunk_index': 21, 'full_heading': 'TCK Madde 22 - Taksir'} | PREVIEW: TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+DOC: tck | SCORE: 0.3077 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Akıl hastalarına özgü güvenlik tedbirleri', 'source': 'tck', 'madde_no': '57', 'chunk_type': 'article', 'chunk_index': 56, 'full_heading': 'TCK Madde 57 - Akıl hastalarına özgü güvenlik tedbirleri'} | PREVIEW: TCK Madde 57 - Akıl hastalarına özgü güvenlik tedbirleri - Madde 57- (1) Fiili i
+DOC: tck | SCORE: 0.3059 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kasten yaralamanın ihmali davranışla işlenmesi', 'source': 'tck', 'madde_no': '88', 'chunk_type': 'article', 'chunk_index': 86, 'full_heading': 'TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi'} | PREVIEW: TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+DOC: tck | SCORE: 0.2975 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler', 'source': 'tck', 'madde_no': '273', 'chunk_type': 'article', 'chunk_index': 271, 'full_heading': 'TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler'} | PREVIEW: TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+DOC: tck | SCORE: 0.2959 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'İştirak hâlinde işlenen suçlarda gönüllü vazgeçme', 'source': 'tck', 'madde_no': '41', 'chunk_type': 'article', 'chunk_index': 40, 'full_heading': 'TCK Madde 41 - İştirak hâlinde işlenen suçlarda gönüllü vazgeçme'} | PREVIEW: TCK Madde 41 - İştirak hâlinde işlenen suçlarda gönüllü vazgeçme - Madde 41- (1)
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.4211 | TOPIC=0.0000 | LEXICAL=0.8000 | TITLE=0.2000 | EXACT_TITLE=1.0000 | FINAL=0.7911 | PREVIEW=TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+VECTOR=0.3077 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3077 | PREVIEW=TCK Madde 57 - Akıl hastalarına özgü güvenlik tedbirleri - Madde 57- (1) Fiili i
+VECTOR=0.3059 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3059 | PREVIEW=TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+VECTOR=0.2975 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.2975 | PREVIEW=TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+VECTOR=0.2959 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.2959 | PREVIEW=TCK Madde 41 - İştirak hâlinde işlenen suçlarda gönüllü vazgeçme - Madde 41- (1)
+4. SORU: taksir nedir
+   Grup          : single_article
+   Beklenen madde: 22
+   Gelen madde   : 22
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: yağma suçu nedir
+normalized: yağma suçu nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: yağma suçu nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7455 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kullanma hırsızlığı', 'source': 'tck', 'madde_no': '146', 'chunk_type': 'article', 'chunk_index': 144, 'full_heading': 'TCK Madde 146 - Kullanma hırsızlığı'} | PREVIEW: TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+DOC: tck | SCORE: 0.7336 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+DOC: tck | SCORE: 0.6906 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli hırsızlık', 'source': 'tck', 'madde_no': '142', 'chunk_type': 'article', 'chunk_index': 140, 'full_heading': 'TCK Madde 142 - Nitelikli hırsızlık'} | PREVIEW: TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+DOC: tck | SCORE: 0.6503 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Resmen teslim olunan mala elkonulması ve bozulması', 'source': 'tck', 'madde_no': '290', 'chunk_type': 'article', 'chunk_index': 288, 'full_heading': 'TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması'} | PREVIEW: TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması - Madde 290- 
+DOC: tck | SCORE: 0.6438 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Zorunluluk hâli', 'source': 'tck', 'madde_no': '147', 'chunk_type': 'article', 'chunk_index': 145, 'full_heading': 'TCK Madde 147 - Zorunluluk hâli'} | PREVIEW: TCK Madde 147 - Zorunluluk hâli - Madde 147- (1) Hırsızlık suçunun ağır ve acil 
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.5673 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=1.0000 | FINAL=1.1173 | PREVIEW=TCK Madde 148 - Yağma - Madde 148- (1) Bir başkasını, kendisinin veya yakınının 
+VECTOR=0.7336 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=0.2500 | FINAL=1.0961 | PREVIEW=TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+VECTOR=0.6503 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7503 | PREVIEW=TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması - Madde 290- 
+VECTOR=0.7455 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7455 | PREVIEW=TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+VECTOR=0.6906 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6906 | PREVIEW=TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+5. SORU: yağma suçu nedir
+   Grup          : single_article
+   Beklenen madde: 148
+   Gelen madde   : 148
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: bilinçli taksir nedir
+normalized: bilinçli taksir nedir
+phrase_hits: ['bilinçli taksir']
+matched_terms: ['taksir', 'bilinçli taksir']
+added_terms: ['dikkat', 'özen', 'kusur']
+expanded_query: bilinçli taksir nedir dikkat özen kusur
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: taksir
+confidence: 0.7499998125000469
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.3463 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Taksir', 'source': 'tck', 'madde_no': '22', 'chunk_type': 'article', 'chunk_index': 21, 'full_heading': 'TCK Madde 22 - Taksir'} | PREVIEW: TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+DOC: tck | SCORE: 0.3315 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Neticesi sebebiyle ağırlaşmış işkence', 'source': 'tck', 'madde_no': '95', 'chunk_type': 'article', 'chunk_index': 93, 'full_heading': 'TCK Madde 95 - Neticesi sebebiyle ağırlaşmış işkence'} | PREVIEW: TCK Madde 95 - Neticesi sebebiyle ağırlaşmış işkence - Madde 95- (1) İşkence fi 
+DOC: tck | SCORE: 0.3249 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Akıl hastalarına özgü güvenlik tedbirleri', 'source': 'tck', 'madde_no': '57', 'chunk_type': 'article', 'chunk_index': 56, 'full_heading': 'TCK Madde 57 - Akıl hastalarına özgü güvenlik tedbirleri'} | PREVIEW: TCK Madde 57 - Akıl hastalarına özgü güvenlik tedbirleri - Madde 57- (1) Fiili i
+DOC: tck | SCORE: 0.3163 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler', 'source': 'tck', 'madde_no': '273', 'chunk_type': 'article', 'chunk_index': 271, 'full_heading': 'TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler'} | PREVIEW: TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+DOC: tck | SCORE: 0.3051 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kasten yaralamanın ihmali davranışla işlenmesi', 'source': 'tck', 'madde_no': '88', 'chunk_type': 'article', 'chunk_index': 86, 'full_heading': 'TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi'} | PREVIEW: TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.3463 | TOPIC=0.0000 | LEXICAL=0.8000 | TITLE=0.2000 | EXACT_TITLE=1.0000 | FINAL=0.7163 | PREVIEW=TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+VECTOR=0.3315 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3315 | PREVIEW=TCK Madde 95 - Neticesi sebebiyle ağırlaşmış işkence - Madde 95- (1) İşkence fi 
+VECTOR=0.3249 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3249 | PREVIEW=TCK Madde 57 - Akıl hastalarına özgü güvenlik tedbirleri - Madde 57- (1) Fiili i
+VECTOR=0.3163 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3163 | PREVIEW=TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+VECTOR=0.3051 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3051 | PREVIEW=TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+6. SORU: bilinçli taksir nedir
+   Grup          : single_article
+   Beklenen madde: 22
+   Gelen madde   : 22
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: olası kast nedir
+normalized: olası kast nedir
+phrase_hits: ['olası kast']
+matched_terms: ['kast', 'olası kast']
+added_terms: ['doğrudan kast', 'bilerek', 'isteyerek']
+expanded_query: olası kast nedir doğrudan kast bilerek isteyerek
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: kast
+confidence: 0.99999950000025
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.4298 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nefret ve ayırımcılık', 'source': 'tck', 'madde_no': '122', 'chunk_type': 'article', 'chunk_index': 120, 'full_heading': 'TCK Madde 122 - Nefret ve ayırımcılık'} | PREVIEW: TCK Madde 122 - Nefret ve ayırımcılık - Madde 122- (Değişik: 2/3/2014-6529/15 md
+DOC: tck | SCORE: 0.3886 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Müstehcenlik', 'source': 'tck', 'madde_no': '226', 'chunk_type': 'article', 'chunk_index': 224, 'full_heading': 'TCK Madde 226 - Müstehcenlik'} | PREVIEW: TCK Madde 226 - Müstehcenlik - Madde 226- (1) a) Bir çocuğa müstehcen görüntü, y
+DOC: tck | SCORE: 0.3883 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kazanç müsaderesi', 'source': 'tck', 'madde_no': '55', 'chunk_type': 'article', 'chunk_index': 54, 'full_heading': 'TCK Madde 55 - Kazanç müsaderesi'} | PREVIEW: TCK Madde 55 - Kazanç müsaderesi - Madde 55- (1) Suçun işlenmesi ile elde edilen
+DOC: tck | SCORE: 0.3692 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '201', 'chunk_type': 'article', 'chunk_index': 199, 'full_heading': 'TCK Madde 201 - Etkin pişmanlık'} | PREVIEW: TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+DOC: tck | SCORE: 0.3629 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Ortak hüküm', 'source': 'tck', 'madde_no': '119', 'chunk_type': 'article', 'chunk_index': 117, 'full_heading': 'TCK Madde 119 - Ortak hüküm'} | PREVIEW: TCK Madde 119 - Ortak hüküm - Madde 119- (1) Eğitim ve öğretimin engellenmesi, k
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.2719 | TOPIC=0.0000 | LEXICAL=0.6000 | TITLE=0.2000 | EXACT_TITLE=1.0000 | FINAL=0.6219 | PREVIEW=TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+VECTOR=0.4298 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4298 | PREVIEW=TCK Madde 122 - Nefret ve ayırımcılık - Madde 122- (Değişik: 2/3/2014-6529/15 md
+VECTOR=0.3886 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3886 | PREVIEW=TCK Madde 226 - Müstehcenlik - Madde 226- (1) a) Bir çocuğa müstehcen görüntü, y
+VECTOR=0.3883 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3883 | PREVIEW=TCK Madde 55 - Kazanç müsaderesi - Madde 55- (1) Suçun işlenmesi ile elde edilen
+VECTOR=0.3561 | TOPIC=0.0000 | LEXICAL=0.2000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3761 | PREVIEW=TCK Madde 25 - Meşru savunma ve zorunluluk hali - Madde 25- (1) Gerek kendisine 
+7. SORU: olası kast nedir
+   Grup          : single_article
+   Beklenen madde: 21
+   Gelen madde   : 21
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: kasten öldürme nedir
+normalized: kasten öldürme nedir
+phrase_hits: []
+matched_terms: ['kast']
+added_terms: ['doğrudan kast', 'olası kast', 'bilerek', 'isteyerek']
+expanded_query: kasten öldürme nedir doğrudan kast olası kast bilerek isteyerek
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: kast
+confidence: 0.99999950000025
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.5786 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kasten öldürmenin ihmali davranışla işlenmesi', 'source': 'tck', 'madde_no': '83', 'chunk_type': 'article', 'chunk_index': 81, 'full_heading': 'TCK Madde 83 - Kasten öldürmenin ihmali davranışla işlenmesi'} | PREVIEW: TCK Madde 83 - Kasten öldürmenin ihmali davranışla işlenmesi - Madde 83- (1) Kiş
+DOC: tck | SCORE: 0.5749 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Soykırım', 'source': 'tck', 'madde_no': '76', 'chunk_type': 'article', 'chunk_index': 74, 'full_heading': 'TCK Madde 76 - Soykırım'} | PREVIEW: TCK Madde 76 - Soykırım - Madde 76- (1) Bir planın icrası suretiyle, milli, etni
+DOC: tck | SCORE: 0.5724 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli haller', 'source': 'tck', 'madde_no': '82', 'chunk_type': 'article', 'chunk_index': 80, 'full_heading': 'TCK Madde 82 - Nitelikli haller'} | PREVIEW: TCK Madde 82 - Nitelikli haller - Madde 82- (1) Kasten öldürme suçunun; a) Tasar
+DOC: tck | SCORE: 0.507 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Netice sebebiyle ağırlaşmış suç', 'source': 'tck', 'madde_no': '23', 'chunk_type': 'article', 'chunk_index': 22, 'full_heading': 'TCK Madde 23 - Netice sebebiyle ağırlaşmış suç'} | PREVIEW: TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+DOC: tck | SCORE: 0.5051 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'İnsanlığa karşı suçlar', 'source': 'tck', 'madde_no': '77', 'chunk_type': 'article', 'chunk_index': 75, 'full_heading': 'TCK Madde 77 - İnsanlığa karşı suçlar'} | PREVIEW: TCK Madde 77 - İnsanlığa karşı suçlar - Madde 77- (1) Aşağıdaki fi llerin, siyas
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.4775 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.2857 | EXACT_TITLE=1.0000 | FINAL=0.8133 | PREVIEW=TCK Madde 81 - Kasten öldürme - Madde 81- (1) Bir insanı kasten öldüren kişi, mü
+VECTOR=0.4324 | TOPIC=0.0000 | LEXICAL=0.4286 | TITLE=0.1429 | EXACT_TITLE=1.0000 | FINAL=0.7538 | PREVIEW=TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+VECTOR=0.5786 | TOPIC=0.0000 | LEXICAL=0.1429 | TITLE=0.1429 | EXACT_TITLE=0.0000 | FINAL=0.6215 | PREVIEW=TCK Madde 83 - Kasten öldürmenin ihmali davranışla işlenmesi - Madde 83- (1) Kiş
+VECTOR=0.5749 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6035 | PREVIEW=TCK Madde 76 - Soykırım - Madde 76- (1) Bir planın icrası suretiyle, milli, etni
+VECTOR=0.5724 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6010 | PREVIEW=TCK Madde 82 - Nitelikli haller - Madde 82- (1) Kasten öldürme suçunun; a) Tasar
+8. SORU: kasten öldürme nedir
+   Grup          : single_article
+   Beklenen madde: 81
+   Gelen madde   : 81
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: güveni kötüye kullanma nedir
+normalized: güveni kötüye kullanma nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: güveni kötüye kullanma nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.4342 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Güveni kötüye kullanma', 'source': 'tck', 'madde_no': '155', 'chunk_type': 'article', 'chunk_index': 153, 'full_heading': 'TCK Madde 155 - Güveni kötüye kullanma'} | PREVIEW: TCK Madde 155 - Güveni kötüye kullanma - Madde 155- (1) Başkasına ait olup da, m
+DOC: tck | SCORE: 0.4204 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '201', 'chunk_type': 'article', 'chunk_index': 199, 'full_heading': 'TCK Madde 201 - Etkin pişmanlık'} | PREVIEW: TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+DOC: tck | SCORE: 0.3772 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Devlet sırlarından yararlanma, Devlet hizmetlerinde sadakatsizlik', 'source': 'tck', 'madde_no': '333', 'chunk_type': 'article', 'chunk_index': 330, 'full_heading': 'TCK Madde 333 - Devlet sırlarından yararlanma, Devlet hizmetlerinde sadakatsizlik'} | PREVIEW: TCK Madde 333 - Devlet sırlarından yararlanma, Devlet hizmetlerinde sadakatsizli
+DOC: tck | SCORE: 0.3767 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Tüzel kişiler hakkında güvenlik tedbiri uygulanması', 'source': 'tck', 'madde_no': '111', 'chunk_type': 'article', 'chunk_index': 109, 'full_heading': 'TCK Madde 111 - Tüzel kişiler hakkında güvenlik tedbiri uygulanması'} | PREVIEW: TCK Madde 111 - Tüzel kişiler hakkında güvenlik tedbiri uygulanması - Madde 111-
+DOC: tck | SCORE: 0.3717 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '168', 'chunk_type': 'article', 'chunk_index': 166, 'full_heading': 'TCK Madde 168 - Etkin pişmanlık'} | PREVIEW: TCK Madde 168 - Etkin pişmanlık - Madde 168 – (Değişik: 29/6/2005 – 5377/20 md.)
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.4342 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=1.0000 | FINAL=0.9842 | PREVIEW=TCK Madde 155 - Güveni kötüye kullanma - Madde 155- (1) Başkasına ait olup da, m
+VECTOR=0.3717 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4717 | PREVIEW=TCK Madde 168 - Etkin pişmanlık - Madde 168 – (Değişik: 29/6/2005 – 5377/20 md.)
+VECTOR=0.3617 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4617 | PREVIEW=TCK Madde 169 - Tüzel kişiler hakkında güvenlik tedbiri uygulanması - Madde 169-
+VECTOR=0.4204 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4204 | PREVIEW=TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+VECTOR=0.3525 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3858 | PREVIEW=TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+9. SORU: güveni kötüye kullanma nedir
+   Grup          : single_article
+   Beklenen madde: 155
+   Gelen madde   : 155
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: tehdit suçu nedir
+normalized: tehdit suçu nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: tehdit suçu nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7043 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Cebir ve şiddet, korkutma ve tehdit', 'source': 'tck', 'madde_no': '28', 'chunk_type': 'article', 'chunk_index': 27, 'full_heading': 'TCK Madde 28 - Cebir ve şiddet, korkutma ve tehdit'} | PREVIEW: TCK Madde 28 - Cebir ve şiddet, korkutma ve tehdit - Madde 28- (1) Karşı koyamay
+DOC: tck | SCORE: 0.7027 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Halk arasında korku ve panik yaratmak amacıyla tehdit', 'source': 'tck', 'madde_no': '213', 'chunk_type': 'article', 'chunk_index': 211, 'full_heading': 'TCK Madde 213 - Halk arasında korku ve panik yaratmak amacıyla tehdit'} | PREVIEW: TCK Madde 213 - Halk arasında korku ve panik yaratmak amacıyla tehdit - Madde 21
+DOC: tck | SCORE: 0.6641 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Genel güvenliğin kasten tehlikeye sokulması', 'source': 'tck', 'madde_no': '170', 'chunk_type': 'article', 'chunk_index': 168, 'full_heading': 'TCK Madde 170 - Genel güvenliğin kasten tehlikeye sokulması'} | PREVIEW: TCK Madde 170 - Genel güvenliğin kasten tehlikeye sokulması - Madde 170- (1) Kiş
+DOC: tck | SCORE: 0.6553 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Tüzel kişiler hakkında güvenlik tedbiri uygulanması', 'source': 'tck', 'madde_no': '111', 'chunk_type': 'article', 'chunk_index': 109, 'full_heading': 'TCK Madde 111 - Tüzel kişiler hakkında güvenlik tedbiri uygulanması'} | PREVIEW: TCK Madde 111 - Tüzel kişiler hakkında güvenlik tedbiri uygulanması - Madde 111-
+DOC: tck | SCORE: 0.6389 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Tehdit', 'source': 'tck', 'madde_no': '106', 'chunk_type': 'article', 'chunk_index': 104, 'full_heading': 'TCK Madde 106 - Tehdit'} | PREVIEW: TCK Madde 106 - Tehdit - Madde 106- (1) Bir başkasını, kendisinin veya yakınının
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6389 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=1.0000 | FINAL=1.1889 | PREVIEW=TCK Madde 106 - Tehdit - Madde 106- (1) Bir başkasını, kendisinin veya yakınının
+VECTOR=0.7043 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=0.0000 | FINAL=1.0043 | PREVIEW=TCK Madde 28 - Cebir ve şiddet, korkutma ve tehdit - Madde 28- (1) Karşı koyamay
+VECTOR=0.7027 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=0.0000 | FINAL=1.0027 | PREVIEW=TCK Madde 213 - Halk arasında korku ve panik yaratmak amacıyla tehdit - Madde 21
+VECTOR=0.6553 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7553 | PREVIEW=TCK Madde 111 - Tüzel kişiler hakkında güvenlik tedbiri uygulanması - Madde 111-
+VECTOR=0.5928 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6928 | PREVIEW=TCK Madde 224 - işgali - Madde 224- (1) Kıt'a sahanlığında veya münhasır ekonomi
+10. SORU: tehdit suçu nedir
+   Grup          : single_article
+   Beklenen madde: 106
+   Gelen madde   : 106
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: hakaret suçu nedir
+normalized: hakaret suçu nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: hakaret suçu nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6615 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Haksız fi l nedeniyle veya karşılıklı hakaret', 'source': 'tck', 'madde_no': '129', 'chunk_type': 'article', 'chunk_index': 127, 'full_heading': 'TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret'} | PREVIEW: TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret - Madde 129- (1) H
+DOC: tck | SCORE: 0.5862 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Hakaret', 'source': 'tck', 'madde_no': '125', 'chunk_type': 'article', 'chunk_index': 123, 'full_heading': 'TCK Madde 125 - Hakaret'} | PREVIEW: TCK Madde 125 - Hakaret - Madde 125- (1) Bir kimseye onur, şeref ve saygınlığını
+DOC: tck | SCORE: 0.568 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Mağdurun belirlenmesi', 'source': 'tck', 'madde_no': '126', 'chunk_type': 'article', 'chunk_index': 124, 'full_heading': 'TCK Madde 126 - Mağdurun belirlenmesi'} | PREVIEW: TCK Madde 126 - Mağdurun belirlenmesi - Madde 126- (1) Hakaret suçunun işlenmesi
+DOC: tck | SCORE: 0.5604 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'aşağılama', 'source': 'tck', 'madde_no': '301', 'chunk_type': 'article', 'chunk_index': 299, 'full_heading': 'TCK Madde 301 - aşağılama'} | PREVIEW: TCK Madde 301 - aşağılama - Madde 301- (Değişik: 30/4/2008-5759/1 md.) (1) Türk 
+DOC: tck | SCORE: 0.5601 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Halkı kin ve düşmanlığa tahrik veya aşağılama', 'source': 'tck', 'madde_no': '216', 'chunk_type': 'article', 'chunk_index': 214, 'full_heading': 'TCK Madde 216 - Halkı kin ve düşmanlığa tahrik veya aşağılama'} | PREVIEW: TCK Madde 216 - Halkı kin ve düşmanlığa tahrik veya aşağılama - Madde 216- (1) H
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.5862 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=1.0000 | FINAL=1.1362 | PREVIEW=TCK Madde 125 - Hakaret - Madde 125- (1) Bir kimseye onur, şeref ve saygınlığını
+VECTOR=0.6615 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=0.0000 | FINAL=0.9615 | PREVIEW=TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret - Madde 129- (1) H
+VECTOR=0.5103 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=0.2500 | FINAL=0.8728 | PREVIEW=TCK Madde 299 - Cumhurbaşkanına hakaret - Madde 299- (1) Cumhurbaşkanına hakaret
+VECTOR=0.5510 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=0.0000 | FINAL=0.8510 | PREVIEW=TCK Madde 130 - Kişinin hatırasına hakaret - Madde 130- (1) Bir kimsenin öldükte
+VECTOR=0.4631 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=0.0000 | FINAL=0.7631 | PREVIEW=TCK Madde 341 - Yabancı devlet bayrağına karşı hakaret - Madde 341- (1) Resmen ç
+11. SORU: hakaret suçu nedir
+   Grup          : single_article
+   Beklenen madde: 125
+   Gelen madde   : 125
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: iftira suçu nedir
+normalized: iftira suçu nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: iftira suçu nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6642 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Haksız fi l nedeniyle veya karşılıklı hakaret', 'source': 'tck', 'madde_no': '129', 'chunk_type': 'article', 'chunk_index': 127, 'full_heading': 'TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret'} | PREVIEW: TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret - Madde 129- (1) H
+DOC: tck | SCORE: 0.6445 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Mağdurun belirlenmesi', 'source': 'tck', 'madde_no': '126', 'chunk_type': 'article', 'chunk_index': 124, 'full_heading': 'TCK Madde 126 - Mağdurun belirlenmesi'} | PREVIEW: TCK Madde 126 - Mağdurun belirlenmesi - Madde 126- (1) Hakaret suçunun işlenmesi
+DOC: tck | SCORE: 0.6102 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+DOC: tck | SCORE: 0.5918 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'İsnadın ispatı', 'source': 'tck', 'madde_no': '127', 'chunk_type': 'article', 'chunk_index': 125, 'full_heading': 'TCK Madde 127 - İsnadın ispatı'} | PREVIEW: TCK Madde 127 - İsnadın ispatı - Madde 127- (1) İsnat edilen ve suç oluşturan fi
+DOC: tck | SCORE: 0.5913 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'aşağılama', 'source': 'tck', 'madde_no': '301', 'chunk_type': 'article', 'chunk_index': 299, 'full_heading': 'TCK Madde 301 - aşağılama'} | PREVIEW: TCK Madde 301 - aşağılama - Madde 301- (Değişik: 30/4/2008-5759/1 md.) (1) Türk 
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6642 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6642 | PREVIEW=TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret - Madde 129- (1) H
+VECTOR=0.5560 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6560 | PREVIEW=TCK Madde 268 - Başkasına ait kimlik veya kimlik bilgilerinin kullanılması - Mad
+VECTOR=0.5550 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6550 | PREVIEW=TCK Madde 267 - İftira - Madde 267- (1) Yetkili makamlara ihbar veya şikayette b
+VECTOR=0.5516 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6516 | PREVIEW=TCK Madde 269 - Etkin pişmanlık - Madde 269- (1) İftira edenin, mağdur hakkında 
+VECTOR=0.6445 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6445 | PREVIEW=TCK Madde 126 - Mağdurun belirlenmesi - Madde 126- (1) Hakaret suçunun işlenmesi
+12. SORU: iftira suçu nedir
+   Grup          : single_article
+   Beklenen madde: 267
+   Gelen madde   : 268
+   Beklenen tip  : answer
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: zimmet suçu nedir
+normalized: zimmet suçu nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: zimmet suçu nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.421 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Neticesi sebebiyle ağırlaşmış yaralama', 'source': 'tck', 'madde_no': '87', 'chunk_type': 'article', 'chunk_index': 85, 'full_heading': 'TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama'} | PREVIEW: TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama - Madde 87- (1) Kasten yar
+DOC: tck | SCORE: 0.407 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli haller', 'source': 'tck', 'madde_no': '82', 'chunk_type': 'article', 'chunk_index': 80, 'full_heading': 'TCK Madde 82 - Nitelikli haller'} | PREVIEW: TCK Madde 82 - Nitelikli haller - Madde 82- (1) Kasten öldürme suçunun; a) Tasar
+DOC: tck | SCORE: 0.4034 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Neticesi sebebiyle ağırlaşmış işkence', 'source': 'tck', 'madde_no': '95', 'chunk_type': 'article', 'chunk_index': 93, 'full_heading': 'TCK Madde 95 - Neticesi sebebiyle ağırlaşmış işkence'} | PREVIEW: TCK Madde 95 - Neticesi sebebiyle ağırlaşmış işkence - Madde 95- (1) İşkence fi 
+DOC: tck | SCORE: 0.4033 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Netice sebebiyle ağırlaşmış suç', 'source': 'tck', 'madde_no': '23', 'chunk_type': 'article', 'chunk_index': 22, 'full_heading': 'TCK Madde 23 - Netice sebebiyle ağırlaşmış suç'} | PREVIEW: TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+DOC: tck | SCORE: 0.3794 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.3155 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=1.0000 | FINAL=0.8655 | PREVIEW=TCK Madde 247 - Zimmet - Madde 247- (1) Görevi nedeniyle zilyedliği kendisine de
+VECTOR=0.4210 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4210 | PREVIEW=TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama - Madde 87- (1) Kasten yar
+VECTOR=0.4070 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4070 | PREVIEW=TCK Madde 82 - Nitelikli haller - Madde 82- (1) Kasten öldürme suçunun; a) Tasar
+VECTOR=0.4034 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4034 | PREVIEW=TCK Madde 95 - Neticesi sebebiyle ağırlaşmış işkence - Madde 95- (1) İşkence fi 
+VECTOR=0.4033 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4033 | PREVIEW=TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+13. SORU: zimmet suçu nedir
+   Grup          : single_article
+   Beklenen madde: 247
+   Gelen madde   : 247
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: rüşvet suçu nedir
+normalized: rüşvet suçu nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: rüşvet suçu nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7723 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '254', 'chunk_type': 'article', 'chunk_index': 252, 'full_heading': 'TCK Madde 254 - Etkin pişmanlık'} | PREVIEW: TCK Madde 254 - Etkin pişmanlık - Madde 254- (1) (Değişik: 2/7/2012-6352/88 md.)
+DOC: tck | SCORE: 0.6706 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Rüşvet', 'source': 'tck', 'madde_no': '252', 'chunk_type': 'article', 'chunk_index': 250, 'full_heading': 'TCK Madde 252 - Rüşvet'} | PREVIEW: TCK Madde 252 - Rüşvet - Madde 252- (Değişik: 2/7/2012-6352/87 md.) (1) Görevini
+DOC: tck | SCORE: 0.5894 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '201', 'chunk_type': 'article', 'chunk_index': 199, 'full_heading': 'TCK Madde 201 - Etkin pişmanlık'} | PREVIEW: TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+DOC: tck | SCORE: 0.5664 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Şantaj', 'source': 'tck', 'madde_no': '107', 'chunk_type': 'article', 'chunk_index': 105, 'full_heading': 'TCK Madde 107 - Şantaj'} | PREVIEW: TCK Madde 107 - Şantaj - Madde 107- (1) Hakkı olan veya yükümlü olduğu bir şeyi 
+DOC: tck | SCORE: 0.5648 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli dolandırıcılık', 'source': 'tck', 'madde_no': '158', 'chunk_type': 'article', 'chunk_index': 156, 'full_heading': 'TCK Madde 158 - Nitelikli dolandırıcılık'} | PREVIEW: TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6706 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=1.0000 | FINAL=1.2206 | PREVIEW=TCK Madde 252 - Rüşvet - Madde 252- (Değişik: 2/7/2012-6352/87 md.) (1) Görevini
+VECTOR=0.7723 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.8723 | PREVIEW=TCK Madde 254 - Etkin pişmanlık - Madde 254- (1) (Değişik: 2/7/2012-6352/88 md.)
+VECTOR=0.5515 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6515 | PREVIEW=TCK Madde 253 - Tüzel kişiler hakkında güvenlik tedbiri uygulanması - Madde 253-
+VECTOR=0.5894 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.5894 | PREVIEW=TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+VECTOR=0.5664 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.5664 | PREVIEW=TCK Madde 107 - Şantaj - Madde 107- (1) Hakkı olan veya yükümlü olduğu bir şeyi 
+14. SORU: rüşvet suçu nedir
+   Grup          : single_article
+   Beklenen madde: 252
+   Gelen madde   : 252
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: kast nedir
+normalized: kast nedir
+phrase_hits: []
+matched_terms: ['kast']
+added_terms: ['doğrudan kast', 'olası kast', 'bilerek', 'isteyerek']
+expanded_query: kast nedir doğrudan kast olası kast bilerek isteyerek
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: kast
+confidence: 0.99999950000025
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.4608 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nefret ve ayırımcılık', 'source': 'tck', 'madde_no': '122', 'chunk_type': 'article', 'chunk_index': 120, 'full_heading': 'TCK Madde 122 - Nefret ve ayırımcılık'} | PREVIEW: TCK Madde 122 - Nefret ve ayırımcılık - Madde 122- (Değişik: 2/3/2014-6529/15 md
+DOC: tck | SCORE: 0.3652 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Soykırım', 'source': 'tck', 'madde_no': '76', 'chunk_type': 'article', 'chunk_index': 74, 'full_heading': 'TCK Madde 76 - Soykırım'} | PREVIEW: TCK Madde 76 - Soykırım - Madde 76- (1) Bir planın icrası suretiyle, milli, etni
+DOC: tck | SCORE: 0.3648 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Müstehcenlik', 'source': 'tck', 'madde_no': '226', 'chunk_type': 'article', 'chunk_index': 224, 'full_heading': 'TCK Madde 226 - Müstehcenlik'} | PREVIEW: TCK Madde 226 - Müstehcenlik - Madde 226- (1) a) Bir çocuğa müstehcen görüntü, y
+DOC: tck | SCORE: 0.3597 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kazanç müsaderesi', 'source': 'tck', 'madde_no': '55', 'chunk_type': 'article', 'chunk_index': 54, 'full_heading': 'TCK Madde 55 - Kazanç müsaderesi'} | PREVIEW: TCK Madde 55 - Kazanç müsaderesi - Madde 55- (1) Suçun işlenmesi ile elde edilen
+DOC: tck | SCORE: 0.355 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Ortak hüküm', 'source': 'tck', 'madde_no': '119', 'chunk_type': 'article', 'chunk_index': 117, 'full_heading': 'TCK Madde 119 - Ortak hüküm'} | PREVIEW: TCK Madde 119 - Ortak hüküm - Madde 119- (1) Eğitim ve öğretimin engellenmesi, k
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.4608 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4608 | PREVIEW=TCK Madde 122 - Nefret ve ayırımcılık - Madde 122- (Değişik: 2/3/2014-6529/15 md
+VECTOR=0.3652 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3652 | PREVIEW=TCK Madde 76 - Soykırım - Madde 76- (1) Bir planın icrası suretiyle, milli, etni
+VECTOR=0.3648 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3648 | PREVIEW=TCK Madde 226 - Müstehcenlik - Madde 226- (1) a) Bir çocuğa müstehcen görüntü, y
+VECTOR=0.3597 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3597 | PREVIEW=TCK Madde 55 - Kazanç müsaderesi - Madde 55- (1) Suçun işlenmesi ile elde edilen
+VECTOR=0.3550 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3550 | PREVIEW=TCK Madde 119 - Ortak hüküm - Madde 119- (1) Eğitim ve öğretimin engellenmesi, k
+15. SORU: kast nedir
+   Grup          : single_article
+   Beklenen madde: 21
+   Gelen madde   : 122
+   Beklenen tip  : answer
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: nitelikli hırsızlık nedir
+normalized: nitelikli hırsızlık nedir
+phrase_hits: []
+matched_terms: ['hırsızlık']
+added_terms: ['taşınır mal', 'zilyet', 'rıza', 'almak']
+expanded_query: nitelikli hırsızlık nedir taşınır mal zilyet rıza almak
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: hırsızlık
+confidence: 0.9999996666667778
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6789 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kullanma hırsızlığı', 'source': 'tck', 'madde_no': '146', 'chunk_type': 'article', 'chunk_index': 144, 'full_heading': 'TCK Madde 146 - Kullanma hırsızlığı'} | PREVIEW: TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+DOC: tck | SCORE: 0.66 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+DOC: tck | SCORE: 0.6487 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Resmen teslim olunan mala elkonulması ve bozulması', 'source': 'tck', 'madde_no': '290', 'chunk_type': 'article', 'chunk_index': 288, 'full_heading': 'TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması'} | PREVIEW: TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması - Madde 290- 
+DOC: tck | SCORE: 0.6453 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli hırsızlık', 'source': 'tck', 'madde_no': '142', 'chunk_type': 'article', 'chunk_index': 140, 'full_heading': 'TCK Madde 142 - Nitelikli hırsızlık'} | PREVIEW: TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+DOC: tck | SCORE: 0.6351 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Hırsızlık', 'source': 'tck', 'madde_no': '141', 'chunk_type': 'article', 'chunk_index': 139, 'full_heading': 'TCK Madde 141 - Hırsızlık'} | PREVIEW: TCK Madde 141 - Hırsızlık - Madde 141- (1) Zilyedinin rızası olmadan başkasına a
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6453 | TOPIC=0.0000 | LEXICAL=0.4286 | TITLE=0.2857 | EXACT_TITLE=1.0000 | FINAL=0.9953 | PREVIEW=TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+VECTOR=0.6351 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.1429 | EXACT_TITLE=1.0000 | FINAL=0.9422 | PREVIEW=TCK Madde 141 - Hırsızlık - Madde 141- (1) Zilyedinin rızası olmadan başkasına a
+VECTOR=0.6600 | TOPIC=0.0000 | LEXICAL=0.1429 | TITLE=0.1429 | EXACT_TITLE=0.2500 | FINAL=0.7654 | PREVIEW=TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+VECTOR=0.6789 | TOPIC=0.0000 | LEXICAL=0.1429 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6932 | PREVIEW=TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+VECTOR=0.6487 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6773 | PREVIEW=TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması - Madde 290- 
+16. SORU: nitelikli hırsızlık nedir
+   Grup          : single_article
+   Beklenen madde: 142
+   Gelen madde   : 142
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: nitelikli dolandırıcılık nedir
+normalized: nitelikli dolandırıcılık nedir
+phrase_hits: []
+matched_terms: ['dolandırıcılık']
+added_terms: ['hile', 'aldatma', 'menfaat']
+expanded_query: nitelikli dolandırıcılık nedir hile aldatma menfaat
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: dolandırıcılık
+confidence: 0.9999996666667778
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.5473 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '201', 'chunk_type': 'article', 'chunk_index': 199, 'full_heading': 'TCK Madde 201 - Etkin pişmanlık'} | PREVIEW: TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+DOC: tck | SCORE: 0.5416 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli dolandırıcılık', 'source': 'tck', 'madde_no': '158', 'chunk_type': 'article', 'chunk_index': 156, 'full_heading': 'TCK Madde 158 - Nitelikli dolandırıcılık'} | PREVIEW: TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+DOC: tck | SCORE: 0.527 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Özel belgede sahtecilik', 'source': 'tck', 'madde_no': '207', 'chunk_type': 'article', 'chunk_index': 205, 'full_heading': 'TCK Madde 207 - Özel belgede sahtecilik'} | PREVIEW: TCK Madde 207 - Özel belgede sahtecilik - Madde 207- (1) Bir özel belgeyi sahte 
+DOC: tck | SCORE: 0.5081 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '254', 'chunk_type': 'article', 'chunk_index': 252, 'full_heading': 'TCK Madde 254 - Etkin pişmanlık'} | PREVIEW: TCK Madde 254 - Etkin pişmanlık - Madde 254- (1) (Değişik: 2/7/2012-6352/88 md.)
+DOC: tck | SCORE: 0.4776 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Parada sahtecilik', 'source': 'tck', 'madde_no': '197', 'chunk_type': 'article', 'chunk_index': 195, 'full_heading': 'TCK Madde 197 - Parada sahtecilik'} | PREVIEW: TCK Madde 197 - Parada sahtecilik - Madde 197- (1) Memlekette veya yabancı ülkel
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.5416 | TOPIC=0.0000 | LEXICAL=0.6000 | TITLE=0.4000 | EXACT_TITLE=1.0000 | FINAL=0.9316 | PREVIEW=TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+VECTOR=0.4315 | TOPIC=0.0000 | LEXICAL=0.2000 | TITLE=0.2000 | EXACT_TITLE=1.0000 | FINAL=0.7415 | PREVIEW=TCK Madde 157 - Dolandırıcılık - Madde 157- (1) Hileli davranışlarla bir kimseyi
+VECTOR=0.5473 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.5473 | PREVIEW=TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+VECTOR=0.5270 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.5270 | PREVIEW=TCK Madde 207 - Özel belgede sahtecilik - Madde 207- (1) Bir özel belgeyi sahte 
+VECTOR=0.5081 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.5081 | PREVIEW=TCK Madde 254 - Etkin pişmanlık - Madde 254- (1) (Değişik: 2/7/2012-6352/88 md.)
+17. SORU: nitelikli dolandırıcılık nedir
+   Grup          : single_article
+   Beklenen madde: 158
+   Gelen madde   : 158
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: nitelikli yağma nedir
+normalized: nitelikli yağma nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: nitelikli yağma nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6245 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+DOC: tck | SCORE: 0.6167 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kullanma hırsızlığı', 'source': 'tck', 'madde_no': '146', 'chunk_type': 'article', 'chunk_index': 144, 'full_heading': 'TCK Madde 146 - Kullanma hırsızlığı'} | PREVIEW: TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+DOC: tck | SCORE: 0.5996 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli hırsızlık', 'source': 'tck', 'madde_no': '142', 'chunk_type': 'article', 'chunk_index': 140, 'full_heading': 'TCK Madde 142 - Nitelikli hırsızlık'} | PREVIEW: TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+DOC: tck | SCORE: 0.5777 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '201', 'chunk_type': 'article', 'chunk_index': 199, 'full_heading': 'TCK Madde 201 - Etkin pişmanlık'} | PREVIEW: TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+DOC: tck | SCORE: 0.5515 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Resmen teslim olunan mala elkonulması ve bozulması', 'source': 'tck', 'madde_no': '290', 'chunk_type': 'article', 'chunk_index': 288, 'full_heading': 'TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması'} | PREVIEW: TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması - Madde 290- 
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6245 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=1.0000 | FINAL=1.1745 | PREVIEW=TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+VECTOR=0.4250 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.5000 | EXACT_TITLE=1.0000 | FINAL=0.8250 | PREVIEW=TCK Madde 148 - Yağma - Madde 148- (1) Bir başkasını, kendisinin veya yakınının 
+VECTOR=0.5996 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.5000 | EXACT_TITLE=0.2500 | FINAL=0.8121 | PREVIEW=TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+VECTOR=0.4812 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.5000 | EXACT_TITLE=0.2500 | FINAL=0.6937 | PREVIEW=TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+VECTOR=0.4676 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.5000 | EXACT_TITLE=0.2500 | FINAL=0.6801 | PREVIEW=TCK Madde 137 - Nitelikli haller - Madde 137- (1) Yukarıdaki maddelerde tanımlan
+18. SORU: nitelikli yağma nedir
+   Grup          : single_article
+   Beklenen madde: 149
+   Gelen madde   : 149
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: nitelikli kasten yaralama nedir
+normalized: nitelikli kasten yaralama nedir
+phrase_hits: []
+matched_terms: ['kast']
+added_terms: ['doğrudan kast', 'olası kast', 'bilerek', 'isteyerek']
+expanded_query: nitelikli kasten yaralama nedir doğrudan kast olası kast bilerek isteyerek
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: kast
+confidence: 0.99999950000025
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6257 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Neticesi sebebiyle ağırlaşmış yaralama', 'source': 'tck', 'madde_no': '87', 'chunk_type': 'article', 'chunk_index': 85, 'full_heading': 'TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama'} | PREVIEW: TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama - Madde 87- (1) Kasten yar
+DOC: tck | SCORE: 0.5621 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kasten yaralamanın ihmali davranışla işlenmesi', 'source': 'tck', 'madde_no': '88', 'chunk_type': 'article', 'chunk_index': 86, 'full_heading': 'TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi'} | PREVIEW: TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+DOC: tck | SCORE: 0.5184 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Neticesi sebebiyle ağırlaşmış işkence', 'source': 'tck', 'madde_no': '95', 'chunk_type': 'article', 'chunk_index': 93, 'full_heading': 'TCK Madde 95 - Neticesi sebebiyle ağırlaşmış işkence'} | PREVIEW: TCK Madde 95 - Neticesi sebebiyle ağırlaşmış işkence - Madde 95- (1) İşkence fi 
+DOC: tck | SCORE: 0.5097 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Netice sebebiyle ağırlaşmış suç', 'source': 'tck', 'madde_no': '23', 'chunk_type': 'article', 'chunk_index': 22, 'full_heading': 'TCK Madde 23 - Netice sebebiyle ağırlaşmış suç'} | PREVIEW: TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+DOC: tck | SCORE: 0.5033 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Taksirle yaralama', 'source': 'tck', 'madde_no': '89', 'chunk_type': 'article', 'chunk_index': 87, 'full_heading': 'TCK Madde 89 - Taksirle yaralama'} | PREVIEW: TCK Madde 89 - Taksirle yaralama - Madde 89- (1) Taksirle başkasının vücuduna ac
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.4447 | TOPIC=0.0000 | LEXICAL=0.2500 | TITLE=0.2500 | EXACT_TITLE=1.0000 | FINAL=0.7697 | PREVIEW=TCK Madde 86 - Kasten yaralama - Madde 86- (1) Kasten başkasının vücuduna acı ve
+VECTOR=0.6257 | TOPIC=0.0000 | LEXICAL=0.2500 | TITLE=0.1250 | EXACT_TITLE=0.0000 | FINAL=0.6757 | PREVIEW=TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama - Madde 87- (1) Kasten yar
+VECTOR=0.4973 | TOPIC=0.0000 | LEXICAL=0.2500 | TITLE=0.1250 | EXACT_TITLE=0.2500 | FINAL=0.6098 | PREVIEW=TCK Madde 82 - Nitelikli haller - Madde 82- (1) Kasten öldürme suçunun; a) Tasar
+VECTOR=0.5033 | TOPIC=0.0000 | LEXICAL=0.1250 | TITLE=0.1250 | EXACT_TITLE=0.2500 | FINAL=0.6033 | PREVIEW=TCK Madde 89 - Taksirle yaralama - Madde 89- (1) Taksirle başkasının vücuduna ac
+VECTOR=0.5621 | TOPIC=0.0000 | LEXICAL=0.1250 | TITLE=0.1250 | EXACT_TITLE=0.0000 | FINAL=0.5996 | PREVIEW=TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+19. SORU: nitelikli kasten yaralama nedir
+   Grup          : single_article
+   Beklenen madde: 87
+   Gelen madde   : 86
+   Beklenen tip  : answer
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: adli para cezası nedir
+normalized: adli para cezası nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: adli para cezası nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7149 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Adlî para cezası', 'source': 'tck', 'madde_no': '52', 'chunk_type': 'article', 'chunk_index': 51, 'full_heading': 'TCK Madde 52 - Adlî para cezası'} | PREVIEW: TCK Madde 52 - Adlî para cezası - Madde 52- (1) Adlî para cezası, beş günden az 
+DOC: tck | SCORE: 0.7021 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Cezalar', 'source': 'tck', 'madde_no': '45', 'chunk_type': 'article', 'chunk_index': 44, 'full_heading': 'TCK Madde 45 - Cezalar'} | PREVIEW: TCK Madde 45 - Cezalar - Madde 45- (1) Suç karşılığında uygulanan yaptırım olara
+DOC: tck | SCORE: 0.6842 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Zimmet', 'source': 'tck', 'madde_no': '247', 'chunk_type': 'article', 'chunk_index': 245, 'full_heading': 'TCK Madde 247 - Zimmet'} | PREVIEW: TCK Madde 247 - Zimmet - Madde 247- (1) Görevi nedeniyle zilyedliği kendisine de
+DOC: tck | SCORE: 0.6818 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Haksız tahrik', 'source': 'tck', 'madde_no': '29', 'chunk_type': 'article', 'chunk_index': 28, 'full_heading': 'TCK Madde 29 - Haksız tahrik'} | PREVIEW: TCK Madde 29 - Haksız tahrik - Madde 29- (1) Haksız bir fi lin meydana getirdiği
+DOC: tck | SCORE: 0.6777 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'İftira', 'source': 'tck', 'madde_no': '267', 'chunk_type': 'article', 'chunk_index': 265, 'full_heading': 'TCK Madde 267 - İftira'} | PREVIEW: TCK Madde 267 - İftira - Madde 267- (1) Yetkili makamlara ihbar veya şikayette b
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.7149 | TOPIC=0.0000 | LEXICAL=0.6667 | TITLE=0.6667 | EXACT_TITLE=0.2500 | FINAL=0.9774 | PREVIEW=TCK Madde 52 - Adlî para cezası - Madde 52- (1) Adlî para cezası, beş günden az 
+VECTOR=0.6774 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7774 | PREVIEW=TCK Madde 255 - Nüfuz ticareti - Madde 255- (Değişik: 2/7/2012-6352/89 md.) (1) 
+VECTOR=0.7021 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7355 | PREVIEW=TCK Madde 45 - Cezalar - Madde 45- (1) Suç karşılığında uygulanan yaptırım olara
+VECTOR=0.6664 | TOPIC=0.0000 | LEXICAL=0.6667 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7331 | PREVIEW=TCK Madde 289 - Muhafaza görevini kötüye kullanma - Madde 289- (1) Muhafaza edil
+VECTOR=0.6293 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7293 | PREVIEW=TCK Madde 227 - Fuhuş - Madde 227- (1) Çocuğu fuhşa teşvik eden, bunun yolunu ko
+20. SORU: adli para cezası nedir
+   Grup          : single_article
+   Beklenen madde: 52
+   Gelen madde   : 52
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: kasten öldürme suçu cezası nedir
+normalized: kasten öldürme suçu cezası nedir
+phrase_hits: []
+matched_terms: ['kast']
+added_terms: ['doğrudan kast', 'olası kast', 'bilerek', 'isteyerek']
+expanded_query: kasten öldürme suçu cezası nedir doğrudan kast olası kast bilerek isteyerek
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: kast
+confidence: 0.99999950000025
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.707 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Fikri içtima', 'source': 'tck', 'madde_no': '44', 'chunk_type': 'article', 'chunk_index': 43, 'full_heading': 'TCK Madde 44 - Fikri içtima'} | PREVIEW: TCK Madde 44 - Fikri içtima - Madde 44- (1) İşlediği bir fi l ile birden fazla f
+DOC: tck | SCORE: 0.6861 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Yasama organına karşı suç', 'source': 'tck', 'madde_no': '311', 'chunk_type': 'article', 'chunk_index': 309, 'full_heading': 'TCK Madde 311 - Yasama organına karşı suç'} | PREVIEW: TCK Madde 311 - Yasama organına karşı suç - Madde 311- (1) Cebir ve şiddet kulla
+DOC: tck | SCORE: 0.6829 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Gönüllü vazgeçme', 'source': 'tck', 'madde_no': '36', 'chunk_type': 'article', 'chunk_index': 35, 'full_heading': 'TCK Madde 36 - Gönüllü vazgeçme'} | PREVIEW: TCK Madde 36 - Gönüllü vazgeçme - Madde 36- (1) Fail, suçun icra hareketlerinden
+DOC: tck | SCORE: 0.6791 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kast', 'source': 'tck', 'madde_no': '21', 'chunk_type': 'article', 'chunk_index': 20, 'full_heading': 'TCK Madde 21 - Kast'} | PREVIEW: TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+DOC: tck | SCORE: 0.6761 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Netice sebebiyle ağırlaşmış suç', 'source': 'tck', 'madde_no': '23', 'chunk_type': 'article', 'chunk_index': 22, 'full_heading': 'TCK Madde 23 - Netice sebebiyle ağırlaşmış suç'} | PREVIEW: TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6607 | TOPIC=0.0000 | LEXICAL=0.3750 | TITLE=0.2500 | EXACT_TITLE=1.0000 | FINAL=0.9982 | PREVIEW=TCK Madde 81 - Kasten öldürme - Madde 81- (1) Bir insanı kasten öldüren kişi, mü
+VECTOR=0.6791 | TOPIC=0.0000 | LEXICAL=0.3750 | TITLE=0.1250 | EXACT_TITLE=1.0000 | FINAL=0.9916 | PREVIEW=TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+VECTOR=0.7070 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7070 | PREVIEW=TCK Madde 44 - Fikri içtima - Madde 44- (1) İşlediği bir fi l ile birden fazla f
+VECTOR=0.6667 | TOPIC=0.0000 | LEXICAL=0.1250 | TITLE=0.1250 | EXACT_TITLE=0.0000 | FINAL=0.7042 | PREVIEW=TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+VECTOR=0.6759 | TOPIC=0.0000 | LEXICAL=0.1250 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6884 | PREVIEW=TCK Madde 38 - Azmettirme - Madde 38- (1) Başkasını suç işlemeye azmettiren kişi
+21. SORU: kasten öldürme suçu cezası nedir
+   Grup          : single_article
+   Beklenen madde: 81
+   Gelen madde   : 81
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: hırsızlık suçunun cezası nedir
+normalized: hırsızlık suçunun cezası nedir
+phrase_hits: []
+matched_terms: ['hırsızlık']
+added_terms: ['taşınır mal', 'zilyet', 'rıza', 'almak']
+expanded_query: hırsızlık suçunun cezası nedir taşınır mal zilyet rıza almak
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: hırsızlık
+confidence: 0.9999996666667778
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7986 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kullanma hırsızlığı', 'source': 'tck', 'madde_no': '146', 'chunk_type': 'article', 'chunk_index': 144, 'full_heading': 'TCK Madde 146 - Kullanma hırsızlığı'} | PREVIEW: TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+DOC: tck | SCORE: 0.7519 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Zorunluluk hâli', 'source': 'tck', 'madde_no': '147', 'chunk_type': 'article', 'chunk_index': 145, 'full_heading': 'TCK Madde 147 - Zorunluluk hâli'} | PREVIEW: TCK Madde 147 - Zorunluluk hâli - Madde 147- (1) Hırsızlık suçunun ağır ve acil 
+DOC: tck | SCORE: 0.751 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+DOC: tck | SCORE: 0.7444 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Resmen teslim olunan mala elkonulması ve bozulması', 'source': 'tck', 'madde_no': '290', 'chunk_type': 'article', 'chunk_index': 288, 'full_heading': 'TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması'} | PREVIEW: TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması - Madde 290- 
+DOC: tck | SCORE: 0.7402 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Hırsızlık', 'source': 'tck', 'madde_no': '141', 'chunk_type': 'article', 'chunk_index': 139, 'full_heading': 'TCK Madde 141 - Hırsızlık'} | PREVIEW: TCK Madde 141 - Hırsızlık - Madde 141- (1) Zilyedinin rızası olmadan başkasına a
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.7402 | TOPIC=0.0000 | LEXICAL=0.3750 | TITLE=0.1250 | EXACT_TITLE=1.0000 | FINAL=1.0527 | PREVIEW=TCK Madde 141 - Hırsızlık - Madde 141- (1) Zilyedinin rızası olmadan başkasına a
+VECTOR=0.7986 | TOPIC=0.0000 | LEXICAL=0.2500 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.8236 | PREVIEW=TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+VECTOR=0.6972 | TOPIC=0.0000 | LEXICAL=0.3750 | TITLE=0.1250 | EXACT_TITLE=0.2500 | FINAL=0.8222 | PREVIEW=TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+VECTOR=0.7444 | TOPIC=0.0000 | LEXICAL=0.3750 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7819 | PREVIEW=TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması - Madde 290- 
+VECTOR=0.7519 | TOPIC=0.0000 | LEXICAL=0.2500 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7769 | PREVIEW=TCK Madde 147 - Zorunluluk hâli - Madde 147- (1) Hırsızlık suçunun ağır ve acil 
+22. SORU: hırsızlık suçunun cezası nedir
+   Grup          : single_article
+   Beklenen madde: 141
+   Gelen madde   : 141
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: dolandırıcılık suçunun cezası nedir
+normalized: dolandırıcılık suçunun cezası nedir
+phrase_hits: []
+matched_terms: ['dolandırıcılık']
+added_terms: ['hile', 'aldatma', 'menfaat']
+expanded_query: dolandırıcılık suçunun cezası nedir hile aldatma menfaat
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: dolandırıcılık
+confidence: 0.9999996666667778
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6552 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Özel belgede sahtecilik', 'source': 'tck', 'madde_no': '207', 'chunk_type': 'article', 'chunk_index': 205, 'full_heading': 'TCK Madde 207 - Özel belgede sahtecilik'} | PREVIEW: TCK Madde 207 - Özel belgede sahtecilik - Madde 207- (1) Bir özel belgeyi sahte 
+DOC: tck | SCORE: 0.6451 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Parada sahtecilik', 'source': 'tck', 'madde_no': '197', 'chunk_type': 'article', 'chunk_index': 195, 'full_heading': 'TCK Madde 197 - Parada sahtecilik'} | PREVIEW: TCK Madde 197 - Parada sahtecilik - Madde 197- (1) Memlekette veya yabancı ülkel
+DOC: tck | SCORE: 0.6441 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli dolandırıcılık', 'source': 'tck', 'madde_no': '158', 'chunk_type': 'article', 'chunk_index': 156, 'full_heading': 'TCK Madde 158 - Nitelikli dolandırıcılık'} | PREVIEW: TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+DOC: tck | SCORE: 0.6397 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Daha az cezayı gerektiren hal', 'source': 'tck', 'madde_no': '211', 'chunk_type': 'article', 'chunk_index': 209, 'full_heading': 'TCK Madde 211 - Daha az cezayı gerektiren hal'} | PREVIEW: TCK Madde 211 - Daha az cezayı gerektiren hal - Madde 211- (1) Bir hukuki ilişki
+DOC: tck | SCORE: 0.6324 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '201', 'chunk_type': 'article', 'chunk_index': 199, 'full_heading': 'TCK Madde 201 - Etkin pişmanlık'} | PREVIEW: TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6199 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.1667 | EXACT_TITLE=1.0000 | FINAL=0.9366 | PREVIEW=TCK Madde 157 - Dolandırıcılık - Madde 157- (1) Hileli davranışlarla bir kimseyi
+VECTOR=0.6441 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.1667 | EXACT_TITLE=0.2500 | FINAL=0.7899 | PREVIEW=TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+VECTOR=0.6552 | TOPIC=0.0000 | LEXICAL=0.1667 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6718 | PREVIEW=TCK Madde 207 - Özel belgede sahtecilik - Madde 207- (1) Bir özel belgeyi sahte 
+VECTOR=0.6451 | TOPIC=0.0000 | LEXICAL=0.1667 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6618 | PREVIEW=TCK Madde 197 - Parada sahtecilik - Madde 197- (1) Memlekette veya yabancı ülkel
+VECTOR=0.6397 | TOPIC=0.0000 | LEXICAL=0.1667 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6564 | PREVIEW=TCK Madde 211 - Daha az cezayı gerektiren hal - Madde 211- (1) Bir hukuki ilişki
+23. SORU: dolandırıcılık suçunun cezası nedir
+   Grup          : single_article
+   Beklenen madde: 157
+   Gelen madde   : 157
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: taksirle öldürme nedir
+normalized: taksirle öldürme nedir
+phrase_hits: []
+matched_terms: ['taksir']
+added_terms: ['dikkat', 'özen', 'kusur', 'bilinçli taksir']
+expanded_query: taksirle öldürme nedir dikkat özen kusur bilinçli taksir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: taksir
+confidence: 0.7499998125000469
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.5618 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Taksir', 'source': 'tck', 'madde_no': '22', 'chunk_type': 'article', 'chunk_index': 21, 'full_heading': 'TCK Madde 22 - Taksir'} | PREVIEW: TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+DOC: tck | SCORE: 0.4869 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kasten yaralamanın ihmali davranışla işlenmesi', 'source': 'tck', 'madde_no': '88', 'chunk_type': 'article', 'chunk_index': 86, 'full_heading': 'TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi'} | PREVIEW: TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+DOC: tck | SCORE: 0.485 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kasten öldürmenin ihmali davranışla işlenmesi', 'source': 'tck', 'madde_no': '83', 'chunk_type': 'article', 'chunk_index': 81, 'full_heading': 'TCK Madde 83 - Kasten öldürmenin ihmali davranışla işlenmesi'} | PREVIEW: TCK Madde 83 - Kasten öldürmenin ihmali davranışla işlenmesi - Madde 83- (1) Kiş
+DOC: tck | SCORE: 0.4792 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Netice sebebiyle ağırlaşmış suç', 'source': 'tck', 'madde_no': '23', 'chunk_type': 'article', 'chunk_index': 22, 'full_heading': 'TCK Madde 23 - Netice sebebiyle ağırlaşmış suç'} | PREVIEW: TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+DOC: tck | SCORE: 0.4476 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Gönüllü vazgeçme', 'source': 'tck', 'madde_no': '36', 'chunk_type': 'article', 'chunk_index': 35, 'full_heading': 'TCK Madde 36 - Gönüllü vazgeçme'} | PREVIEW: TCK Madde 36 - Gönüllü vazgeçme - Madde 36- (1) Fail, suçun icra hareketlerinden
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.5618 | TOPIC=0.0000 | LEXICAL=0.7143 | TITLE=0.1429 | EXACT_TITLE=1.0000 | FINAL=0.9118 | PREVIEW=TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+VECTOR=0.4159 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.2857 | EXACT_TITLE=1.0000 | FINAL=0.7516 | PREVIEW=TCK Madde 85 - Taksirle öldürme - Madde 85- (1) Taksirle bir insanın ölümüne ned
+VECTOR=0.3884 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.1429 | EXACT_TITLE=0.2500 | FINAL=0.5081 | PREVIEW=TCK Madde 89 - Taksirle yaralama - Madde 89- (1) Taksirle başkasının vücuduna ac
+VECTOR=0.3978 | TOPIC=0.0000 | LEXICAL=0.1429 | TITLE=0.1429 | EXACT_TITLE=0.2500 | FINAL=0.5032 | PREVIEW=TCK Madde 81 - Kasten öldürme - Madde 81- (1) Bir insanı kasten öldüren kişi, mü
+VECTOR=0.4792 | TOPIC=0.0000 | LEXICAL=0.1429 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4935 | PREVIEW=TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+24. SORU: taksirle öldürme nedir
+   Grup          : single_article
+   Beklenen madde: 85
+   Gelen madde   : 22
+   Beklenen tip  : answer
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: suç işlenmesini önleme amacı nedir
+normalized: suç işlenmesini önleme amacı nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: suç işlenmesini önleme amacı nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6355 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Zorunluluk hâli', 'source': 'tck', 'madde_no': '147', 'chunk_type': 'article', 'chunk_index': 145, 'full_heading': 'TCK Madde 147 - Zorunluluk hâli'} | PREVIEW: TCK Madde 147 - Zorunluluk hâli - Madde 147- (1) Hırsızlık suçunun ağır ve acil 
+DOC: tck | SCORE: 0.6248 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Zaman bakımından uygulama', 'source': 'tck', 'madde_no': '7', 'chunk_type': 'article', 'chunk_index': 6, 'full_heading': 'TCK Madde 7 - Zaman bakımından uygulama'} | PREVIEW: TCK Madde 7 - Zaman bakımından uygulama - Madde 7- (1) İşlendiği zaman yürürlükt
+DOC: tck | SCORE: 0.6243 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+DOC: tck | SCORE: 0.6228 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Tüzel kişiler hakkında güvenlik tedbiri uygulanması', 'source': 'tck', 'madde_no': '111', 'chunk_type': 'article', 'chunk_index': 109, 'full_heading': 'TCK Madde 111 - Tüzel kişiler hakkında güvenlik tedbiri uygulanması'} | PREVIEW: TCK Madde 111 - Tüzel kişiler hakkında güvenlik tedbiri uygulanması - Madde 111-
+DOC: tck | SCORE: 0.6227 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '110', 'chunk_type': 'article', 'chunk_index': 108, 'full_heading': 'TCK Madde 110 - Etkin pişmanlık'} | PREVIEW: TCK Madde 110 - Etkin pişmanlık - Madde 110- (1) Yukarıdaki maddede tanımlanan s
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.5600 | TOPIC=0.0000 | LEXICAL=0.6667 | TITLE=0.3333 | EXACT_TITLE=0.0000 | FINAL=0.6933 | PREVIEW=TCK Madde 1 - Ceza Kanununun amacı - Madde 1- (1) Ceza Kanununun amacı; kişi hak
+VECTOR=0.6355 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6355 | PREVIEW=TCK Madde 147 - Zorunluluk hâli - Madde 147- (1) Hırsızlık suçunun ağır ve acil 
+VECTOR=0.6248 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6248 | PREVIEW=TCK Madde 7 - Zaman bakımından uygulama - Madde 7- (1) İşlendiği zaman yürürlükt
+VECTOR=0.6243 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6243 | PREVIEW=TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+VECTOR=0.6228 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6228 | PREVIEW=TCK Madde 111 - Tüzel kişiler hakkında güvenlik tedbiri uygulanması - Madde 111-
+25. SORU: suç işlenmesini önleme amacı nedir
+   Grup          : single_article
+   Beklenen madde: 1
+   Gelen madde   : 1
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: kanunilik ilkesi nedir
+normalized: kanunilik ilkesi nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: kanunilik ilkesi nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6532 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Ortak hüküm', 'source': 'tck', 'madde_no': '119', 'chunk_type': 'article', 'chunk_index': 117, 'full_heading': 'TCK Madde 119 - Ortak hüküm'} | PREVIEW: TCK Madde 119 - Ortak hüküm - Madde 119- (1) Eğitim ve öğretimin engellenmesi, k
+DOC: tck | SCORE: 0.6146 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Ceza Kanununun amacı', 'source': 'tck', 'madde_no': '1', 'chunk_type': 'article', 'chunk_index': 0, 'full_heading': 'TCK Madde 1 - Ceza Kanununun amacı'} | PREVIEW: TCK Madde 1 - Ceza Kanununun amacı - Madde 1- (1) Ceza Kanununun amacı; kişi hak
+DOC: tck | SCORE: 0.609 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Adalet ve kanun önünde eşitlik ilkesi', 'source': 'tck', 'madde_no': '3', 'chunk_type': 'article', 'chunk_index': 2, 'full_heading': 'TCK Madde 3 - Adalet ve kanun önünde eşitlik ilkesi'} | PREVIEW: TCK Madde 3 - Adalet ve kanun önünde eşitlik ilkesi - Madde 3- (1) Suç işleyen k
+DOC: tck | SCORE: 0.6077 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kazanç müsaderesi', 'source': 'tck', 'madde_no': '55', 'chunk_type': 'article', 'chunk_index': 54, 'full_heading': 'TCK Madde 55 - Kazanç müsaderesi'} | PREVIEW: TCK Madde 55 - Kazanç müsaderesi - Madde 55- (1) Suçun işlenmesi ile elde edilen
+DOC: tck | SCORE: 0.6075 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Tüzel kişiler hakkında güvenlik tedbirleri', 'source': 'tck', 'madde_no': '60', 'chunk_type': 'article', 'chunk_index': 59, 'full_heading': 'TCK Madde 60 - Tüzel kişiler hakkında güvenlik tedbirleri'} | PREVIEW: TCK Madde 60 - Tüzel kişiler hakkında güvenlik tedbirleri - Madde 60- (1) Bir ka
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6090 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.5000 | EXACT_TITLE=0.0000 | FINAL=0.7590 | PREVIEW=TCK Madde 3 - Adalet ve kanun önünde eşitlik ilkesi - Madde 3- (1) Suç işleyen k
+VECTOR=0.5689 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.5000 | EXACT_TITLE=0.0000 | FINAL=0.7189 | PREVIEW=TCK Madde 2 - Suçta ve cezada kanunîlik ilkesi - Madde 2- (1) Kanunun açıkça suç
+VECTOR=0.6532 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6532 | PREVIEW=TCK Madde 119 - Ortak hüküm - Madde 119- (1) Eğitim ve öğretimin engellenmesi, k
+VECTOR=0.6146 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6146 | PREVIEW=TCK Madde 1 - Ceza Kanununun amacı - Madde 1- (1) Ceza Kanununun amacı; kişi hak
+VECTOR=0.6077 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6077 | PREVIEW=TCK Madde 55 - Kazanç müsaderesi - Madde 55- (1) Suçun işlenmesi ile elde edilen
+26. SORU: kanunilik ilkesi nedir
+   Grup          : single_article
+   Beklenen madde: 2
+   Gelen madde   : 3
+   Beklenen tip  : answer
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: ceza kanununun amacı nedir
+normalized: ceza kanununun amacı nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: ceza kanununun amacı nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7059 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Ceza Kanununun amacı', 'source': 'tck', 'madde_no': '1', 'chunk_type': 'article', 'chunk_index': 0, 'full_heading': 'TCK Madde 1 - Ceza Kanununun amacı'} | PREVIEW: TCK Madde 1 - Ceza Kanununun amacı - Madde 1- (1) Ceza Kanununun amacı; kişi hak
+DOC: tck | SCORE: 0.6823 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kast', 'source': 'tck', 'madde_no': '21', 'chunk_type': 'article', 'chunk_index': 20, 'full_heading': 'TCK Madde 21 - Kast'} | PREVIEW: TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+DOC: tck | SCORE: 0.6623 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Anayasayı ihlal', 'source': 'tck', 'madde_no': '309', 'chunk_type': 'article', 'chunk_index': 307, 'full_heading': 'TCK Madde 309 - Anayasayı ihlal'} | PREVIEW: TCK Madde 309 - Anayasayı ihlal - Madde 309- (1) Cebir ve şiddet kullanarak, Tür
+DOC: tck | SCORE: 0.6609 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler', 'source': 'tck', 'madde_no': '273', 'chunk_type': 'article', 'chunk_index': 271, 'full_heading': 'TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler'} | PREVIEW: TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+DOC: tck | SCORE: 0.6604 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Suçta ve cezada kanunîlik ilkesi', 'source': 'tck', 'madde_no': '2', 'chunk_type': 'article', 'chunk_index': 1, 'full_heading': 'TCK Madde 2 - Suçta ve cezada kanunîlik ilkesi'} | PREVIEW: TCK Madde 2 - Suçta ve cezada kanunîlik ilkesi - Madde 2- (1) Kanunun açıkça suç
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.7059 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=1.0000 | FINAL=1.2559 | PREVIEW=TCK Madde 1 - Ceza Kanununun amacı - Madde 1- (1) Ceza Kanununun amacı; kişi hak
+VECTOR=0.6197 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.3333 | EXACT_TITLE=0.0000 | FINAL=0.7197 | PREVIEW=TCK Madde 71 - Ceza zamanaşımının kesilmesi - Madde 71- (1) Mahkûmiyet hükmünün 
+VECTOR=0.6823 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7157 | PREVIEW=TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+VECTOR=0.6609 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6942 | PREVIEW=TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+VECTOR=0.6604 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6937 | PREVIEW=TCK Madde 2 - Suçta ve cezada kanunîlik ilkesi - Madde 2- (1) Kanunun açıkça suç
+27. SORU: ceza kanununun amacı nedir
+   Grup          : single_article
+   Beklenen madde: 1
+   Gelen madde   : 1
+   Beklenen tip  : answer
+   SONUÇ         : ✔️ DOĞRU
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: taksir ile kast arasındaki fark nedir
+normalized: taksir ile kast arasındaki fark nedir
+phrase_hits: []
+matched_terms: ['taksir', 'kast']
+added_terms: ['dikkat', 'özen', 'kusur', 'bilinçli taksir', 'doğrudan kast', 'olası kast', 'bilerek', 'isteyerek']
+expanded_query: taksir ile kast arasındaki fark nedir dikkat özen kusur bilinçli taksir doğrudan kast olası kast bilerek isteyerek
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.49999991666668053
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.4797 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Taksir', 'source': 'tck', 'madde_no': '22', 'chunk_type': 'article', 'chunk_index': 21, 'full_heading': 'TCK Madde 22 - Taksir'} | PREVIEW: TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+DOC: tck | SCORE: 0.3368 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Sınırın aşılması', 'source': 'tck', 'madde_no': '27', 'chunk_type': 'article', 'chunk_index': 26, 'full_heading': 'TCK Madde 27 - Sınırın aşılması'} | PREVIEW: TCK Madde 27 - Sınırın aşılması - Madde 27- (1) Ceza sorumluluğunu kaldıran nede
+DOC: tck | SCORE: 0.3288 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler', 'source': 'tck', 'madde_no': '273', 'chunk_type': 'article', 'chunk_index': 271, 'full_heading': 'TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler'} | PREVIEW: TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+DOC: tck | SCORE: 0.3279 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'İştirak hâlinde işlenen suçlarda gönüllü vazgeçme', 'source': 'tck', 'madde_no': '41', 'chunk_type': 'article', 'chunk_index': 40, 'full_heading': 'TCK Madde 41 - İştirak hâlinde işlenen suçlarda gönüllü vazgeçme'} | PREVIEW: TCK Madde 41 - İştirak hâlinde işlenen suçlarda gönüllü vazgeçme - Madde 41- (1)
+DOC: tck | SCORE: 0.3148 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kasten yaralamanın ihmali davranışla işlenmesi', 'source': 'tck', 'madde_no': '88', 'chunk_type': 'article', 'chunk_index': 86, 'full_heading': 'TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi'} | PREVIEW: TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.4797 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0833 | EXACT_TITLE=1.0000 | FINAL=0.7797 | PREVIEW=TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+VECTOR=0.2334 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0833 | EXACT_TITLE=1.0000 | FINAL=0.5334 | PREVIEW=TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+VECTOR=0.3368 | TOPIC=0.0000 | LEXICAL=0.0833 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3452 | PREVIEW=TCK Madde 27 - Sınırın aşılması - Madde 27- (1) Ceza sorumluluğunu kaldıran nede
+VECTOR=0.3288 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3288 | PREVIEW=TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+VECTOR=0.3279 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3279 | PREVIEW=TCK Madde 41 - İştirak hâlinde işlenen suçlarda gönüllü vazgeçme - Madde 41- (1)
+28. SORU: taksir ile kast arasındaki fark nedir
+   Grup          : comparison
+   Beklenen madde: None
+   Gelen madde   : 22
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: yağma ile hırsızlık arasındaki fark nedir
+normalized: yağma ile hırsızlık arasındaki fark nedir
+phrase_hits: []
+matched_terms: ['hırsızlık']
+added_terms: ['taşınır mal', 'zilyet', 'rıza', 'almak']
+expanded_query: yağma ile hırsızlık arasındaki fark nedir taşınır mal zilyet rıza almak
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: hırsızlık
+confidence: 0.9999996666667778
+is_reliable: True
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6834 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kullanma hırsızlığı', 'source': 'tck', 'madde_no': '146', 'chunk_type': 'article', 'chunk_index': 144, 'full_heading': 'TCK Madde 146 - Kullanma hırsızlığı'} | PREVIEW: TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+DOC: tck | SCORE: 0.6269 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Resmen teslim olunan mala elkonulması ve bozulması', 'source': 'tck', 'madde_no': '290', 'chunk_type': 'article', 'chunk_index': 288, 'full_heading': 'TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması'} | PREVIEW: TCK Madde 290 - Resmen teslim olunan mala elkonulması ve bozulması - Madde 290- 
+DOC: tck | SCORE: 0.6213 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Hırsızlık', 'source': 'tck', 'madde_no': '141', 'chunk_type': 'article', 'chunk_index': 139, 'full_heading': 'TCK Madde 141 - Hırsızlık'} | PREVIEW: TCK Madde 141 - Hırsızlık - Madde 141- (1) Zilyedinin rızası olmadan başkasına a
+DOC: tck | SCORE: 0.6156 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+DOC: tck | SCORE: 0.6073 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli hırsızlık', 'source': 'tck', 'madde_no': '142', 'chunk_type': 'article', 'chunk_index': 140, 'full_heading': 'TCK Madde 142 - Nitelikli hırsızlık'} | PREVIEW: TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6213 | TOPIC=0.0000 | LEXICAL=0.2222 | TITLE=0.1111 | EXACT_TITLE=1.0000 | FINAL=0.9157 | PREVIEW=TCK Madde 141 - Hırsızlık - Madde 141- (1) Zilyedinin rızası olmadan başkasına a
+VECTOR=0.6073 | TOPIC=0.0000 | LEXICAL=0.2222 | TITLE=0.1111 | EXACT_TITLE=0.2500 | FINAL=0.7143 | PREVIEW=TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+VECTOR=0.6156 | TOPIC=0.0000 | LEXICAL=0.1111 | TITLE=0.1111 | EXACT_TITLE=0.2500 | FINAL=0.7114 | PREVIEW=TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+VECTOR=0.4250 | TOPIC=0.0000 | LEXICAL=0.1111 | TITLE=0.1111 | EXACT_TITLE=1.0000 | FINAL=0.7083 | PREVIEW=TCK Madde 148 - Yağma - Madde 148- (1) Bir başkasını, kendisinin veya yakınının 
+VECTOR=0.6834 | TOPIC=0.0000 | LEXICAL=0.1111 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6945 | PREVIEW=TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+29. SORU: yağma ile hırsızlık arasındaki fark nedir
+   Grup          : comparison
+   Beklenen madde: None
+   Gelen madde   : 141
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: dolandırıcılık ile hırsızlık farkı nedir
+normalized: dolandırıcılık ile hırsızlık farkı nedir
+phrase_hits: []
+matched_terms: ['hırsızlık', 'dolandırıcılık']
+added_terms: ['taşınır mal', 'zilyet', 'rıza', 'almak', 'hile', 'aldatma', 'menfaat']
+expanded_query: dolandırıcılık ile hırsızlık farkı nedir taşınır mal zilyet rıza almak hile aldatma menfaat
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.49999991666668053
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6099 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '201', 'chunk_type': 'article', 'chunk_index': 199, 'full_heading': 'TCK Madde 201 - Etkin pişmanlık'} | PREVIEW: TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+DOC: tck | SCORE: 0.5939 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '254', 'chunk_type': 'article', 'chunk_index': 252, 'full_heading': 'TCK Madde 254 - Etkin pişmanlık'} | PREVIEW: TCK Madde 254 - Etkin pişmanlık - Madde 254- (1) (Değişik: 2/7/2012-6352/88 md.)
+DOC: tck | SCORE: 0.5898 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kullanma hırsızlığı', 'source': 'tck', 'madde_no': '146', 'chunk_type': 'article', 'chunk_index': 144, 'full_heading': 'TCK Madde 146 - Kullanma hırsızlığı'} | PREVIEW: TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+DOC: tck | SCORE: 0.5799 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli dolandırıcılık', 'source': 'tck', 'madde_no': '158', 'chunk_type': 'article', 'chunk_index': 156, 'full_heading': 'TCK Madde 158 - Nitelikli dolandırıcılık'} | PREVIEW: TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+DOC: tck | SCORE: 0.5631 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Parada sahtecilik', 'source': 'tck', 'madde_no': '197', 'chunk_type': 'article', 'chunk_index': 195, 'full_heading': 'TCK Madde 197 - Parada sahtecilik'} | PREVIEW: TCK Madde 197 - Parada sahtecilik - Madde 197- (1) Memlekette veya yabancı ülkel
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.4958 | TOPIC=0.0000 | LEXICAL=0.0909 | TITLE=0.0909 | EXACT_TITLE=1.0000 | FINAL=0.7731 | PREVIEW=TCK Madde 157 - Dolandırıcılık - Madde 157- (1) Hileli davranışlarla bir kimseyi
+VECTOR=0.4810 | TOPIC=0.0000 | LEXICAL=0.1818 | TITLE=0.0909 | EXACT_TITLE=1.0000 | FINAL=0.7673 | PREVIEW=TCK Madde 141 - Hırsızlık - Madde 141- (1) Zilyedinin rızası olmadan başkasına a
+VECTOR=0.5799 | TOPIC=0.0000 | LEXICAL=0.2727 | TITLE=0.0909 | EXACT_TITLE=0.2500 | FINAL=0.6878 | PREVIEW=TCK Madde 158 - Nitelikli dolandırıcılık - Madde 158- (1) Dolandırıcılık suçunun
+VECTOR=0.6099 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6099 | PREVIEW=TCK Madde 201 - Etkin pişmanlık - Madde 201- (1) Sahte olarak para veya kıymetli
+VECTOR=0.5074 | TOPIC=0.0000 | LEXICAL=0.1818 | TITLE=0.0909 | EXACT_TITLE=0.2500 | FINAL=0.6062 | PREVIEW=TCK Madde 142 - Nitelikli hırsızlık - Madde 142- (1) Hırsızlık suçunun; a) Kime 
+30. SORU: dolandırıcılık ile hırsızlık farkı nedir
+   Grup          : comparison
+   Beklenen madde: None
+   Gelen madde   : 157
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: kasten yaralama ile taksirle yaralama farkı
+normalized: kasten yaralama ile taksirle yaralama farkı
+phrase_hits: []
+matched_terms: ['taksir', 'kast']
+added_terms: ['dikkat', 'özen', 'kusur', 'bilinçli taksir', 'doğrudan kast', 'olası kast', 'bilerek', 'isteyerek']
+expanded_query: kasten yaralama ile taksirle yaralama farkı dikkat özen kusur bilinçli taksir doğrudan kast olası kast bilerek isteyerek
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.49999991666668053
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.5361 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kasten yaralamanın ihmali davranışla işlenmesi', 'source': 'tck', 'madde_no': '88', 'chunk_type': 'article', 'chunk_index': 86, 'full_heading': 'TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi'} | PREVIEW: TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+DOC: tck | SCORE: 0.4868 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Neticesi sebebiyle ağırlaşmış yaralama', 'source': 'tck', 'madde_no': '87', 'chunk_type': 'article', 'chunk_index': 85, 'full_heading': 'TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama'} | PREVIEW: TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama - Madde 87- (1) Kasten yar
+DOC: tck | SCORE: 0.4734 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Taksir', 'source': 'tck', 'madde_no': '22', 'chunk_type': 'article', 'chunk_index': 21, 'full_heading': 'TCK Madde 22 - Taksir'} | PREVIEW: TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+DOC: tck | SCORE: 0.4676 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Netice sebebiyle ağırlaşmış suç', 'source': 'tck', 'madde_no': '23', 'chunk_type': 'article', 'chunk_index': 22, 'full_heading': 'TCK Madde 23 - Netice sebebiyle ağırlaşmış suç'} | PREVIEW: TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+DOC: tck | SCORE: 0.452 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Cebir', 'source': 'tck', 'madde_no': '108', 'chunk_type': 'article', 'chunk_index': 106, 'full_heading': 'TCK Madde 108 - Cebir'} | PREVIEW: TCK Madde 108 - Cebir - Madde 108- (1) Bir şeyi yapması veya yapmaması ya da ken
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.4734 | TOPIC=0.0000 | LEXICAL=0.3571 | TITLE=0.0714 | EXACT_TITLE=1.0000 | FINAL=0.7734 | PREVIEW=TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+VECTOR=0.4276 | TOPIC=0.0000 | LEXICAL=0.2143 | TITLE=0.1429 | EXACT_TITLE=1.0000 | FINAL=0.7276 | PREVIEW=TCK Madde 89 - Taksirle yaralama - Madde 89- (1) Taksirle başkasının vücuduna ac
+VECTOR=0.3632 | TOPIC=0.0000 | LEXICAL=0.1429 | TITLE=0.1429 | EXACT_TITLE=1.0000 | FINAL=0.6561 | PREVIEW=TCK Madde 86 - Kasten yaralama - Madde 86- (1) Kasten başkasının vücuduna acı ve
+VECTOR=0.3063 | TOPIC=0.0000 | LEXICAL=0.2857 | TITLE=0.0714 | EXACT_TITLE=1.0000 | FINAL=0.5992 | PREVIEW=TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+VECTOR=0.5361 | TOPIC=0.0000 | LEXICAL=0.0714 | TITLE=0.0714 | EXACT_TITLE=0.0000 | FINAL=0.5575 | PREVIEW=TCK Madde 88 - Kasten yaralamanın ihmali davranışla işlenmesi - Madde 88-(1) Kas
+31. SORU: kasten yaralama ile taksirle yaralama farkı
+   Grup          : comparison
+   Beklenen madde: None
+   Gelen madde   : 22
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: olası kast ile bilinçli taksir farkı
+normalized: olası kast ile bilinçli taksir farkı
+phrase_hits: ['olası kast', 'bilinçli taksir']
+matched_terms: ['taksir', 'kast', 'olası kast', 'bilinçli taksir']
+added_terms: ['dikkat', 'özen', 'kusur', 'doğrudan kast', 'bilerek', 'isteyerek']
+expanded_query: olası kast ile bilinçli taksir farkı dikkat özen kusur doğrudan kast bilerek isteyerek
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.49999991666668053
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.3634 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nefret ve ayırımcılık', 'source': 'tck', 'madde_no': '122', 'chunk_type': 'article', 'chunk_index': 120, 'full_heading': 'TCK Madde 122 - Nefret ve ayırımcılık'} | PREVIEW: TCK Madde 122 - Nefret ve ayırımcılık - Madde 122- (Değişik: 2/3/2014-6529/15 md
+DOC: tck | SCORE: 0.3543 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Taksir', 'source': 'tck', 'madde_no': '22', 'chunk_type': 'article', 'chunk_index': 21, 'full_heading': 'TCK Madde 22 - Taksir'} | PREVIEW: TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+DOC: tck | SCORE: 0.34 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler', 'source': 'tck', 'madde_no': '273', 'chunk_type': 'article', 'chunk_index': 271, 'full_heading': 'TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler'} | PREVIEW: TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+DOC: tck | SCORE: 0.3251 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '274', 'chunk_type': 'article', 'chunk_index': 272, 'full_heading': 'TCK Madde 274 - Etkin pişmanlık'} | PREVIEW: TCK Madde 274 - Etkin pişmanlık - Madde 274- (1) Aleyhine tanıklık yapılan kişi 
+DOC: tck | SCORE: 0.3228 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Sınırın aşılması', 'source': 'tck', 'madde_no': '27', 'chunk_type': 'article', 'chunk_index': 26, 'full_heading': 'TCK Madde 27 - Sınırın aşılması'} | PREVIEW: TCK Madde 27 - Sınırın aşılması - Madde 27- (1) Ceza sorumluluğunu kaldıran nede
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.3543 | TOPIC=0.0000 | LEXICAL=0.3636 | TITLE=0.0909 | EXACT_TITLE=1.0000 | FINAL=0.6589 | PREVIEW=TCK Madde 22 - Taksir - Madde 22- (1) Taksirle işlenen fi ller, kanunun açıkça b
+VECTOR=0.3634 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3634 | PREVIEW=TCK Madde 122 - Nefret ve ayırımcılık - Madde 122- (Değişik: 2/3/2014-6529/15 md
+VECTOR=0.3400 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3400 | PREVIEW=TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+VECTOR=0.3228 | TOPIC=0.0000 | LEXICAL=0.0909 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3319 | PREVIEW=TCK Madde 27 - Sınırın aşılması - Madde 27- (1) Ceza sorumluluğunu kaldıran nede
+VECTOR=0.3251 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3251 | PREVIEW=TCK Madde 274 - Etkin pişmanlık - Madde 274- (1) Aleyhine tanıklık yapılan kişi 
+32. SORU: olası kast ile bilinçli taksir farkı
+   Grup          : comparison
+   Beklenen madde: None
+   Gelen madde   : 22
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: ceza hukuku nedir
+normalized: ceza hukuku nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: ceza hukuku nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7255 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Tutuklu, hükümlü veya suç delillerini bildirmeme', 'source': 'tck', 'madde_no': '284', 'chunk_type': 'article', 'chunk_index': 282, 'full_heading': 'TCK Madde 284 - Tutuklu, hükümlü veya suç delillerini bildirmeme'} | PREVIEW: TCK Madde 284 - Tutuklu, hükümlü veya suç delillerini bildirmeme - Madde 284- (1
+DOC: tck | SCORE: 0.7217 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Anayasayı ihlal', 'source': 'tck', 'madde_no': '309', 'chunk_type': 'article', 'chunk_index': 307, 'full_heading': 'TCK Madde 309 - Anayasayı ihlal'} | PREVIEW: TCK Madde 309 - Anayasayı ihlal - Madde 309- (1) Cebir ve şiddet kullanarak, Tür
+DOC: tck | SCORE: 0.7162 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Adil yargılamayı etkilemeye teşebbüs', 'source': 'tck', 'madde_no': '288', 'chunk_type': 'article', 'chunk_index': 286, 'full_heading': 'TCK Madde 288 - Adil yargılamayı etkilemeye teşebbüs'} | PREVIEW: TCK Madde 288 - Adil yargılamayı etkilemeye teşebbüs - Madde 288- (Değişik: 2/7/
+DOC: tck | SCORE: 0.7159 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'İftira', 'source': 'tck', 'madde_no': '267', 'chunk_type': 'article', 'chunk_index': 265, 'full_heading': 'TCK Madde 267 - İftira'} | PREVIEW: TCK Madde 267 - İftira - Madde 267- (1) Yetkili makamlara ihbar veya şikayette b
+DOC: tck | SCORE: 0.7041 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kast', 'source': 'tck', 'madde_no': '21', 'chunk_type': 'article', 'chunk_index': 20, 'full_heading': 'TCK Madde 21 - Kast'} | PREVIEW: TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6610 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.5000 | EXACT_TITLE=0.0000 | FINAL=0.8110 | PREVIEW=TCK Madde 71 - Ceza zamanaşımının kesilmesi - Madde 71- (1) Mahkûmiyet hükmünün 
+VECTOR=0.7255 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7755 | PREVIEW=TCK Madde 284 - Tutuklu, hükümlü veya suç delillerini bildirmeme - Madde 284- (1
+VECTOR=0.7159 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7659 | PREVIEW=TCK Madde 267 - İftira - Madde 267- (1) Yetkili makamlara ihbar veya şikayette b
+VECTOR=0.7041 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7541 | PREVIEW=TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+VECTOR=0.6987 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7487 | PREVIEW=TCK Madde 2 - Suçta ve cezada kanunîlik ilkesi - Madde 2- (1) Kanunun açıkça suç
+33. SORU: ceza hukuku nedir
+   Grup          : concept
+   Beklenen madde: None
+   Gelen madde   : 284
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: suç nedir
+normalized: suç nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: suç nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6901 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+DOC: tck | SCORE: 0.6697 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Bileşik suç', 'source': 'tck', 'madde_no': '42', 'chunk_type': 'article', 'chunk_index': 41, 'full_heading': 'TCK Madde 42 - Bileşik suç'} | PREVIEW: TCK Madde 42 - Bileşik suç - Madde 42- (1) Biri diğerinin unsurunu veya ağırlaşt
+DOC: tck | SCORE: 0.6484 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Tutuklu, hükümlü veya suç delillerini bildirmeme', 'source': 'tck', 'madde_no': '284', 'chunk_type': 'article', 'chunk_index': 282, 'full_heading': 'TCK Madde 284 - Tutuklu, hükümlü veya suç delillerini bildirmeme'} | PREVIEW: TCK Madde 284 - Tutuklu, hükümlü veya suç delillerini bildirmeme - Madde 284- (1
+DOC: tck | SCORE: 0.6479 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kullanma hırsızlığı', 'source': 'tck', 'madde_no': '146', 'chunk_type': 'article', 'chunk_index': 144, 'full_heading': 'TCK Madde 146 - Kullanma hırsızlığı'} | PREVIEW: TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+DOC: tck | SCORE: 0.6391 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Faillik', 'source': 'tck', 'madde_no': '37', 'chunk_type': 'article', 'chunk_index': 36, 'full_heading': 'TCK Madde 37 - Faillik'} | PREVIEW: TCK Madde 37 - Faillik - Madde 37- (1) Suçun kanuni tanımında yer alan fi li bir
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6901 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6901 | PREVIEW=TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+VECTOR=0.6697 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6697 | PREVIEW=TCK Madde 42 - Bileşik suç - Madde 42- (1) Biri diğerinin unsurunu veya ağırlaşt
+VECTOR=0.6484 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6484 | PREVIEW=TCK Madde 284 - Tutuklu, hükümlü veya suç delillerini bildirmeme - Madde 284- (1
+VECTOR=0.6479 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6479 | PREVIEW=TCK Madde 146 - Kullanma hırsızlığı - Madde 146- (1) Hırsızlık suçunun, malın ge
+VECTOR=0.6391 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6391 | PREVIEW=TCK Madde 37 - Faillik - Madde 37- (1) Suçun kanuni tanımında yer alan fi li bir
+34. SORU: suç nedir
+   Grup          : concept
+   Beklenen madde: None
+   Gelen madde   : 42
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: ceza sorumluluğu nedir
+normalized: ceza sorumluluğu nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: ceza sorumluluğu nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7049 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Ceza sorumluluğunun şahsiliği', 'source': 'tck', 'madde_no': '20', 'chunk_type': 'article', 'chunk_index': 19, 'full_heading': 'TCK Madde 20 - Ceza sorumluluğunun şahsiliği'} | PREVIEW: TCK Madde 20 - Ceza sorumluluğunun şahsiliği - Madde 20- (1) Ceza sorumluluğu şa
+DOC: tck | SCORE: 0.6873 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Netice sebebiyle ağırlaşmış suç', 'source': 'tck', 'madde_no': '23', 'chunk_type': 'article', 'chunk_index': 22, 'full_heading': 'TCK Madde 23 - Netice sebebiyle ağırlaşmış suç'} | PREVIEW: TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+DOC: tck | SCORE: 0.6839 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Haksız fi l nedeniyle veya karşılıklı hakaret', 'source': 'tck', 'madde_no': '129', 'chunk_type': 'article', 'chunk_index': 127, 'full_heading': 'TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret'} | PREVIEW: TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret - Madde 129- (1) H
+DOC: tck | SCORE: 0.6752 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kasten öldürmenin ihmali davranışla işlenmesi', 'source': 'tck', 'madde_no': '83', 'chunk_type': 'article', 'chunk_index': 81, 'full_heading': 'TCK Madde 83 - Kasten öldürmenin ihmali davranışla işlenmesi'} | PREVIEW: TCK Madde 83 - Kasten öldürmenin ihmali davranışla işlenmesi - Madde 83- (1) Kiş
+DOC: tck | SCORE: 0.6746 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Cebir', 'source': 'tck', 'madde_no': '108', 'chunk_type': 'article', 'chunk_index': 106, 'full_heading': 'TCK Madde 108 - Cebir'} | PREVIEW: TCK Madde 108 - Cebir - Madde 108- (1) Bir şeyi yapması veya yapmaması ya da ken
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.7049 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.5000 | EXACT_TITLE=0.0000 | FINAL=0.9049 | PREVIEW=TCK Madde 20 - Ceza sorumluluğunun şahsiliği - Madde 20- (1) Ceza sorumluluğu şa
+VECTOR=0.6873 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7373 | PREVIEW=TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+VECTOR=0.6839 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7339 | PREVIEW=TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret - Madde 129- (1) H
+VECTOR=0.6752 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7252 | PREVIEW=TCK Madde 83 - Kasten öldürmenin ihmali davranışla işlenmesi - Madde 83- (1) Kiş
+VECTOR=0.6746 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7246 | PREVIEW=TCK Madde 108 - Cebir - Madde 108- (1) Bir şeyi yapması veya yapmaması ya da ken
+35. SORU: ceza sorumluluğu nedir
+   Grup          : concept
+   Beklenen madde: None
+   Gelen madde   : 20
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: hukuka uygunluk nedenleri nelerdir
+normalized: hukuka uygunluk nedenleri nelerdir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: hukuka uygunluk nedenleri nelerdir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7032 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler', 'source': 'tck', 'madde_no': '273', 'chunk_type': 'article', 'chunk_index': 271, 'full_heading': 'TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler'} | PREVIEW: TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+DOC: tck | SCORE: 0.6714 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Şahsi cezasızlık sebebi veya cezada indirim yapılmasını gerektiren şahsi sebep', 'source': 'tck', 'madde_no': '167', 'chunk_type': 'article', 'chunk_index': 165, 'full_heading': 'TCK Madde 167 - Şahsi cezasızlık sebebi veya cezada indirim yapılmasını gerektiren şahsi sebep'} | PREVIEW: TCK Madde 167 - Şahsi cezasızlık sebebi veya cezada indirim yapılmasını gerektir
+DOC: tck | SCORE: 0.649 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Hata', 'source': 'tck', 'madde_no': '30', 'chunk_type': 'article', 'chunk_index': 29, 'full_heading': 'TCK Madde 30 - Hata'} | PREVIEW: TCK Madde 30 - Hata - Madde 30- (1) Fiilin icrası sırasında suçun kanuni tanımın
+DOC: tck | SCORE: 0.6429 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Bağlılık kuralı', 'source': 'tck', 'madde_no': '40', 'chunk_type': 'article', 'chunk_index': 39, 'full_heading': 'TCK Madde 40 - Bağlılık kuralı'} | PREVIEW: TCK Madde 40 - Bağlılık kuralı - Madde 40- (1) Suça iştirak için kasten ve hukuk
+DOC: tck | SCORE: 0.6394 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'İddia ve savunma dokunulmazlığı', 'source': 'tck', 'madde_no': '128', 'chunk_type': 'article', 'chunk_index': 126, 'full_heading': 'TCK Madde 128 - İddia ve savunma dokunulmazlığı'} | PREVIEW: TCK Madde 128 - İddia ve savunma dokunulmazlığı - Madde 128- (1) Yargı mercileri
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.7032 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7032 | PREVIEW=TCK Madde 273 - Şahsi cezasızlık veya cezanın azaltılmasını gerektiren sebepler 
+VECTOR=0.6714 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6714 | PREVIEW=TCK Madde 167 - Şahsi cezasızlık sebebi veya cezada indirim yapılmasını gerektir
+VECTOR=0.6429 | TOPIC=0.0000 | LEXICAL=0.2500 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6679 | PREVIEW=TCK Madde 40 - Bağlılık kuralı - Madde 40- (1) Suça iştirak için kasten ve hukuk
+VECTOR=0.6490 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6490 | PREVIEW=TCK Madde 30 - Hata - Madde 30- (1) Fiilin icrası sırasında suçun kanuni tanımın
+VECTOR=0.6218 | TOPIC=0.0000 | LEXICAL=0.2500 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6468 | PREVIEW=TCK Madde 60 - Tüzel kişiler hakkında güvenlik tedbirleri - Madde 60- (1) Bir ka
+36. SORU: hukuka uygunluk nedenleri nelerdir
+   Grup          : concept
+   Beklenen madde: None
+   Gelen madde   : 273
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: suçun unsurları nelerdir
+normalized: suçun unsurları nelerdir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: suçun unsurları nelerdir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6904 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Netice sebebiyle ağırlaşmış suç', 'source': 'tck', 'madde_no': '23', 'chunk_type': 'article', 'chunk_index': 22, 'full_heading': 'TCK Madde 23 - Netice sebebiyle ağırlaşmış suç'} | PREVIEW: TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+DOC: tck | SCORE: 0.6774 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli yağma', 'source': 'tck', 'madde_no': '149', 'chunk_type': 'article', 'chunk_index': 147, 'full_heading': 'TCK Madde 149 - Nitelikli yağma'} | PREVIEW: TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+DOC: tck | SCORE: 0.6764 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Faillik', 'source': 'tck', 'madde_no': '37', 'chunk_type': 'article', 'chunk_index': 36, 'full_heading': 'TCK Madde 37 - Faillik'} | PREVIEW: TCK Madde 37 - Faillik - Madde 37- (1) Suçun kanuni tanımında yer alan fi li bir
+DOC: tck | SCORE: 0.675 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Bileşik suç', 'source': 'tck', 'madde_no': '42', 'chunk_type': 'article', 'chunk_index': 41, 'full_heading': 'TCK Madde 42 - Bileşik suç'} | PREVIEW: TCK Madde 42 - Bileşik suç - Madde 42- (1) Biri diğerinin unsurunu veya ağırlaşt
+DOC: tck | SCORE: 0.6723 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Nitelikli haller', 'source': 'tck', 'madde_no': '137', 'chunk_type': 'article', 'chunk_index': 135, 'full_heading': 'TCK Madde 137 - Nitelikli haller'} | PREVIEW: TCK Madde 137 - Nitelikli haller - Madde 137- (1) Yukarıdaki maddelerde tanımlan
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6764 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7098 | PREVIEW=TCK Madde 37 - Faillik - Madde 37- (1) Suçun kanuni tanımında yer alan fi li bir
+VECTOR=0.6699 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7032 | PREVIEW=TCK Madde 44 - Fikri içtima - Madde 44- (1) İşlediği bir fi l ile birden fazla f
+VECTOR=0.6904 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6904 | PREVIEW=TCK Madde 23 - Netice sebebiyle ağırlaşmış suç - Madde 23- (1) Bir fi lin, kaste
+VECTOR=0.5816 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.3333 | EXACT_TITLE=0.0000 | FINAL=0.6816 | PREVIEW=TCK Madde 143 - Suçun gece vakti işlenmesi - Madde 143- (1) Hırsızlık suçunun ge
+VECTOR=0.6774 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6774 | PREVIEW=TCK Madde 149 - Nitelikli yağma - Madde 149- (1) Yağma suçunun; a) Silahla, b) K
+37. SORU: suçun unsurları nelerdir
+   Grup          : concept
+   Beklenen madde: None
+   Gelen madde   : 37
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: kusur nedir
+normalized: kusur nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: kusur nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.3618 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Hata', 'source': 'tck', 'madde_no': '30', 'chunk_type': 'article', 'chunk_index': 29, 'full_heading': 'TCK Madde 30 - Hata'} | PREVIEW: TCK Madde 30 - Hata - Madde 30- (1) Fiilin icrası sırasında suçun kanuni tanımın
+DOC: tck | SCORE: 0.3598 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kazanç müsaderesi', 'source': 'tck', 'madde_no': '55', 'chunk_type': 'article', 'chunk_index': 54, 'full_heading': 'TCK Madde 55 - Kazanç müsaderesi'} | PREVIEW: TCK Madde 55 - Kazanç müsaderesi - Madde 55- (1) Suçun işlenmesi ile elde edilen
+DOC: tck | SCORE: 0.3577 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Faillik', 'source': 'tck', 'madde_no': '37', 'chunk_type': 'article', 'chunk_index': 36, 'full_heading': 'TCK Madde 37 - Faillik'} | PREVIEW: TCK Madde 37 - Faillik - Madde 37- (1) Suçun kanuni tanımında yer alan fi li bir
+DOC: tck | SCORE: 0.3538 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Neticesi sebebiyle ağırlaşmış yaralama', 'source': 'tck', 'madde_no': '87', 'chunk_type': 'article', 'chunk_index': 85, 'full_heading': 'TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama'} | PREVIEW: TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama - Madde 87- (1) Kasten yar
+DOC: tck | SCORE: 0.3183 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Etkin pişmanlık', 'source': 'tck', 'madde_no': '168', 'chunk_type': 'article', 'chunk_index': 166, 'full_heading': 'TCK Madde 168 - Etkin pişmanlık'} | PREVIEW: TCK Madde 168 - Etkin pişmanlık - Madde 168 – (Değişik: 29/6/2005 – 5377/20 md.)
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.3577 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.4577 | PREVIEW=TCK Madde 37 - Faillik - Madde 37- (1) Suçun kanuni tanımında yer alan fi li bir
+VECTOR=0.3618 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3618 | PREVIEW=TCK Madde 30 - Hata - Madde 30- (1) Fiilin icrası sırasında suçun kanuni tanımın
+VECTOR=0.3598 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3598 | PREVIEW=TCK Madde 55 - Kazanç müsaderesi - Madde 55- (1) Suçun işlenmesi ile elde edilen
+VECTOR=0.3538 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3538 | PREVIEW=TCK Madde 87 - Neticesi sebebiyle ağırlaşmış yaralama - Madde 87- (1) Kasten yar
+VECTOR=0.3183 | TOPIC=0.0000 | LEXICAL=0.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.3183 | PREVIEW=TCK Madde 168 - Etkin pişmanlık - Madde 168 – (Değişik: 29/6/2005 – 5377/20 md.)
+38. SORU: kusur nedir
+   Grup          : concept
+   Beklenen madde: None
+   Gelen madde   : 37
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: hapis cezası nedir
+normalized: hapis cezası nedir
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: hapis cezası nedir
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.7144 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Kast', 'source': 'tck', 'madde_no': '21', 'chunk_type': 'article', 'chunk_index': 20, 'full_heading': 'TCK Madde 21 - Kast'} | PREVIEW: TCK Madde 21 - Kast - Madde 21- (1) Suçun oluşması kastın varlığına bağlıdır. Ka
+DOC: tck | SCORE: 0.7079 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Haksız tahrik', 'source': 'tck', 'madde_no': '29', 'chunk_type': 'article', 'chunk_index': 28, 'full_heading': 'TCK Madde 29 - Haksız tahrik'} | PREVIEW: TCK Madde 29 - Haksız tahrik - Madde 29- (1) Haksız bir fi lin meydana getirdiği
+DOC: tck | SCORE: 0.6955 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Muhafızın görevini kötüye kullanması', 'source': 'tck', 'madde_no': '295', 'chunk_type': 'article', 'chunk_index': 293, 'full_heading': 'TCK Madde 295 - Muhafızın görevini kötüye kullanması'} | PREVIEW: TCK Madde 295 - Muhafızın görevini kötüye kullanması - Madde 295- (1) Gözaltına 
+DOC: tck | SCORE: 0.6751 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Suç işlemeye tahrik', 'source': 'tck', 'madde_no': '214', 'chunk_type': 'article', 'chunk_index': 212, 'full_heading': 'TCK Madde 214 - Suç işlemeye tahrik'} | PREVIEW: TCK Madde 214 - Suç işlemeye tahrik - Madde 214- (1) Suç işlemek için alenen tah
+DOC: tck | SCORE: 0.6749 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Cezadan mahsup', 'source': 'tck', 'madde_no': '16', 'chunk_type': 'article', 'chunk_index': 15, 'full_heading': 'TCK Madde 16 - Cezadan mahsup'} | PREVIEW: TCK Madde 16 - Cezadan mahsup - Madde 16- (1) Nerede işlenmiş olursa olsun bir s
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6409 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=1.0000 | EXACT_TITLE=0.2500 | FINAL=1.0034 | PREVIEW=TCK Madde 49 - Süreli hapis cezası - Madde 49- (1) Süreli hapis cezası, kanunda 
+VECTOR=0.6459 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.5000 | EXACT_TITLE=0.2500 | FINAL=0.9084 | PREVIEW=TCK Madde 46 - Hapis cezaları - Madde 46- (1) Hapis cezaları şunlardır: a) Ağırl
+VECTOR=0.7079 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.8079 | PREVIEW=TCK Madde 29 - Haksız tahrik - Madde 29- (1) Haksız bir fi lin meydana getirdiği
+VECTOR=0.6955 | TOPIC=0.0000 | LEXICAL=1.0000 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7955 | PREVIEW=TCK Madde 295 - Muhafızın görevini kötüye kullanması - Madde 295- (1) Gözaltına 
+VECTOR=0.6353 | TOPIC=0.0000 | LEXICAL=0.5000 | TITLE=0.5000 | EXACT_TITLE=0.0000 | FINAL=0.7853 | PREVIEW=TCK Madde 52 - Adlî para cezası - Madde 52- (1) Adlî para cezası, beş günden az 
+39. SORU: hapis cezası nedir
+   Grup          : other
+   Beklenen madde: None
+   Gelen madde   : 49
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== QUERY EXPANSION DEBUG ===
+original: ceza indirimi ne demek
+normalized: ceza indirimi ne demek
+phrase_hits: []
+matched_terms: []
+added_terms: []
+expanded_query: ceza indirimi ne demek
+
+=== TOPIC CLASSIFIER DEBUG ===
+topic: unknown
+confidence: 0.0
+is_reliable: False
+
+=== VECTOR SEARCH DEBUG ===
+Top results:
+DOC: tck | SCORE: 0.6907 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Daha az cezayı gerektiren hal', 'source': 'tck', 'madde_no': '249', 'chunk_type': 'article', 'chunk_index': 247, 'full_heading': 'TCK Madde 249 - Daha az cezayı gerektiren hal'} | PREVIEW: TCK Madde 249 - Daha az cezayı gerektiren hal - Madde 249- (1) Zimmet suçunun ko
+DOC: tck | SCORE: 0.6788 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Zorunluluk hâli', 'source': 'tck', 'madde_no': '147', 'chunk_type': 'article', 'chunk_index': 145, 'full_heading': 'TCK Madde 147 - Zorunluluk hâli'} | PREVIEW: TCK Madde 147 - Zorunluluk hâli - Madde 147- (1) Hırsızlık suçunun ağır ve acil 
+DOC: tck | SCORE: 0.6627 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Malın değerinin az olması', 'source': 'tck', 'madde_no': '145', 'chunk_type': 'article', 'chunk_index': 143, 'full_heading': 'TCK Madde 145 - Malın değerinin az olması'} | PREVIEW: TCK Madde 145 - Malın değerinin az olması - Madde 145- (1) (Değişik: 29/6/2005 –
+DOC: tck | SCORE: 0.6494 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Gönüllü vazgeçme', 'source': 'tck', 'madde_no': '36', 'chunk_type': 'article', 'chunk_index': 35, 'full_heading': 'TCK Madde 36 - Gönüllü vazgeçme'} | PREVIEW: TCK Madde 36 - Gönüllü vazgeçme - Madde 36- (1) Fail, suçun icra hareketlerinden
+DOC: tck | SCORE: 0.6476 | KONU: Genel | META: {'kanun': 'TCK', 'title': 'Haksız fi l nedeniyle veya karşılıklı hakaret', 'source': 'tck', 'madde_no': '129', 'chunk_type': 'article', 'chunk_index': 127, 'full_heading': 'TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret'} | PREVIEW: TCK Madde 129 - Haksız fi l nedeniyle veya karşılıklı hakaret - Madde 129- (1) H
+===========================
+
+
+=== SCORING DEBUG ===
+VECTOR=0.6907 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7240 | PREVIEW=TCK Madde 249 - Daha az cezayı gerektiren hal - Madde 249- (1) Zimmet suçunun ko
+VECTOR=0.6788 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.7122 | PREVIEW=TCK Madde 147 - Zorunluluk hâli - Madde 147- (1) Hırsızlık suçunun ağır ve acil 
+VECTOR=0.6118 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.3333 | EXACT_TITLE=0.0000 | FINAL=0.7118 | PREVIEW=TCK Madde 71 - Ceza zamanaşımının kesilmesi - Madde 71- (1) Mahkûmiyet hükmünün 
+VECTOR=0.6627 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6960 | PREVIEW=TCK Madde 145 - Malın değerinin az olması - Madde 145- (1) (Değişik: 29/6/2005 –
+VECTOR=0.6494 | TOPIC=0.0000 | LEXICAL=0.3333 | TITLE=0.0000 | EXACT_TITLE=0.0000 | FINAL=0.6828 | PREVIEW=TCK Madde 36 - Gönüllü vazgeçme - Madde 36- (1) Fail, suçun icra hareketlerinden
+40. SORU: ceza indirimi ne demek
+   Grup          : other
+   Beklenen madde: None
+   Gelen madde   : 249
+   Beklenen tip  : uncertain
+   SONUÇ         : ❌ YANLIŞ
+------------------------------------------------------------
+
+=== RETRIEVAL EVALUATION END ===
+Toplam soru : 40
+Doğru       : 22
+Accuracy    : %55.00

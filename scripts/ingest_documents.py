@@ -1,6 +1,7 @@
 import os
 import sys
 import csv
+import re
 import hashlib
 from pathlib import Path
 from typing import List
@@ -88,6 +89,57 @@ def embed_texts(texts: List[str], batch_size: int = 64):
 
 
 # -------------------------------------------------
+# Chunk metadata
+# -------------------------------------------------
+
+
+def build_chunk_meta(
+    doc_id: str,
+    chunk_index: int,
+    content: str,
+    article: dict | None = None,
+) -> dict:
+    meta = {
+        "source": doc_id,
+        "chunk_index": chunk_index,
+        "kanun": "TCK",
+        "madde_no": None,
+        "title": None,
+        "full_heading": None,
+        "chunk_type": "article",
+    }
+
+    # Parser'dan article bilgisi geldiyse önce onu kullan
+    if article:
+        title = article.get("title")
+        if title:
+            meta["full_heading"] = title
+
+            madde_match = re.search(r"Madde\s+(\d+)", title, re.IGNORECASE)
+            if madde_match:
+                meta["madde_no"] = madde_match.group(1)
+
+            # Örnek:
+            # "TCK Madde 141 - Hırsızlık" -> "Hırsızlık"
+            parts = title.split(" - ")
+            if len(parts) >= 2:
+                meta["title"] = parts[1].strip()
+            else:
+                meta["title"] = title.strip()
+
+        return meta
+
+    # Fallback: content içinden çıkarmaya çalış
+    match = re.search(r"(TCK\s+Madde\s+(\d+)\s*-\s*([^-\n]+))", content, re.IGNORECASE)
+    if match:
+        meta["full_heading"] = match.group(1).strip()
+        meta["madde_no"] = match.group(2).strip()
+        meta["title"] = match.group(3).strip()
+
+    return meta
+
+
+# -------------------------------------------------
 # Ingest manifest
 # -------------------------------------------------
 
@@ -122,20 +174,28 @@ def ingest_manifest(manifest_csv: str):
 
         h = file_hash(path)
 
+        article_payloads = None
+
         # PDF için önce madde parser dene
         if ext == ".pdf":
             articles = parse_statute_articles(text)
 
             if len(articles) > 3:
                 print(f"{doc_id}: statute parser used ({len(articles)} articles)")
-                chunks = [f'{a["title"]} - {a["content"]}' for a in articles]
+                article_payloads = []
+                chunks = []
+
+                for a in articles:
+                    chunk_content = f'{a["title"]} - {a["content"]}'
+                    chunks.append(chunk_content)
+                    article_payloads.append(a)
             else:
                 print(f"{doc_id}: fallback chunking")
                 chunks = chunk_text(text)
         else:
             chunks = chunk_text(text)
 
-        docs.append((doc_id, ders, konu, title, path, mime, h, chunks))
+        docs.append((doc_id, ders, konu, title, path, mime, h, chunks, article_payloads))
 
     # -------------------------------------------------
     # Chunk listesi oluştur
@@ -144,10 +204,15 @@ def ingest_manifest(manifest_csv: str):
     all_chunks = []
     chunk_map = []
 
-    for doc_id, _, _, _, _, _, _, chunks in docs:
+    for doc_id, _, _, _, _, _, _, chunks, article_payloads in docs:
         for idx, ch in enumerate(chunks):
             all_chunks.append(ch)
-            chunk_map.append((doc_id, idx))
+
+            article = None
+            if article_payloads and idx < len(article_payloads):
+                article = article_payloads[idx]
+
+            chunk_map.append((doc_id, idx, article))
 
     print("TOTAL CHUNKS:", len(all_chunks))
 
@@ -161,7 +226,7 @@ def ingest_manifest(manifest_csv: str):
 
     with pg_conn() as conn:
         with conn.cursor() as cur:
-            for doc_id, ders, konu, title, path, mime, h, _chunks in docs:
+            for doc_id, ders, konu, title, path, mime, h, _chunks, _article_payloads in docs:
                 cur.execute(
                     """
                     INSERT INTO documents
@@ -183,10 +248,15 @@ def ingest_manifest(manifest_csv: str):
                     (doc_id,),
                 )
 
-            for (doc_id, chunk_index), content, emb in zip(
+            for (doc_id, chunk_index, article), content, emb in zip(
                 chunk_map, all_chunks, embeddings
             ):
-                meta = {"chunk_index": chunk_index, "source": doc_id}
+                meta = build_chunk_meta(
+                    doc_id=doc_id,
+                    chunk_index=chunk_index,
+                    content=content,
+                    article=article,
+                )
 
                 cur.execute(
                     """

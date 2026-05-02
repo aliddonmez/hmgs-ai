@@ -2,6 +2,46 @@ import re
 from document_parser.text_cleaner import clean_text
 
 
+NOISE_LINES = {
+    "Mevzuat Bilgi Sistemi",
+}
+
+
+def is_valid_title_candidate(line: str) -> bool:
+    line = line.strip()
+
+    if not line:
+        return False
+
+    if line in NOISE_LINES:
+        return False
+
+    # Çok uzunsa büyük ihtimal başlık değildir
+    if len(line.split()) > 12:
+        return False
+
+    # Cümle gibi bitiyorsa başlık değildir
+    if line.endswith(".") or line.endswith(";") or line.endswith(":"):
+        return False
+
+    # "Madde ..." satırı başlık değildir
+    if re.match(r"^\s*Madde\s+\d+", line, re.IGNORECASE):
+        return False
+
+    return True
+
+
+def find_previous_title(lines: list[str]) -> str:
+    """
+    Sondan geriye doğru gidip ilk uygun başlığı bulur.
+    """
+    for line in reversed(lines):
+        line = line.strip()
+        if is_valid_title_candidate(line):
+            return line
+    return "Belirtilmemiş Başlık"
+
+
 def parse_statute_articles(text: str):
     """
     Kanun metnini Madde bazında parçalar ve başlıkları otomatik yakalar.
@@ -14,7 +54,7 @@ def parse_statute_articles(text: str):
     current_title = "Genel Hükümler"
     current_content = []
 
-    # Madde başlangıcını yakalayan kalıp (Örn: "Madde 157-")
+    # Madde başlangıcını yakalayan kalıp
     madde_pattern = re.compile(r"^\s*Madde\s+(\d+)\s*[-–—]", re.IGNORECASE)
 
     for line in lines:
@@ -25,51 +65,40 @@ def parse_statute_articles(text: str):
         match = madde_pattern.search(line)
 
         if match:
-            # Yeni bir madde bulduk! Önceki maddeyi paketleyip listeye ekleyelim.
+            # Yeni maddeye geldik, önce önceki maddeyi kaydet
             if current_madde_no:
-                # Mevcut içeriğin en son satırı aslında BU YENİ maddenin başlığıdır (TCK formatı).
-                # Onu metinden çıkarıp (pop) bir sonraki başlık yapıyoruz.
-                if len(current_content) > 0:
-                    potential_title = current_content.pop()
-                    # Eğer son satır çok uzunsa veya nokta ile bitiyorsa başlık değil, cümledir (Yanlış alarm engelleme)
-                    if len(potential_title.split()) > 15 or potential_title.endswith(
-                        "."
-                    ):
-                        current_content.append(potential_title)  # Cümleyse geri koy
-                        next_title = "Belirtilmemiş Başlık"
-                    else:
-                        next_title = potential_title
-                else:
-                    next_title = "Belirtilmemiş Başlık"
+                next_title = find_previous_title(current_content)
 
-                # Önceki maddeyi kaydet
+                # Kaydetmeden önce current_content içinden başlığı temizle
+                cleaned_content = current_content[:]
+                if cleaned_content and cleaned_content[-1].strip() == next_title:
+                    cleaned_content.pop()
+
                 results.append(
                     {
                         "doc_id": f"tck_{current_madde_no}",
-                        "title": f"TCK Madde {current_madde_no} - {current_title}",  # Başlığı buraya da ekledik
+                        "title": f"TCK Madde {current_madde_no} - {current_title}",
                         "metadata": {
                             "madde_no": current_madde_no,
-                            "madde_basligi": current_title,  # VECTOR DB İÇİN ALTIN DEĞERİNDEKİ KISIM
+                            "madde_basligi": current_title,
                         },
-                        "content": " ".join(current_content),
+                        "content": " ".join(cleaned_content),
                     }
                 )
 
-                current_title = next_title  # Yeni başlığı sonraki maddeye ata
+                current_title = next_title
             else:
-                # İlk maddeye (Madde 1) geldiğimizde, üstteki son satır onun başlığıdır.
+                # İlk madde için üstten başlık bul
                 if len(current_content) > 0:
-                    current_title = current_content[-1]
+                    current_title = find_previous_title(current_content)
                     current_content.clear()
 
-            # Yeni maddenin numarasını ve ilk satırını ayarla
             current_madde_no = match.group(1)
             current_content = [line]
         else:
-            # Madde başlangıcı değilse metni okumaya devam et
             current_content.append(line)
 
-    # Döngü bitince en son kalan maddeyi de listeye ekle
+    # Son maddeyi de ekle
     if current_madde_no:
         results.append(
             {

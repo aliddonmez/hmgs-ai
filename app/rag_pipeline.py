@@ -11,6 +11,13 @@ from dotenv import load_dotenv
 
 from retrieval.pipeline import retrieve_chunks
 from app.llm.gemini_client import ask_gemini
+from retrieval.config import (
+    AMBIGUITY_MARGIN,
+    DEBUG_RAG,
+    MIN_TOP_SCORE,
+    MIN_SECOND_SCORE,
+    MIN_AVG_TOP3_SCORE,
+)
 
 IDK_TEXT = (
     "⚠️ Bu soruya, mevcut hukuki kaynaklar içinde doğrudan ve güvenli "
@@ -48,7 +55,6 @@ def is_out_of_scope(question: str):
 
 
 def build_context(results):
-
     parts = []
 
     for r in results:
@@ -58,19 +64,15 @@ def build_context(results):
 
 
 def load_prompt():
-
     path = Path(__file__).resolve().parents[1] / "docs" / "prompt_v1.md"
-
     return path.read_text(encoding="utf-8")
 
 
 def fill_prompt(prompt: str, question: str, context: str):
-
     return prompt.replace("{{question}}", question).replace("{{context}}", context)
 
 
 def run(question: str, debug: bool = False) -> dict:
-
     question = question.strip()
 
     if not question:
@@ -86,41 +88,62 @@ def run(question: str, debug: bool = False) -> dict:
     if not results:
         return make_no_answer("no_result")
 
+    sorted_results = sorted(
+        results,
+        key=lambda x: float(x.get("final_score", 0.0)),
+        reverse=True,
+    )
+
     # Debug
-    if debug:
+    if DEBUG_RAG or debug:
         print("\n--- RETRIEVAL DEBUG ---")
 
-        for i, r in enumerate(results):
-
-            print(f"\n[{i+1}] SCORE: {round(float(r.get('score', 0.0)),4)}")
+        for i, r in enumerate(sorted_results):
+            print(f"\n[{i+1}] FINAL_SCORE: {round(float(r.get('final_score', 0.0)), 4)}")
+            print("VECTOR_SCORE:", round(float(r.get("vector_score", 0.0)), 4))
             print("TITLE:", r.get("title"))
             print("CONTENT:", (r.get("content") or "")[:300])
 
-    # (C) Çok belirsiz sonuç kontrolü
-    scores = [float(r.get("score", 0.0)) for r in results]
+    # (C) Retrieval kalite kontrolü
+    scores = [float(r.get("final_score", 0.0)) for r in sorted_results]
 
+    top_score = scores[0] if len(scores) >= 1 else 0.0
+    second_score = scores[1] if len(scores) >= 2 else 0.0
+    avg_top3 = sum(scores[:3]) / min(len(scores), 3) if scores else 0.0
+
+    if DEBUG_RAG or debug:
+        print("\n=== RETRIEVAL QUALITY DEBUG ===")
+        print("top_score:", round(top_score, 4))
+        print("second_score:", round(second_score, 4))
+        print("avg_top3:", round(avg_top3, 4))
+        print("ambiguity_gap:", round(abs(top_score - second_score), 4))
+
+    # 1) Top sonuç çok zayıfsa dur
+    if top_score < MIN_TOP_SCORE:
+        return make_no_answer("weak_top_result")
+
+    # 2) İlk birkaç sonuç genel olarak zayıfsa dur
+    if avg_top3 < MIN_AVG_TOP3_SCORE:
+        return make_no_answer("weak_retrieval")
+
+    # 3) İlk iki sonuç birbirine çok yakınsa ve ikinci sonuç da güçlü ise kararsız say
     if len(scores) >= 2:
-
-        if abs(scores[0] - scores[1]) < 0.0005:
-
+        if abs(top_score - second_score) < AMBIGUITY_MARGIN and second_score >= MIN_SECOND_SCORE:
             return make_no_answer("ambiguous_retrieval")
 
     # (D) Context oluştur
-    context = build_context(results)
+    context = build_context(sorted_results)
 
     prompt_template = load_prompt()
-
     final_prompt = fill_prompt(prompt_template, question, context)
 
-    print("\n=== CONTEXT DEBUG ===")
-    print(context)
-    print("=====================\n")
-
-    print("=====================\n")
+    if DEBUG_RAG or debug:
+        print("\n=== CONTEXT DEBUG ===")
+        print(context)
+        print("=====================\n")
 
     # (E) LLM çağrısı
     try:
-
         answer = ask_gemini(final_prompt)
 
         if not answer or len(answer.strip()) < 10:
@@ -129,30 +152,26 @@ def run(question: str, debug: bool = False) -> dict:
         return {
             "type": "answer",
             "text": answer,
-            "sources": results[:3],
+            "sources": sorted_results[:3],
         }
 
     except Exception as e:
-
         print("LLM ERROR:", e)
 
-        fallback = quick_answer_from_context(results)
+        fallback = quick_answer_from_context(sorted_results)
 
         if fallback:
-
             return {
                 "type": "answer",
                 "text": fallback,
-                "sources": results[:3],
+                "sources": sorted_results[:3],
             }
 
         return make_no_answer("llm_failed")
 
 
 def main():
-
     q = input("Soru: ")
-
     print(run(q, debug=True))
 
 

@@ -1,11 +1,9 @@
-## retrieval/vector_search.py
-
 from analysis.db import get_conn
 from retrieval.embedding_model import embed_text
+from retrieval.config import FETCH_K, DEBUG_RETRIEVAL
 
 
-def vector_search(question: str, fetch_k: int = 50):
-
+def vector_search(question: str, fetch_k: int = FETCH_K):
     conn = get_conn()
     cur = conn.cursor()
 
@@ -16,6 +14,7 @@ def vector_search(question: str, fetch_k: int = 50):
         SELECT
             d.title,
             dc.content,
+            dc.meta,
             1 - (dc.embedding <=> %s::vector) AS similarity,
             d.id,
             d.ders,
@@ -35,31 +34,36 @@ def vector_search(question: str, fetch_k: int = 50):
 
     results = []
 
-    for title, content, score, doc_id, ders, konu in rows:
-
+    for title, content, meta, score, doc_id, ders, konu in rows:
         results.append(
             {
                 "title": title,
                 "content": content,
+                "meta": meta,
                 "score": score,
                 "doc_id": doc_id,
                 "ders": ders,
                 "konu": konu,
             }
         )
-        # 🔎 DEBUG
-    print("\n=== VECTOR SEARCH DEBUG ===")
-    print("Top results:")
-    for r in results[:5]:
-        print(
-            "DOC:",
-            r["doc_id"],
-            "| SCORE:",
-            round(float(r["score"]), 4),
-            "| KONU:",
-            r["konu"],
-            "| PREVIEW:",
-            r["content"][:80],
-        )
-    print("===========================\n")
+
+    # 🔎 DEBUG
+    if DEBUG_RETRIEVAL:
+        print("\n=== VECTOR SEARCH DEBUG ===")
+        print("Top results:")
+        for r in results[:5]:
+            print(
+                "DOC:",
+                r["doc_id"],
+                "| SCORE:",
+                round(float(r["score"]), 4),
+                "| KONU:",
+                r["konu"],
+                "| META:",
+                r["meta"],
+                "| PREVIEW:",
+                r["content"][:80],
+            )
+        print("===========================\n")
+
     return results
