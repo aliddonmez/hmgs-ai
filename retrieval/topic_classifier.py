@@ -39,7 +39,7 @@ def classify_topic(query: str) -> dict:
 
     # güven kontrolü
     if confidence < TOPIC_CONFIDENCE_THRESHOLD or margin < TOPIC_MARGIN_THRESHOLD:
-     f   return {
+        return {
             "topic": "unknown",
             "confidence": confidence,
             "is_reliable": False,

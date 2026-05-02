@@ -114,3 +114,27 @@ def phrase_match_score(query: str, content: str) -> float:
         return 1.0
 
     return 0.0
+
+def target_presence_score(targets: list[str], content: str, title: str = "") -> float:
+    """
+    Intent target'larının chunk content/title içinde geçip geçmediğini ölçer.
+    Özellikle comparison sorularında her hedefin temsil edilmesini sağlar.
+    """
+    if not targets:
+        return 0.0
+
+    content_norm = normalize_for_match(content)
+    title_norm = normalize_for_match(title or "")
+
+    matched = 0
+
+    for target in targets:
+        target_norm = normalize_for_match(target)
+
+        if not target_norm:
+            continue
+
+        if target_norm in content_norm or target_norm in title_norm:
+            matched += 1
+
+    return matched / len(targets)

@@ -1,8 +1,15 @@
+from retrieval.intent.classifier import classify_intent
 from retrieval.query_expansion import expand_query
 from retrieval.topic_classifier import classify_topic
 from retrieval.vector_search import vector_search
 from retrieval.reranker import rerank_chunks
-from retrieval.scoring import lexical_overlap_score, title_match_score, exact_title_match_bonus,phrase_match_score
+from retrieval.scoring import (
+    lexical_overlap_score,
+    title_match_score,
+    exact_title_match_bonus,
+    phrase_match_score,
+    target_presence_score,
+)
 from retrieval.config import DEBUG_META
 from retrieval.config import (
     FETCH_K,
@@ -13,6 +20,24 @@ from retrieval.config import (
     TOPIC_BOOST,
 )
 
+def boost_if_contains_targets(candidates, targets):
+    for c in candidates:
+        content = c["content"].lower()
+        title = (c.get("title") or "").lower()
+
+        hit = False
+        for t in targets:
+            if t in content or t in title:
+                hit = True
+                break
+
+        if hit:
+            c["lexical_boost"] = 0.2
+        else:
+            c["lexical_boost"] = 0.0
+
+    return candidates
+
 
 def retrieve_chunks(
     question: str,
@@ -20,6 +45,19 @@ def retrieve_chunks(
     rerank_k: int = RERANK_K,
     top_k: int = TOP_K,
 ):
+    
+    # 0️⃣ Intent classification
+    intent_result = classify_intent(question)
+
+    intent_type = intent_result["intent_type"]
+    relation_type = intent_result["relation_type"]
+    targets = [t["normalized_text"] for t in intent_result["targets"]]
+
+    print("\n=== INTENT DEBUG ===")
+    print("intent:", intent_type)
+    print("relation:", relation_type)
+    print("targets:", targets)
+
     # 1️⃣ Query expansion
     expansion_result = expand_query(question)
     expanded_query = expansion_result["expanded_query"]
@@ -44,10 +82,34 @@ def retrieve_chunks(
     is_reliable = topic_result["is_reliable"]
 
     # 3️⃣ Vector search
-    candidates = vector_search(expanded_query, fetch_k)
+    # 3️⃣ Vector search (intent-aware)
+
+    if intent_type == "comparison" and len(targets) >= 2:
+        all_candidates = []
+
+        for t in targets:
+            print(f"\n--- SEARCH FOR TARGET: {t} ---")
+
+            # 🔥 target-based expansion
+            t_expansion = expand_query(t)
+            expanded_t = t_expansion["expanded_query"]
+
+            print(f"expanded target: {expanded_t}")
+
+            partial = vector_search(expanded_t, fetch_k // 2)
+
+
+            all_candidates.extend(partial)
+
+        candidates = all_candidates
+
+    else:
+        candidates = vector_search(expanded_query, fetch_k)
+    
+    candidates = boost_if_contains_targets(candidates, targets)
 
     if not candidates:
-        return []
+            return []
 
     # ------------------------------------------------
     # 4️⃣ SCORING
@@ -71,6 +133,7 @@ def retrieve_chunks(
         title_score = title_match_score(expanded_query, title)
         phrase_score = phrase_match_score(expanded_query, content)
         exact_title = exact_title_match_bonus(expanded_query, title)
+        target_score = target_presence_score(targets, content, title)
 
         if is_reliable and topic != "unknown" and c.get("konu"):
             if topic.lower() in c["konu"].lower():
@@ -82,7 +145,9 @@ def retrieve_chunks(
             + (lexical_score * 0.10)
             + (title_score * 0.20)
             + (exact_title * 0.25)
-            + (phrase_score * 0.15 ) 
+            + (phrase_score * 0.15)
+            + (target_score * 0.30)
+            + c.get("lexical_boost", 0.0)
         )
 
         c["vector_score"] = vector_score
@@ -90,6 +155,7 @@ def retrieve_chunks(
         c["lexical_score"] = lexical_score
         c["title_score"] = title_score
         c["exact_title"] = exact_title
+        c["target_score"] = target_score
         c["final_score"] = final_score
 
         scored_candidates.append(c)
@@ -109,6 +175,7 @@ def retrieve_chunks(
             f"LEXICAL={c['lexical_score']:.4f} | "
             f"TITLE={c['title_score']:.4f} | "
             f"EXACT_TITLE={c.get('exact_title', 0.0):.4f} | "
+            f"TARGET={c.get('target_score', 0.0):.4f} | "
             f"FINAL={c['final_score']:.4f} | "
             f"PREVIEW={preview}"
         )
