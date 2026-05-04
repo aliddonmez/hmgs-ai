@@ -24,7 +24,7 @@ TEST_CASES = [
 # -----------------------------
 {"q": "kasten yaralama ile taksirle yaralama farkı", "intent": "comparison", "rel": "comparison", "tc": 2},
 {"q": "yağma ile gasp farkı nedir", "intent": "comparison", "rel": "comparison", "tc": 2},
-{"q": "hırsızlık dolandırıcılık farkı", "intent": "comparison", "rel": "comparison", "tc": 2},
+{"q": "hırsızlık dolandırıcılık farkı nedir", "intent": "comparison", "rel": "comparison", "tc": 2},
 {"q": "olası kast bilinçli taksir farkı nedir", "intent": "comparison", "rel": "comparison", "tc": 2},
 {"q": "doğrudan kast olası kast farkı", "intent": "comparison", "rel": "comparison", "tc": 2},
 {"q": "suç kabahat farkı", "intent": "comparison", "rel": "comparison", "tc": 2},

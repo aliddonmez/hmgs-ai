@@ -4,3 +4,4 @@ google-genai
 pypdf
 sentence-transformers
 psycopg[binary]
+PyMuPDF
