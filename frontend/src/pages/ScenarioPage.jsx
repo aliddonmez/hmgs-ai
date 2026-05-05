@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const API_BASE = 'http://localhost:8000/api';
 
@@ -9,11 +9,7 @@ export default function ScenarioPage() {
   const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchScenarios();
-  }, []);
-
-  const fetchScenarios = async () => {
+  const fetchScenarios = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`${API_BASE}/scenarios/`);
@@ -24,7 +20,11 @@ export default function ScenarioPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    Promise.resolve().then(fetchScenarios);
+  }, [fetchScenarios]);
 
   const startScenario = async (id = null) => {
     setLoading(true);

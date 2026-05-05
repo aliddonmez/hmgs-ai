@@ -76,6 +76,23 @@ def init_storage():
         with conn.cursor() as cur:
             cur.execute(
                 """
+                CREATE TABLE IF NOT EXISTS profiles (
+                    user_id TEXT PRIMARY KEY,
+                    display_name TEXT NOT NULL,
+                    created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+                );
+                """
+            )
+
+            cur.execute(
+                """
+                CREATE INDEX IF NOT EXISTS idx_profiles_display_name
+                ON profiles (display_name);
+                """
+            )
+
+            cur.execute(
+                """
                 CREATE TABLE IF NOT EXISTS quiz_attempt_answers (
                     id BIGSERIAL PRIMARY KEY,
                     attempt_id UUID NOT NULL,
@@ -115,6 +132,88 @@ def init_storage():
             )
 
         conn.commit()
+
+
+# -----------------------------
+# PROFILES
+# -----------------------------
+
+def upsert_profile(user_id: str, display_name: str):
+    """
+    Kullanıcı profilini oluşturur veya mevcut profil adını günceller.
+
+    profiles tablosu mevcut quiz tablolarıyla aynı user_id TEXT anahtarını kullanır.
+    """
+
+    init_storage()
+
+    clean_user_id = user_id.strip()
+    clean_display_name = display_name.strip()
+
+    if not clean_user_id:
+        raise ValueError("user_id boş olamaz.")
+
+    if not clean_display_name:
+        clean_display_name = clean_user_id
+
+    with _pg_get_connection() as conn:
+        conn.row_factory = dict_row
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO profiles (user_id, display_name)
+                VALUES (%s, %s)
+                ON CONFLICT (user_id)
+                DO UPDATE SET display_name = EXCLUDED.display_name
+                RETURNING user_id, display_name, created_at;
+                """,
+                (clean_user_id, clean_display_name),
+            )
+            profile = cur.fetchone()
+
+        conn.commit()
+        return profile
+
+
+def get_profile(user_id: str):
+    """
+    user_id değerine göre tek profil kaydı getirir.
+    """
+
+    init_storage()
+
+    with _pg_get_connection() as conn:
+        conn.row_factory = dict_row
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT user_id, display_name, created_at
+                FROM profiles
+                WHERE user_id = %s;
+                """,
+                (user_id,),
+            )
+            return cur.fetchone()
+
+
+def list_profiles():
+    """
+    Kayıtlı profilleri alfabetik sırada döndürür.
+    """
+
+    init_storage()
+
+    with _pg_get_connection() as conn:
+        conn.row_factory = dict_row
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT user_id, display_name, created_at
+                FROM profiles
+                ORDER BY display_name ASC, user_id ASC;
+                """
+            )
+            return cur.fetchall()
 
 
 # -----------------------------

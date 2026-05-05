@@ -21,7 +21,12 @@ app = FastAPI(title="HMGS API", version="1.0.0")
 # React dev server'ına izin ver
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -49,6 +54,10 @@ class QuizAnswerRequest(BaseModel):
     session_id: str
     selected_index: int
 
+class ProfileRequest(BaseModel):
+    user_id: str
+    display_name: str
+
 
 # ─── CHAT ────────────────────────────────────────────────────────────────────
 
@@ -59,6 +68,34 @@ def chat(req: ChatRequest):
     return result
 
 
+# ─── PROFILES ────────────────────────────────────────────────────────────────
+
+@app.get("/api/profiles")
+def profiles_list():
+    from app.sqlstorage import list_profiles
+    return {"profiles": list_profiles()}
+
+
+@app.get("/api/profiles/{user_id}")
+def profile_get(user_id: str):
+    from app.sqlstorage import get_profile
+
+    profile = get_profile(user_id)
+    if not profile:
+        raise HTTPException(status_code=404, detail="Profil bulunamadı.")
+    return profile
+
+
+@app.post("/api/profiles")
+def profile_upsert(req: ProfileRequest):
+    from app.sqlstorage import upsert_profile
+
+    try:
+        return upsert_profile(req.user_id, req.display_name)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
 # ─── QUIZ ────────────────────────────────────────────────────────────────────
 
 @app.post("/api/quiz/start")
@@ -66,7 +103,11 @@ def quiz_start(req: QuizStartRequest):
     from app.repositories.questions_repo import get_questions
     from app.question_select import select_questions
     from app.quiz_engine import start_quiz
+    from app.sqlstorage import get_profile
     from analysis.user_report import get_user_report
+
+    if not get_profile(req.user_id):
+        raise HTTPException(status_code=404, detail="Quiz başlatmak için önce profil oluşturun.")
 
     questions = get_questions()
     if not questions:
@@ -183,7 +224,12 @@ def quiz_session_status(session_id: str):
 
 @app.get("/api/dashboard/{user_id}")
 def dashboard(user_id: str):
+    from app.sqlstorage import get_profile
     from analysis.user_report import get_user_report
+
+    if not get_profile(user_id):
+        raise HTTPException(status_code=404, detail="Dashboard için önce profil oluşturun.")
+
     report = get_user_report(user_id)
     return report
 

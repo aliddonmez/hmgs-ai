@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
@@ -8,7 +8,6 @@ import { getDashboard } from '../api'
 
 const C_TEAL  = '#008080'
 const C_NAVY  = '#1B2A47'
-const C_GOLD  = '#C5A059'
 const C_GREEN = '#2ECC71'
 const C_RED   = '#E74C3C'
 const C_WARN  = '#F39C12'
@@ -153,19 +152,23 @@ const TABS = [
   { key: 'suggestions', label: '🧠 Öneriler'    },
 ]
 
-export default function DashboardPage() {
-  const [userId,  setUserId]  = useState('')
+export default function DashboardPage({ profile }) {
   const [report,  setReport]  = useState(null)
   const [loading, setLoading] = useState(false)
   const [error,   setError]   = useState('')
   const [tab,     setTab]     = useState('overview')
 
-  const load = async () => {
-    if (!userId.trim()) { setError('Kullanıcı ID giriniz.'); return }
+  const load = useCallback(async () => {
+    const activeUserId = profile?.userId?.trim()
+    if (!activeUserId) {
+      setReport(null)
+      setError('Önce Profil sayfasından profil ID ile giriş yapın.')
+      return
+    }
     setError('')
     setLoading(true)
     try {
-      const data = await getDashboard(userId.trim())
+      const data = await getDashboard(activeUserId)
       setReport(data)
       setTab('overview')
     } catch (e) {
@@ -173,9 +176,38 @@ export default function DashboardPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [profile?.userId])
 
-  const onKey = (e) => { if (e.key === 'Enter') load() }
+  useEffect(() => {
+    const activeUserId = profile?.userId?.trim()
+    let cancelled = false
+
+    Promise.resolve().then(async () => {
+      if (!activeUserId) {
+        if (!cancelled) {
+          setReport(null)
+          setError('Önce Profil sayfasından profil ID ile giriş yapın.')
+        }
+        return
+      }
+
+      setError('')
+      setLoading(true)
+      try {
+        const data = await getDashboard(activeUserId)
+        if (!cancelled) {
+          setReport(data)
+          setTab('overview')
+        }
+      } catch (e) {
+        if (!cancelled) setError(e.message)
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    })
+
+    return () => { cancelled = true }
+  }, [profile?.userId])
 
   const summary        = report?.summary                   || {}
   const weakTopics     = report?.weak_topics               || []
@@ -223,12 +255,7 @@ export default function DashboardPage() {
         <p>Kullanıcı bazlı quiz analizi, ders & zorluk dağılımı ve akıllı çalışma önerileri.</p>
       </div>
 
-      <div className="user-query-box" style={{ maxWidth: 480 }}>
-        <div style={{ flex: 1 }}>
-          <label className="label" htmlFor="dash-user-id">Kullanıcı ID</label>
-          <input id="dash-user-id" className="input" placeholder="örn. ali123"
-            value={userId} onChange={e => setUserId(e.target.value)} onKeyDown={onKey} />
-        </div>
+      <div className="user-query-box dashboard-actions">
         <button id="dash-load-btn" className="btn btn-primary" onClick={load} disabled={loading}>
           {loading ? <><div className="spinner" style={{ width: 18, height: 18 }} /> Yükleniyor…</> : '📊 Analiz Et'}
         </button>
@@ -240,7 +267,7 @@ export default function DashboardPage() {
         <div className="card" style={{ textAlign: 'center', padding: '64px 32px', color: 'var(--text-muted)' }}>
           <div style={{ fontSize: 56, marginBottom: 16 }}>📊</div>
           <h2 style={{ fontSize: 18, fontWeight: 700, color: 'var(--navy)', marginBottom: 8 }}>Analiz Başlatın</h2>
-          <p style={{ fontSize: 14 }}>Kullanıcı ID girerek detaylı performans raporunuza ulaşın.</p>
+          <p style={{ fontSize: 14 }}>Profil ID ile giriş yaptıktan sonra detaylı performans raporunuza ulaşın.</p>
         </div>
       )}
 

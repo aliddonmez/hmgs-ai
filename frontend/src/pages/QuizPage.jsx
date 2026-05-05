@@ -10,8 +10,7 @@ const MODES = [
 const LETTERS = ['A', 'B', 'C', 'D', 'E']
 
 // ── Setup ekranı ─────────────────────────────────────────────────────────────
-function SetupForm({ onStart }) {
-  const [userId, setUserId]       = useState('')
+function SetupForm({ onStart, profile }) {
   const [mode, setMode]           = useState('random')
   const [n, setN]                 = useState(20)
   const [weakTopic, setWeakTopic] = useState('')
@@ -19,17 +18,18 @@ function SetupForm({ onStart }) {
   const [error, setError]         = useState('')
 
   const start = async () => {
-    if (!userId.trim()) { setError('Kullanıcı ID giriniz.'); return }
+    const activeUserId = profile?.userId?.trim()
+    if (!activeUserId) { setError('Önce Profil sayfasından profil ID ile giriş yapın.'); return }
     setError('')
     setLoading(true)
     try {
       const data = await quizStart({
-        user_id: userId.trim(),
+        user_id: activeUserId,
         mode,
         n_questions: n,
         weak_topic: weakTopic.trim() || null,
       })
-      onStart(data, userId.trim())
+      onStart(data, activeUserId)
     } catch (e) {
       setError(e.message)
     } finally {
@@ -46,17 +46,6 @@ function SetupForm({ onStart }) {
 
       <div className="quiz-setup">
         <div className="card fade-up">
-          <div className="form-group">
-            <label className="label" htmlFor="quiz-user-id">Kullanıcı ID</label>
-            <input
-              id="quiz-user-id"
-              className="input"
-              placeholder="örn. ali123"
-              value={userId}
-              onChange={e => setUserId(e.target.value)}
-            />
-          </div>
-
           <div className="form-group">
             <label className="label">Quiz Modu</label>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -133,7 +122,7 @@ function SetupForm({ onStart }) {
 
 
 // ── Soru ekranı ──────────────────────────────────────────────────────────────
-function QuestionScreen({ session, onFinish, userId }) {
+function QuestionScreen({ session, onFinish }) {
   const [current, setCurrent]     = useState(session)
   const [selected, setSelected]   = useState(null)
   const [feedback, setFeedback]   = useState(null)   // { dogru_mu, correct_index, aciklama }
@@ -265,15 +254,13 @@ function ScoreScreen({ score, onRestart }) {
 
 
 // ── Ana bileşen ───────────────────────────────────────────────────────────────
-export default function QuizPage() {
+export default function QuizPage({ profile }) {
   const [phase, setPhase]     = useState('setup')   // setup | question | score
   const [session, setSession] = useState(null)
   const [score, setScore]     = useState(null)
-  const [userId, setUserId]   = useState('')
 
-  const handleStart = (data, uid) => {
+  const handleStart = (data) => {
     setSession(data)
-    setUserId(uid)
     setPhase('question')
   }
 
@@ -288,7 +275,7 @@ export default function QuizPage() {
     setPhase('setup')
   }
 
-  if (phase === 'setup')    return <SetupForm onStart={handleStart} />
-  if (phase === 'question') return <QuestionScreen session={session} onFinish={handleFinish} userId={userId} />
+  if (phase === 'setup')    return <SetupForm onStart={handleStart} profile={profile} />
+  if (phase === 'question') return <QuestionScreen session={session} onFinish={handleFinish} />
   if (phase === 'score')    return <ScoreScreen score={score} onRestart={handleRestart} />
 }

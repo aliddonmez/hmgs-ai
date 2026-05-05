@@ -35,6 +35,31 @@ export async function quizAnswer(session_id, selected_index) {
 
 export async function getDashboard(user_id) {
   const res = await fetch(`${API}/api/dashboard/${encodeURIComponent(user_id)}`)
-  if (!res.ok) throw new Error('Rapor alınamadı.')
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err.detail || 'Rapor alınamadı.')
+  }
+  return res.json()
+}
+
+export async function saveProfile(payload) {
+  const res = await fetch(`${API}/api/profiles`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err.detail || 'Profil kaydedilemedi.')
+  }
+  return res.json()
+}
+
+export async function getProfile(user_id) {
+  const res = await fetch(`${API}/api/profiles/${encodeURIComponent(user_id)}`)
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err.detail || 'Profil alınamadı.')
+  }
   return res.json()
 }

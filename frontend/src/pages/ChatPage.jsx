@@ -57,7 +57,7 @@ export default function ChatPage() {
           ? data.text
           : data.text || 'Yanıt alınamadı.'
       setMessages(prev => [...prev, { role: 'assistant', content: answer }])
-    } catch (e) {
+    } catch {
       setMessages(prev => [
         ...prev,
         { role: 'assistant', content: '⚠️ Sunucuya bağlanılamadı. Backend çalışıyor mu?' },
