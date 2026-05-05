@@ -2,10 +2,12 @@ import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import ChatPage from './pages/ChatPage'
 import QuizPage from './pages/QuizPage'
 import DashboardPage from './pages/DashboardPage'
+import ScenarioPage from './pages/ScenarioPage'
 
 const NAV = [
-  { path: '/',          icon: '💬', label: 'Chat' },
-  { path: '/quiz',      icon: '🧠', label: 'Quiz' },
+  { path: '/', icon: '💬', label: 'Chat' },
+  { path: '/quiz', icon: '🧠', label: 'Quiz' },
+  { path: '/scenarios', icon: '📖', label: 'Senaryolar' },
   { path: '/dashboard', icon: '📊', label: 'Dashboard' },
 ]
 
@@ -45,8 +47,9 @@ export default function App() {
         {/* ── Content ── */}
         <main className="main">
           <Routes>
-            <Route path="/"          element={<ChatPage />} />
-            <Route path="/quiz"      element={<QuizPage />} />
+            <Route path="/" element={<ChatPage />} />
+            <Route path="/quiz" element={<QuizPage />} />
+            <Route path="/scenarios" element={<ScenarioPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
           </Routes>
         </main>

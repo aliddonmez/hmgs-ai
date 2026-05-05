@@ -14,6 +14,8 @@ from pydantic import BaseModel
 from typing import Optional
 import uuid
 
+from backend.scenarios import router as scenario_router
+
 app = FastAPI(title="HMGS API", version="1.0.0")
 
 # React dev server'ına izin ver
@@ -24,6 +26,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Router'ları ekle
+app.include_router(scenario_router)
 
 # ─── In-memory quiz session store ───────────────────────────────────────────
 quiz_sessions: dict = {}
