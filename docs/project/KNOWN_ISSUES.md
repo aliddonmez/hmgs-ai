@@ -24,13 +24,15 @@ regression testi ve çözüm doğrulamasıyla ilişkilendirilir.
 ## ISSUE-001 - API anahtarı örnek ve ortam dosyasında paylaşılmış
 
 - Öncelik: `P0`
-- Durum: `ACIK`
+- Durum: `COZULDU`
 - Alan: Güvenlik
 - İlgili görev: F0-01
 - Kanıt: `.env` ve `.env.example` içinde dolu Gemini anahtarı görüldü.
 - Risk: Yetkisiz kullanım, maliyet ve hesap güvenliği.
-- Doğru çözüm: Anahtarı iptal et, yenile, Git geçmişini tara/temizle ve secret scan kur.
-- Regression: Depo secret scan ve log redaction testi.
+- Çözüm: Açığa çıkan gizli değerler iptal edilip yenilendi; sabit kimlik bilgileri koddan kaldırıldı ve `.env.example` güvenli örnek değerlere dönüştürüldü.
+- Çözüm commit'i: `fb71eb8`
+- Regression: `TR-F0-01` - `BAŞARILI`
+- Kapanış tarihi: `2026-07-27`
 
 ## ISSUE-002 - Proje arşivi bağımlılık ve gizli yerel dosyalar içeriyor
 

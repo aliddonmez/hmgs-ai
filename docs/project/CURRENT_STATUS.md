@@ -2,15 +2,15 @@
 
 ## Son güncelleme
 
-- Tarih: 2026-07-14
+- Tarih: 2026-07-27
 - Proje aşaması: Ürünleştirme hazırlığı
-- Aktif faz: Takip ve dokümantasyon sisteminin kurulması
-- Aktif görev: Dokümantasyon kapanışı
-- Son tamamlanan çalışma: Test stratejisi, test gözlemleri ve bilinen sorunlar
-- Sıradaki kod görevi: `F0-01 - Açığa çıkan anahtarları iptal et ve yenile`
-- Çalışma branch'i: Henüz doğrulanmadı
-- Kanonik Git commit'i: Henüz doğrulanmadı
-- Bloker: Gemini anahtar rotasyonu kullanıcı hesabında yapılmalıdır
+- Aktif faz: `FAZ 0 - Güvenli ve tekrar üretilebilir proje tabanı`
+- Aktif görev: `F0-02 - Depo ve legacy dosya temizliği`
+- Son tamamlanan çalışma: `F0-01 - Açığa çıkan anahtarları iptal et ve yenile`
+- Sıradaki kod görevi: `F0-02 - Depo ve legacy dosya temizliği`
+- Çalışma branch'i: `intent-retrieval-upgrade`
+- Kanonik Git commit'i: `fb71eb8`
+- Bloker: Yok
 
 ## 1. Ürün hedefi
 

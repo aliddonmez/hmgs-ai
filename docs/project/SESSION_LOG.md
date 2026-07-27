@@ -201,3 +201,36 @@ yapısını inceleyip ürünleştirme risklerini belirlemek.
 Takip belgelerini sırayla oku; kod değişikliğine geçmeden önce aktif Git deposunu ve
 secret rotasyonunun tamamlanıp tamamlanmadığını doğrula. F0-01 tamamlanmadan eski
 Gemini anahtarını kullanma veya hiçbir çıktıda gösterme.
+
+## 2026-07-27 - F0-01 güvenlik görevi kapanışı
+
+### Tamamlanan işlemler
+
+- Paylaşılmış PostgreSQL parolası değiştirildi.
+- Kod içindeki sabit PostgreSQL parolaları kaldırıldı.
+- Yeni gizli değerler yalnızca yerel `.env` dosyasında tutuldu.
+- `.env` dosyasının Git tarafından izlenmediği doğrulandı.
+- `.env.example` içindeki gerçek görünümlü gizli değerler kaldırıldı.
+- Aktif Gemini API anahtarının mevcut dosyalarda bulunmadığı doğrulandı.
+- Aktif Gemini API anahtarının Git geçmişinde bulunmadığı doğrulandı.
+- Güvenlik değişiklikleri `fb71eb8` commit'iyle `intent-retrieval-upgrade` branch'ine gönderildi.
+
+### Doğrulama sonucu
+
+- F0-01 tamamlandı.
+- `ISSUE-001` çözüm şartları karşılandı.
+- Aktif görev `F0-02 - Depo ve legacy dosya temizliği` olarak belirlendi.
+- Mevcut kullanıcı değişiklikleri korunarak F0-02'ye devredildi.
+
+### Korunacak mevcut çalışma dosyaları
+
+- `frontend/package-lock.json`
+- `retrieval/intent/candidates.py`
+- `retrieval/pipeline.py`
+- `retrieval/scoring.py`
+- `changes.txt`
+- `hmgs-ai-clean.zip`
+
+### Sıradaki tek görev
+
+- `F0-02 - Depo ve legacy dosya temizliği`

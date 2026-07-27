@@ -71,7 +71,7 @@ geçilmezse kapsam genişletilmez ve yayın tarihi kalite uğruna ertelenir.
 
 ## F0-01 - Açığa çıkan anahtarları iptal et ve yenile
 
-- Durum: `BEKLIYOR`
+- Durum: `TAMAMLANDI`
 - Sorumlu: `ORTAK`
 - Bağımlılık: Yok
 - Tahmin: 0.5 gün
@@ -96,7 +96,7 @@ Tamamlanma kriteri:
 
 ## F0-02 - Depo ve legacy dosya temizliği
 
-- Durum: `BEKLIYOR`
+- Durum: `HAZIR`
 - Sorumlu: `ORTAK`
 - Bağımlılık: F0-01
 - Tahmin: 0.5 gün

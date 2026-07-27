@@ -213,3 +213,34 @@ Yeni sonuç eklendiğinde:
 6. İyileşen toplam metrik yanında kötüleşen alt gruplar da raporlanır.
 7. Yayın kapısını geçen sonuç `DECISIONS.md` kararına bağlanır.
 
+## TR-F0-01 - Secret yönetimi ve depo güvenliği doğrulaması
+
+- Run ID: `TR-F0-01`
+- Tarih: `2026-07-27`
+- Görev: `F0-01`
+- Branch: `intent-retrieval-upgrade`
+- Git commit: `fb71eb8`
+- Durum: `BAŞARILI`
+
+### Doğrulananlar
+
+- Paylaşılmış gizli değerler iptal edilip yenilendi.
+- Kod içindeki sabit PostgreSQL kimlik bilgileri kaldırıldı.
+- `.env.example` dosyasındaki gerçek görünümlü değerler boş örneklere çevrildi.
+- Yerel `.env` dosyasının `.gitignore` tarafından yok sayıldığı doğrulandı.
+- Gerçek `.env` dosyasının Git tarafından izlenmediği doğrulandı.
+- Git tarafından yalnızca `.env.example` dosyasının izlendiği doğrulandı.
+- Aktif Gemini API anahtarının mevcut dosyalarda ve Git geçmişinde bulunmadığı doğrulandı.
+- Eksik ortam değişkenlerinde uygulamanın gizli değerleri göstermeden kontrollü hata verdiği doğrulandı.
+
+### Kanıt
+
+- `.gitignore:13:.env`
+- `git ls-files .env .env.example` çıktısı: yalnızca `.env.example`
+- Güvenlik commit'i: `fb71eb8`
+- Commit mesajı: `security: remove hardcoded credentials`
+
+### Sonuç
+
+F0-01 tamamlanma kriterleri karşılandı. Güvenlik görevi belge kapanışına hazırdır.
+
