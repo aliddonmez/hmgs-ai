@@ -5,11 +5,11 @@ from dotenv import load_dotenv
 import psycopg
 
 
-load_dotenv() 
+load_dotenv()
 # .env varsa otomatik yüklesin
-# Böylece credential'lar(şifre vb) koda gömülmez 
+# Böylece credential'lar(şifre vb) koda gömülmez
 
-## Hangi veri kaynağından veri cekiyorum ? 
+## Hangi veri kaynağından veri cekiyorum ?
 ##DB bağlantısı tek noktadan yönetilir
 
 def get_conn():
@@ -18,5 +18,5 @@ def get_conn():
         port=int(os.environ.get("PG_PORT", "5432")),
         dbname=os.environ.get("PG_DB", "postgres"),
         user=os.environ.get("PG_USER", "postgres"),
-        password=os.environ.get("PG_PASSWORD", "1234"),
+        password=os.environ.get("PG_PASSWORD"),
     )

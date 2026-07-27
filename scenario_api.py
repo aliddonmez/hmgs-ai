@@ -1,8 +1,11 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
+import os
+from dotenv import load_dotenv
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
+load_dotenv()
 app = FastAPI()
 
 app.add_middleware(
@@ -16,11 +19,11 @@ app.add_middleware(
 # DB bağlantısı
 def get_db_connection():
     return psycopg2.connect(
-        host="localhost",
-        port="5433",
-        database="postgres",
-        user="postgres",
-        password="1234"  # burayı değiştir
+        host=os.environ.get("PG_HOST", "localhost"),
+        port=os.environ.get("PG_PORT", "5433"),
+        database=os.environ.get("PG_DB", "postgres"),
+        user=os.environ.get("PG_USER", "postgres"),
+        password=os.environ["PG_PASSWORD"]
     )
 
 # 1. Tüm senaryoları getir
