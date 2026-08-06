@@ -37,12 +37,16 @@ regression testi ve çözüm doğrulamasıyla ilişkilendirilir.
 ## ISSUE-002 - Proje arşivi bağımlılık ve gizli yerel dosyalar içeriyor
 
 - Öncelik: `P1`
-- Durum: `ACIK`
+- Durum: `COZULDU`
 - Alan: Depo hijyeni
 - İlgili görev: F0-02
 - Kanıt: `.venv`, `node_modules`, `.git`, ZIP, cache ve yerel DB dosyaları.
 - Risk: Büyük depo, güvenlik sızıntısı ve tekrar üretilemeyen kurulum.
-- Çözüm: Temiz kaynak depo ve genişletilmiş `.gitignore`.
+- Çözüm: 12 gruptaki 21 legacy dosya kaldırıldı; `.gitignore` genişletildi ve
+  yasaklı dosya/hassas içerik taraması başarılı oldu.
+- Çözüm commit'i: Bu kaydı içeren F0-02 kapanış commit'i.
+- Regression: `TR-F0-02` - `BAŞARILI`
+- Kapanış tarihi: `2026-08-06`
 
 ## ISSUE-003 - Python requirements aktif uygulamayı tam tanımlamıyor
 
@@ -284,10 +288,16 @@ regression testi ve çözüm doğrulamasıyla ilişkilendirilir.
 ## ISSUE-029 - Legacy scenario_api sabit DB bilgisi ve açık CORS içeriyor
 
 - Öncelik: `P1`
-- Durum: `ACIK`
+- Durum: `COZULDU`
 - Alan: Legacy/güvenlik
 - İlgili görev: F0-02
 - Risk: Yanlışlıkla çalıştırılırsa güvensiz ikinci API yüzeyi oluşur.
+- Çözüm: Aktif FastAPI uygulamasında karşılığı olmayan legacy `scenario_api.py`
+  kaldırıldı; kalan tracked aktif kaynaklarda import, çağrı veya deployment
+  bağımlılığı bulunmadığı doğrulandı.
+- Çözüm commit'i: Bu kaydı içeren F0-02 kapanış commit'i.
+- Regression: `TR-F0-02` - `BAŞARILI`
+- Kapanış tarihi: `2026-08-06`
 
 ## ISSUE-030 - README ve eski aktif akış belgesi güncel değil
 

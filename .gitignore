@@ -29,3 +29,34 @@ Thumbs.db
 # Build
 build/
 dist/
+
+# Environment variants
+.env.*
+!.env.example
+!.env.sample
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Archives and backups
+*.zip
+*.bak
+*.backup
+*.orig
+
+# Test and tool caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Editor and temporary files
+*.sw?
+*~
+*.tmp
+*.temp

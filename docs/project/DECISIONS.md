@@ -218,6 +218,34 @@ Yerine geçen/geçersiz kılan karar:
 - Sonuç: Reference retrieval, reranker ve diğer stratejiler görev bazında geçer.
 - İlgili belge: `ARCHITECTURE.md`.
 
+## DEC-019 - F0-02 legacy depo temizliği uygulanacaktır
+
+- Tarih: 2026-08-06
+- Durum: `ONAYLANDI`
+- Karar veren: Ürün sahibi ve teknik inceleme
+- Karar: F0-02 kapsamında sınıflandırması ve ayrıntılı incelemesi tamamlanan 12
+  gruptaki 21 legacy dosya depodan kaldırılır.
+- Kaldırılan kapsam: Legacy `scenario_api.py` API akışı; yerel SQLite
+  `data/hmgs.db`; eski Streamlit arayüzü; güncelliğini yitirmiş chatbot akış
+  belgesi; eski quiz çalıştırıcısı; deneysel analiz betiği; eski seed ve veri
+  yardımcıları; scratch senaryo betiği; legacy CLI raporlama betiği; eski SQL
+  şemaları ve tablo oluşturma betiği; varsayılan Vite README ve görsel varlıkları;
+  gereksiz `app/.gitkeep` placeholder dosyasıdır.
+- Bağımlılık kanıtı: Kalan aktif kaynaklarda kaldırılan dosyalara yönelik import,
+  çağrı, çalışma zamanı, build veya deployment bağımlılığı bulunmamıştır.
+- Bağımlılık temizliği: Streamlit arayüzünün kaldırılmasıyla `requirements.txt`
+  içindeki `streamlit` bağımlılığı da kaldırılmıştır.
+- Depo koruması: Kök `.gitignore`; ortam varyantları, yerel DB, arşiv/yedek,
+  test ve araç cache'i, editör ve geçici dosya desenleriyle güçlendirilmiştir.
+- Kullanıcı dosyaları: `hmgs-ai-clean.zip` silinmemiş; diskte korunarak `*.zip`
+  kuralıyla ignored yapılmıştır. `changes.txt`, `frontend/package-lock.json`,
+  `retrieval/intent/candidates.py`, `retrieval/pipeline.py` ve
+  `retrieval/scoring.py` korunmuş kullanıcı değişiklikleridir.
+- Doğrulama: Yasaklı dosya ve hassas içerik taraması başarılıdır; tracked gerçek
+  sır veya aktif legacy bağımlılığı bulunmamıştır.
+- Sınır: Bu karar yalnızca F0-02 kapsamındadır ve F0-03'e geçiş anlamına gelmez.
+- İlgili görev: F0-02.
+
 # Açık kararlar
 
 ## DEC-PENDING-001 - Kesin veri saklama süresi

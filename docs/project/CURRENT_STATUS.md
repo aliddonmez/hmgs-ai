@@ -2,14 +2,15 @@
 
 ## Son güncelleme
 
-- Tarih: 2026-07-27
+- Tarih: 2026-08-06
 - Proje aşaması: Ürünleştirme hazırlığı
 - Aktif faz: `FAZ 0 - Güvenli ve tekrar üretilebilir proje tabanı`
-- Aktif görev: `F0-02 - Depo ve legacy dosya temizliği`
-- Son tamamlanan çalışma: `F0-01 - Açığa çıkan anahtarları iptal et ve yenile`
-- Sıradaki kod görevi: `F0-02 - Depo ve legacy dosya temizliği`
+- Aktif görev: `F0-02 - Depo ve legacy dosya temizliği (TAMAMLANDI)`
+- Son tamamlanan çalışma: `F0-02 - Depo ve legacy dosya temizliği`
+- Sıradaki kod görevi: `F0-03 - Python bağımlılıklarını standardize et`
+  (başlatılmadı; kullanıcı onayı bekleniyor)
 - Çalışma branch'i: `intent-retrieval-upgrade`
-- Kanonik Git commit'i: `fb71eb8`
+- Kanonik Git commit'i: `d3f22fa` (F0-02 çalışma ağacı henüz commit edilmedi)
 - Bloker: Yok
 
 ## 1. Ürün hedefi
@@ -33,10 +34,22 @@ Ayrıntı: `PRODUCT_SCOPE.md`
 | `DECISIONS.md` | Tamamlandı | Onaylanmış ürün ve süreç kararları |
 | `SESSION_LOG.md` | Tamamlandı | Sohbetler arası devir kaydı ve şablon |
 
-## 3. Henüz uygulama kodunda yapılmayanlar
+## 3. Son tamamlanan çalışma ve açık uygulama işleri
 
-- API anahtarı rotasyonu yapılmadı.
-- Depo temizliği yapılmadı.
+F0-02, 2026-08-06 tarihinde tamamlandı:
+
+- 12 gruptaki 21 legacy dosya kaldırıldı.
+- Aktif import, çalışma zamanı, build veya deployment bağımlılığı kalmadı.
+- Eski Streamlit ve SQLite çalışma zamanı akışları kaldırıldı.
+- `requirements.txt` içinden yalnızca kullanılmayan `streamlit` kaldırıldı.
+- `.gitignore` yerel DB, arşiv/yedek, ortam varyantı, cache ve geçici dosya
+  desenleriyle güçlendirildi.
+- `hmgs-ai-clean.zip` silinmeden diskte korundu ve ignored yapıldı.
+- `changes.txt` ile dört modified kullanıcı dosyası korundu.
+- Yasaklı dosya/hassas içerik taraması ve teknik doğrulamalar başarılı oldu.
+
+Henüz yapılmayanlar:
+
 - Python ve frontend bağımlılıkları düzeltilmedi.
 - CI kurulmadı.
 - Intent test runner v4/v5 hatası düzeltilmedi.
@@ -66,7 +79,7 @@ Bu değerler F1-05 tamamlanana kadar kanonik baseline değildir.
 
 ## 5. En yüksek öncelikli açık sorunlar
 
-1. `ISSUE-001`: Paylaşılmış Gemini anahtarı - P0.
+1. `ISSUE-003`: Python requirements aktif uygulamayı tam tanımlamıyor - P1.
 2. `ISSUE-005`: Intent v4/v5 yanlış test importu - P1.
 3. `ISSUE-007`: Retrieval evaluation yanlış modeli - P1.
 4. `ISSUE-012`: Reranker guardrail yanlış skor alanı - P1.
@@ -82,9 +95,9 @@ Ayrıntı: `KNOWN_ISSUES.md`
 ## 6. Sıradaki yürütme sırası
 
 ```text
-F0-01  Secret rotasyonu
-F0-02  Depo ve legacy temizliği
-F0-03  Python temiz kurulum
+F0-01  TAMAMLANDI - Secret rotasyonu
+F0-02  TAMAMLANDI - Depo ve legacy temizliği
+F0-03  Sıradaki hedef - Python temiz kurulum (başlatılmadı)
 F0-04  Frontend temiz kurulum
 F0-05  CI
 F1-01  Intent runner v4/v5 düzeltmesi

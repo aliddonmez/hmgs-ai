@@ -96,7 +96,7 @@ Tamamlanma kriteri:
 
 ## F0-02 - Depo ve legacy dosya temizliği
 
-- Durum: `HAZIR`
+- Durum: `TAMAMLANDI`
 - Sorumlu: `ORTAK`
 - Bağımlılık: F0-01
 - Tahmin: 0.5 gün

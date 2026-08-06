@@ -234,3 +234,86 @@ Gemini anahtarını kullanma veya hiçbir çıktıda gösterme.
 ### Sıradaki tek görev
 
 - `F0-02 - Depo ve legacy dosya temizliği`
+
+## SESSION-2026-08-06-01 - F0-02 depo ve legacy temizliği kapanışı
+
+- Tarih/saat: 2026-08-06
+- Aktif görev: `F0-02 - Depo ve legacy dosya temizliği`
+- Branch: `intent-retrieval-upgrade`
+- Başlangıç commit: `d3f22fa`
+- Bitiş commit: Oluşturulmadı
+- Sorumlu: Ürün sahibi ve teknik inceleme
+
+### Oturum hedefi
+
+Legacy dosya envanterini kanıta dayalı biçimde temizlemek, depo koruma kurallarını
+güçlendirmek ve F0-02 kapanış doğrulamalarını tamamlamak.
+
+### Başlangıç durumu
+
+- F0-01 tamamlanmıştı.
+- Legacy API, SQLite, Streamlit, deneysel script, eski şema ve scaffold dosyaları
+  ayrıntılı salt okunur inceleme bekliyordu.
+- Altı kullanıcı değişikliği korunacaktı.
+
+### Yapılan değişiklikler
+
+- 12 gruptaki toplam 21 legacy dosya kaldırıldı.
+- Eski Streamlit ve SQLite çalışma zamanı akışları kaldırıldı.
+- `requirements.txt` içinden yalnızca kullanılmayan `streamlit` kaldırıldı.
+- Kök `.gitignore` ortam varyantı, yerel DB, arşiv/yedek, cache, editör ve geçici
+  dosya desenleriyle güçlendirildi.
+- `DEC-019` ile legacy temizleme kararı kaydedildi.
+- `hmgs-ai-clean.zip` diskte korundu ve ignored yapıldı.
+- `changes.txt`, `frontend/package-lock.json`, `retrieval/intent/candidates.py`,
+  `retrieval/pipeline.py` ve `retrieval/scoring.py` kullanıcı değişiklikleri
+  korunmuştur.
+
+### Değişen dosyalar
+
+- 21 onaylı tracked dosya silmesi.
+- `.gitignore`
+- `requirements.txt`
+- `docs/project/DECISIONS.md`
+- F0-02 kapanış takip belgeleri.
+
+### Çalıştırılan testler
+
+| Komut/suite | Sonuç | Run ID |
+|---|---|---|
+| Python compileall (aktif dizinler) | Başarılı | TR-F0-02 |
+| Intent runner v1-v5 | Görünür 60/60; v4/v5 yanlış set | TR-F0-02 |
+| Frontend `npm run lint` | Başarılı | TR-F0-02 |
+| Frontend `npm run build` | Başarılı; bundle uyarısı | TR-F0-02 |
+| Yasaklı dosya ve hassas içerik taraması | Başarılı | TR-F0-02 |
+| Legacy import/runtime/build/deployment referans kontrolü | Başarılı | TR-F0-02 |
+| `git diff --check` | Başarılı | TR-F0-02 |
+
+### Alınan kararlar
+
+- `DEC-019`: İncelenen 12 gruptaki 21 legacy dosyanın kaldırılması onaylandı.
+- F0-02 kapanışı F0-03'ün başlatıldığı anlamına gelmez.
+
+### Yeni sorunlar
+
+- Yeni sorun açılmadı. Runner v4/v5 sınırlaması `ISSUE-005`, eksik açık
+  FastAPI/Pydantic bağımlılıkları `ISSUE-003` içinde zaten kayıtlıdır.
+
+### Çözülen sorunlar
+
+- `ISSUE-002`: Depo hijyeni ve yerel artifact riski.
+- `ISSUE-029`: Güvensiz legacy `scenario_api.py` yüzeyi.
+
+### Blokerler
+
+- F0-02 kapanışı için bloker yoktur.
+
+### Sıradaki tek görev
+
+- Kullanıcı açıkça onaylarsa `F0-03 - Python bağımlılıklarını standardize et`;
+  henüz başlatılmadı.
+
+### Yeni sohbet için devir notu
+
+Önce F0-02 değişikliklerinin commit durumunu ve korunan kullanıcı değişikliklerini
+doğrula. Kullanıcı açık izni olmadan F0-03'e geçme.

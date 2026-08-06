@@ -244,3 +244,57 @@ Yeni sonuç eklendiğinde:
 
 F0-01 tamamlanma kriterleri karşılandı. Güvenlik görevi belge kapanışına hazırdır.
 
+## TR-F0-02 - Depo ve legacy temizliği teknik doğrulaması
+
+- Run ID: `TR-F0-02`
+- Tarih: `2026-08-06`
+- Görev: `F0-02`
+- Branch: `intent-retrieval-upgrade`
+- Git commit: `d3f22fa` (F0-02 çalışma ağacı henüz commit edilmedi)
+- Durum: `BAŞARILI`
+
+### Çalıştırılan kontroller
+
+```text
+python3 -m compileall -q analysis app backend document_parser evaluation retrieval scripts storage tests
+python3 -m tests.intent.run_tests v1
+python3 -m tests.intent.run_tests v2
+python3 -m tests.intent.run_tests v3
+python3 -m tests.intent.run_tests v4
+python3 -m tests.intent.run_tests v5
+cd frontend && npm run lint
+cd frontend && npm run build
+git diff --check
+```
+
+Ek olarak yasaklı tracked/untracked/ignored dosya desenleri, hassas içerik ve
+kaldırılan legacy dosyalara yönelik import, çalışma zamanı, build ve deployment
+referansları tarandı.
+
+### Sonuçlar
+
+- Python compile kontrolü başarılıdır.
+- Intent runner v1-v5 komutlarının her biri görünür olarak 60/60 ve exit 0
+  üretmiştir.
+- Frontend lint başarılıdır.
+- Frontend production build başarılıdır; yalnızca 500 kB üzeri bundle uyarısı
+  verilmiştir.
+- `git diff --check` başarılıdır.
+- Yasaklı dosya ve hassas içerik taraması başarılıdır; tracked gerçek sır yoktur.
+- Kaldırılan 21 dosyaya yönelik aktif kırık referans bulunmamıştır.
+- Testlerin oluşturduğu `__pycache__` ve `frontend/dist/` çıktıları ignored'dır;
+  yeni tracked veya normal untracked dosya oluşmamıştır.
+
+### Bilinen sınırlamalar
+
+- Mevcut runner v4 için v2, v5 için v3 vakalarını yüklediğinden v4/v5'in görünen
+  60/60 sonuçları gerçek set doğrulaması değildir. Sorun `ISSUE-005` içinde
+  kayıtlıdır ve F0-02 kapanışını engellemez.
+- Aktif `fastapi` ve `pydantic` importlarının `requirements.txt` içinde açık
+  karşılığı yoktur. Sorun `ISSUE-003` içinde kayıtlıdır ve F0-02 temizliğinin
+  oluşturduğu regression değildir.
+
+### Sonuç
+
+F0-02 zorunlu depo taraması, legacy import kontrolü ve teknik kapanış doğrulamaları
+başarılıdır. Bu kayıt F0-03'ün başlatıldığı anlamına gelmez.
