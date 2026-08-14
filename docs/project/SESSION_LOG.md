@@ -317,3 +317,87 @@ güçlendirmek ve F0-02 kapanış doğrulamalarını tamamlamak.
 
 Önce F0-02 değişikliklerinin commit durumunu ve korunan kullanıcı değişikliklerini
 doğrula. Kullanıcı açık izni olmadan F0-03'e geçme.
+
+## SESSION-2026-08-14-01 - F0-03 Python bağımlılık standardizasyonu kapanışı
+
+- Tarih/saat: 2026-08-14
+- Aktif görev: `F0-03 - Python bağımlılıklarını standardize et`
+- Branch: `intent-retrieval-upgrade`
+- Başlangıç commit: `9ac938a`
+- Bitiş commit: Bu kaydı içeren F0-03 kapanış commit'i
+- Sorumlu: Ürün sahibi ve teknik inceleme
+
+### Oturum hedefi
+
+Python çalışma sürümünü, production/development bağımlılık yapısını ve direct pin
+politikasını belirleyip temiz ortamda tekrar üretilebilir backend kurulumunu
+doğrulamak.
+
+### Başlangıç durumu
+
+- F0-02 tamamlanmış ve `9ac938a` commit'iyle remote branch'e gönderilmişti.
+- `requirements.txt` aktif FastAPI backend'i tam tanımlamıyor ve sürüm pinleri
+  içermiyordu.
+- Kanonik Python sürümü ile development requirements dosyası yoktu.
+
+### Yapılan değişiklikler
+
+- Python 3.11.x kanonik çalışma serisi ve Python 3.10 syntax alt sınırı belgelendi.
+- `.python-version` içine `3.11` eklendi.
+- On doğrudan bağımlılık exact pinlendi; transitif paketler doğrudan listelenmedi.
+- `requirements-dev.txt`, `-r requirements.txt` içerecek biçimde eklendi.
+- README'ye production/development kurulumları ve Uvicorn başlatma hedefi eklendi.
+- Pytest F1-02, Alembic F2-02 ve izleme sağlayıcısı paketi F12 kapsamına bırakıldı.
+
+### Değişen dosyalar
+
+- `README.md`
+- `requirements.txt`
+- `requirements-dev.txt`
+- `.python-version`
+- F0-03 kapanış takip belgeleri
+
+### Çalıştırılan testler
+
+| Komut/suite | Sonuç | Run ID |
+|---|---|---|
+| Temiz ortam `pip install -r requirements-dev.txt` | Başarılı | TR-F0-03 |
+| `python -m pip check` | Başarılı | TR-F0-03 |
+| 10 exact pin ve dependency importu | Başarılı | TR-F0-03 |
+| 41 güvenli aktif proje modülü importu | Başarılı | TR-F0-03 |
+| `backend.main:app` ve Uvicorn hedefi | Başarılı | TR-F0-03 |
+| Python compileall | Başarılı | TR-F0-03 |
+| Intent runner v1-v5 | Görünür 60/60; v4/v5 yanlış set | TR-F0-03 |
+| `git diff --check` | Başarılı | TR-F0-03 |
+
+### Metrik farkı
+
+Bu çalışma dependency tekrar üretilebilirliğini doğrular; F1-05 kanonik RAG
+baseline'ı veya ürün kalite metriği değildir.
+
+### Alınan kararlar
+
+- `DEC-020`: Python 3.11 ve doğrudan bağımlılık pinleme standardı onaylandı.
+
+### Yeni sorunlar
+
+- Yeni sorun açılmadı. Intent runner sınırlaması `ISSUE-005` içinde açık kalır.
+
+### Çözülen sorunlar
+
+- `ISSUE-003`: Python requirements aktif uygulamayı tam tanımlamıyordu.
+
+### Blokerler
+
+- F0-03 kapanışı için bloker yoktur.
+
+### Sıradaki tek görev
+
+- `F0-04 - Frontend bağımlılıklarını standardize et`; başlatılmadı ve kullanıcı
+  açık onayı bekleniyor.
+
+### Yeni sohbet için devir notu
+
+F0-03 değişikliklerinin commit durumunu ve korunan kullanıcı değişikliklerini
+doğrula. F0-02'nin gerçek kapanış commit'i `9ac938a`'dır. Kullanıcı açık izni
+olmadan F0-04'e veya başka göreve geçme.

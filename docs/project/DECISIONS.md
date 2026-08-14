@@ -246,6 +246,27 @@ Yerine geçen/geçersiz kılan karar:
 - Sınır: Bu karar yalnızca F0-02 kapsamındadır ve F0-03'e geçiş anlamına gelmez.
 - İlgili görev: F0-02.
 
+## DEC-020 - Python 3.11 ve doğrudan bağımlılık pinleme standardı
+
+- Tarih: 2026-08-14
+- Durum: `ONAYLANDI`
+- Karar veren: Ürün sahibi ve teknik inceleme
+- Bağlam: F0-03 kapsamında backend'in yerel ortam kopyalanmadan temiz ve
+  tekrar üretilebilir biçimde kurulması gerekir.
+- Karar: Python 3.11.x kanonik geliştirme/çalışma serisi, Python 3.10 kaynak kodu
+  sözdizimi alt sınırıdır. Doğrudan bağımlılıklar exact pinlenir; transitif
+  bağımlılıklar doğrudan requirements listesine yazılmaz.
+- Dosya yapısı: Production bağımlılıkları `requirements.txt`, development
+  kurulumu `requirements-dev.txt` ile tanımlanır. Development dosyası bugün
+  `-r requirements.txt` içerir.
+- Kapsam sınırı: Pytest F1-02'ye, Alembic F2-02'ye ve izleme sağlayıcısı paketi
+  F12'ye bırakılmıştır; bu paketler F0-03 kapsamında eklenmemiştir.
+- Gerekçe: Yalnızca mevcut aktif kodun kanıtlanmış bağımlılıklarını sabitlemek ve
+  gelecek görevlerin sağlayıcı/araç kararlarını erkenden kilitlememek.
+- Sonuç: Temiz Python 3.11.5 ortamında production/development kurulumu ve backend
+  import hedefi doğrulanabilir hale gelmiştir.
+- İlgili görev/sorun: F0-03, ISSUE-003.
+
 # Açık kararlar
 
 ## DEC-PENDING-001 - Kesin veri saklama süresi
@@ -271,4 +292,3 @@ Yerine geçen/geçersiz kılan karar:
 - Durum: `ONERILDI`
 - Gerekli olduğu görev: F6-02
 - Kural: Metadata uyumu ve ablation faydası kanıtlanırsa kalır.
-

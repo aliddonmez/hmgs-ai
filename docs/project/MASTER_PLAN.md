@@ -121,7 +121,7 @@ Tamamlanma kriteri:
 
 ## F0-03 - Python bağımlılıklarını standardize et
 
-- Durum: `BEKLIYOR`
+- Durum: `TAMAMLANDI`
 - Sorumlu: `ORTAK`
 - Bağımlılık: F0-02
 - Tahmin: 0.5 gün

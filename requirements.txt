@@ -1,6 +1,17 @@
-python-dotenv
-google-genai
-pypdf
-sentence-transformers
-psycopg[binary]
-PyMuPDF
+# Web API
+fastapi==0.136.1
+uvicorn==0.46.0
+pydantic==2.12.5
+
+# Configuration and external services
+python-dotenv==1.2.1
+google-genai==1.65.0
+
+# Retrieval and database
+sentence-transformers==5.3.0
+psycopg[binary]==3.3.2
+
+# Document ingestion and data tooling
+PyMuPDF==1.27.1
+python-docx==1.2.0
+pypdf==6.6.2

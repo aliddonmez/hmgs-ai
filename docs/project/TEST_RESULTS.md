@@ -298,3 +298,55 @@ referansları tarandı.
 
 F0-02 zorunlu depo taraması, legacy import kontrolü ve teknik kapanış doğrulamaları
 başarılıdır. Bu kayıt F0-03'ün başlatıldığı anlamına gelmez.
+
+## TR-F0-03 - Python bağımlılık standardizasyonu ve temiz kurulum doğrulaması
+
+- Run ID: `TR-F0-03`
+- Tarih: `2026-08-14`
+- Görev: `F0-03`
+- Branch: `intent-retrieval-upgrade`
+- Başlangıç Git commit: `9ac938a`
+- F0-03 commit'i: Bu kaydı içeren F0-03 commit'i
+- Ortam: macOS ARM64, Python 3.11.5
+- Durum: `BAŞARILI`
+
+### Çalıştırılan kontroller
+
+```text
+python -m pip install -r requirements-dev.txt
+python -m pip check
+python -m compileall -q analysis app backend document_parser evaluation retrieval scripts storage tests
+python -m tests.intent.run_tests v1
+python -m tests.intent.run_tests v2
+python -m tests.intent.run_tests v3
+python -m tests.intent.run_tests v4
+python -m tests.intent.run_tests v5
+git diff --check
+```
+
+Ek olarak on direct dependency'nin exact sürümü, on bağımsız dependency importu,
+41 güvenli aktif proje modülü, `backend.main:app` FastAPI nesnesi ve README'deki
+Uvicorn hedefi doğrulandı.
+
+### Sonuçlar
+
+- Yeni ve boş Python 3.11.5 virtualenv içinde development kurulumu başarılıdır.
+- `pip check` sonucu `No broken requirements found.` olmuştur.
+- On direct pin beklenen exact sürümlerle kurulmuş ve on bağımsız import başarılıdır.
+- 41 güvenli aktif proje modülü dependency hatası olmadan import edilmiştir.
+- `backend.main:app` bir FastAPI örneğidir; Uvicorn import hedefi geçerlidir.
+- Compileall başarılıdır.
+- Intent v1, v2 ve v3 sonuçları 60/60 ve exit 0'dır.
+- Intent v4 görünür 60/60 ve exit 0'dır; ISSUE-005 nedeniyle gerçekte v2 setini
+  yüklediğinden gerçek v4 doğrulaması değildir.
+- Intent v5 görünür 60/60 ve exit 0'dır; ISSUE-005 nedeniyle gerçekte v3 setini
+  yüklediğinden gerçek v5 doğrulaması değildir.
+- Gerçek PostgreSQL veya Gemini API bağlantısı kurulmamıştır.
+- Yeni tracked veya normal untracked test çıktısı oluşmamış, `git diff --check`
+  başarılı olmuştur.
+
+### Sınırlamalar ve sonuç
+
+Bu kayıt F1-05 kanonik RAG baseline'ı değildir. Temiz kurulum ve Python dependency
+uyumluluğu macOS ARM64/Python 3.11.5 üzerinde doğrulanmış, F0-03 tamamlanma kriteri
+karşılanmıştır.

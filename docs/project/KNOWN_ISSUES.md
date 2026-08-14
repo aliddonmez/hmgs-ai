@@ -51,12 +51,24 @@ regression testi ve çözüm doğrulamasıyla ilişkilendirilir.
 ## ISSUE-003 - Python requirements aktif uygulamayı tam tanımlamıyor
 
 - Öncelik: `P1`
-- Durum: `ACIK`
+- Durum: `COZULDU`
 - Alan: Kurulum
 - İlgili görev: F0-03
-- Kanıt: FastAPI, Uvicorn, Pydantic, pandas/plotly ve test araçları eksik.
-- Risk: Yeni ortamda backend/Streamlit parçalarının çalışmaması.
-- Çözüm: Aktif ürün bağımlılıklarını sürümlü ve ayrılmış biçimde tanımlamak.
+- Tarihsel kanıt: FastAPI, Uvicorn ve Pydantic açıkça tanımlı değildi; eski
+  incelemede pandas/Plotly, Streamlit ve test araçları da eksik olarak kaydedilmişti.
+- Risk: Yeni ortamda backend'in yerel ortam kopyalanmadan kurulamaması.
+- Çözüm görevi: F0-03
+- Commit: Bu kaydı içeren F0-03 kapanış commit'i.
+- Regression/Test run: `TR-F0-03` - `BAŞARILI`
+- Çözüm özeti: Aktif on doğrudan bağımlılık exact pinlendi, production ve
+  development requirements dosyaları ayrıldı, Python 3.11.x kanonik seri olarak
+  belgelendi ve temiz ortamda kurulum/import doğrulaması tamamlandı. F0-02'de
+  kaldırılan Streamlit için dependency yeniden eklenmedi; pandas/Plotly aktif
+  Python kaynaklarında dependency olarak gerekmedi.
+- Kalan risk: Temiz doğrulama macOS ARM64 ve Python 3.11.5 üzerinde yapıldı.
+  Pytest F1-02, Alembic F2-02 ve izleme sağlayıcısı paketi F12 kapsamında
+  eklenecektir.
+- Kapanış tarihi: `2026-08-14`
 
 ## ISSUE-004 - Frontend lock dosyası package.json ile uyumsuz
 
